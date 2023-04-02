@@ -21,16 +21,16 @@ import apps.pages.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('student/',apps.pages.views.student_view,name='student'),
-    path('lecturer/',apps.pages.views.lecturer_view, name='lecturer'),
-    path('manager/',apps.pages.views.manager_view, name='manager'),
-    path('malfunction/',apps.pages.views.malfunction_view,name='malfunction'),
-    path('products/',apps.pages.views.products_view ,name='products'),
-    path('studio/',apps.pages.views.studio_view, name='studio'),
-    path('podcast/',apps.pages.views.podcast_view, name='podcast'),
-    path('contact/',apps.pages.views.contact_view,name='contact'),
+    path('student',apps.pages.views.student_view,name='student'),
+    path('lecturer',apps.pages.views.lecturer_view, name='lecturer'),
+    path('manager',apps.pages.views.manager_view, name='manager'),
+    path('malfunction',apps.pages.views.malfunction_view,name='malfunction'),
+    path('products',apps.pages.views.products_view ,name='products'),
+    path('studio',apps.pages.views.studio_view, name='studio'),
+    path('podcast',apps.pages.views.podcast_view, name='podcast'),
+    path('contact',apps.pages.views.contact_view,name='contact'),
     path('',apps.pages.views.login_view ,name='login'),
-    path('profile/',apps.pages.views.profile_view,name='profile'),
+    path('profile',apps.pages.views.profile_view,name='profile'),
 
 
 ]
