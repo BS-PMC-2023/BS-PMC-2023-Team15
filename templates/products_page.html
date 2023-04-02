@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+<title>{%block title%}Products {%endblock%}</title>
+<div class="container">
+    {% block content %}
+    <table class="table table-hover">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">ID Product</th>
+            <th scope="col">Type</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Select</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>D20cV99</td>
+            <td>Camera</td>
+            <td>12</td>
+            <td class="checkout__input__checkbox"><input type="checkbox" id="">
+                                        <span class="checkmark"></span></td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>PO8750</td>
+            <td>Green Screen</td>
+            <td>10</td>
+            <td class="checkout__input__checkbox"><input type="checkbox" id="">
+                                        <span class="checkmark"></span></td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>88AJS0</td>
+            <td>Camera Drak mode</td>
+            <td>12</td>
+            <td class="checkout__input__checkbox"><input type="checkbox" id="">
+                                        <span class="checkmark"></span></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<div class="container">
+    <button type="button" class="btn btn-outline-success">Order</button>
+    <button type="button" class="btn btn-outline-info">Return</button>
+    {% endblock %}
+</div>
