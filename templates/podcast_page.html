@@ -1,46 +1,106 @@
 {% extends 'base.html' %}
 
-<title>{%block title%}Podcast {%endblock%}</title>
-<div class="container">
-    {% block content %}
-    <table class="table table-hover">
-        <thead class="thead-dark">
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">ID Product</th>
-            <th scope="col">Type</th>
-            <th scope="col">Select</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>1</td>
-            <td>Room1</td>
-            <td class="checkout__input__checkbox"><input type="checkbox" id="">
-                                        <span class="checkmark"></span></td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>2</td>
-            <td>Room2</td>
-            <td class="checkout__input__checkbox"><input type="checkbox" id="">
-                                        <span class="checkmark"></span></td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>3</td>
-            <td>Room3</td>
-            <td class="checkout__input__checkbox"><input type="checkbox" id="">
-                                        <span class="checkmark"></span></td>
-        </tr>
-        </tbody>
-    </table>
-</div>
+<title>{% block title %}Podcast {% endblock %}</title>
+{% block content %}
+    <!-- Podcast Catalog-->
+    <div class="container">
+        <div class="row">
+            <!-- Podcast 1 -->
+            <div class="col">
+                <div class="card card-cascade card-ecommerce wider shadow mb-5">
+                    <!--Card image-->
+                    <div class="view view-cascade overlay text-center">
+                        <img class="card-img-top img-thumbnail"
+                             src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cG9kY2FzdHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+                             alt="">
+                        <a>
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
 
-<div class="container">
-    <button type="button" class="btn btn-outline-success">Book</button>
-    <button type="button" class="btn btn-outline-info">Return</button>
+                    <!--Card Body-->
+                    <div class="card-body card-body-cascade text-center">
+                        <!--Card Title-->
+                        <h4 class="card-title"><strong><a href="">Podcast Room 1</a></strong></h4>
+                        <!-- Card Description-->
+                        <p class="card-text">Our Podcast Rooms.</p>
+                        <!--Card button-->
+                        <button type="button" class="btn btn-outline-info">Proceed</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Podcast 2 -->
+            <div class="col">
+                <div class="card card-cascade card-ecommerce wider shadow mb-5">
+                    <!--Card image-->
+                    <div class="view view-cascade overlay text-center">
+                        <img class="card-img-top img-thumbnail"
+                             src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cG9kY2FzdHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+                             alt="">
+                        <a>
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
 
-    {% endblock %}
-</div>
+                    <!--Card Body-->
+                    <div class="card-body card-body-cascade text-center">
+                        <!--Card Title-->
+                        <h4 class="card-title"><strong><a href="">Podcast Room 2</a></strong></h4>
+                        <!-- Card Description-->
+                        <p class="card-text">Our Podcast Rooms.</p>
+                        <!--Card button-->
+                        <button type="button" class="btn btn-outline-info">Proceed</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Podcast 3 -->
+            <div class="col">
+                <div class="card card-cascade card-ecommerce wider shadow mb-5">
+                    <!--Card image-->
+                    <div class="view view-cascade overlay text-center">
+                        <img class="card-img-top img-thumbnail"
+                             src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cG9kY2FzdHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+                             alt="">
+                        <a>
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+
+                    <!--Card Body-->
+                    <div class="card-body card-body-cascade text-center">
+                        <!--Card Title-->
+                        <h4 class="card-title"><strong><a href="">Podcast Room 3</a></strong></h4>
+                        <!-- Card Description-->
+                        <p class="card-text">Our Podcast Rooms.</p>
+                        <!--Card button-->
+                        <button type="button" class="btn btn-outline-info">Proceed</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Podcast 4 -->
+            <div class="col">
+                <div class="card card-cascade card-ecommerce wider shadow mb-5">
+                    <!--Card image-->
+                    <div class="view view-cascade overlay text-center">
+                        <img class="card-img-top img-thumbnail"
+                             src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cG9kY2FzdHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+                             alt="">
+                        <a>
+                            <div class="mask rgba-white-slight"></div>
+                        </a>
+                    </div>
+
+                    <!--Card Body-->
+                    <div class="card-body card-body-cascade text-center">
+                        <!--Card Title-->
+                        <h4 class="card-title"><strong><a href="">Podcast Room 4</a></strong></h4>
+                        <!-- Card Description-->
+                        <p class="card-text">Our Podcast Rooms.</p>
+                        <!--Card button-->
+                        <button type="button" class="btn btn-outline-info">Proceed</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
