@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from HomePage.views import login_view, student_view, malfunction_view, lecturer_view, manager_view, podcast_view, \
-    products_view, studio_view, profile_view, contact_view
+    products_view, studio_view, profile_view, contact_view, camera_catalog_view
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
@@ -30,4 +30,5 @@ urlpatterns = [
     path('podcast', podcast_view, name='podcast'),
     path('profile', profile_view, name='profile'),
     path('contact', contact_view, name='contact'),
+    path('Camera_Catalog', camera_catalog_view, name='Camera_Catalog'),
 ]

@@ -30,5 +30,7 @@ def podcast_view (request):
     return render(request, "podcast_page.html")
 def contact_view(request):
     return render(request, "contact.html")
+def camera_catalog_view(request):
+    return render(request, "Camera_Catalog.html")
 def signout(request):
     pass

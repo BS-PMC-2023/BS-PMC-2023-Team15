@@ -90,51 +90,121 @@
     </div>
 </header>
 
-
+<!-- Product Catalog-->
 <div class="container">
-    <table class="table table-hover">
-        <thead class="thead-dark">
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">ID Product</th>
-            <th scope="col">Type</th>
-            <th scope="col">Amount</th>
-            <th scope="col">Select</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>D20cV99</td>
-            <td>Camera</td>
-            <td>12</td>
-            <td class="checkout__input__checkbox"><input type="checkbox" id="">
-                                        <span class="checkmark"></span></td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>PO8750</td>
-            <td>Green Screen</td>
-            <td>10</td>
-            <td class="checkout__input__checkbox"><input type="checkbox" id="">
-                                        <span class="checkmark"></span></td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>88AJS0</td>
-            <td>Camera Drak mode</td>
-            <td>12</td>
-            <td class="checkout__input__checkbox"><input type="checkbox" id="">
-                                        <span class="checkmark"></span></td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="row">
+        <!-- Camera -->
+        <div class="col-md">
+            <div class="card card-cascade card-ecommerce wider shadow mb-5" style="width: 16rem">
+                <!--Card image-->
+                <div class="view view-cascade overlay text-center">
+                    <img class="card-img-top img-thumbnail"
+                         src="http://i1.adis.ws/i/canon/eos-r10-frt_range_9feaf965e90e48d3a164d106d9939020" alt=""
+                         class="img-thumbnail">
+                    <a>
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+
+                <!--Card Body-->
+                <div class="card-body card-body-cascade text-center">
+                    <!--Card Title-->
+                    <h4 class="card-title"><strong><a href="">Camera</a></strong></h4>
+                    <!-- Card Description-->
+                    <p class="card-text">Our camera catalog.</p>
+                    <!--Card button-->
+                    <button onclick='location.href = "Camera_Catalog"' type="submit" class="btn btn-outline-info">
+                        Proceed
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Tripod -->
+        <div class="col-md">
+            <div class="card card-cascade card-ecommerce wider shadow mb-5">
+                <!--Card image-->
+                <div class="view view-cascade overlay text-center">
+                    <img class="card-img-top img-thumbnail"
+                         src="http://cdn.shopify.com/s/files/1/0614/7656/9320/products/KENVT102_01.jpg?v=1650360801"
+                         alt="" class="img-thumbnail">
+                    <a>
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+
+                <!--Card Body-->
+                <div class="card-body card-body-cascade text-center">
+                    <!--Card Title-->
+                    <h4 class="card-title"><strong><a href="">Tripod</a></strong></h4>
+                    <!-- Card Description-->
+                    <p class="card-text">Our Tripod catalog.</p>
+                    <!--Card button-->
+                    <button onclick='location.href = "Camera_Catalog"' type="submit" class="btn btn-outline-info">
+                        Proceed
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Ipad -->
+        <div class="col-md">
+            <div class="card card-cascade card-ecommerce wider shadow mb-5">
+                <!--Card image-->
+                <div class="view view-cascade overlay text-center">
+                    <img class="card-img-top img-thumbnail"
+                         src="https://ae01.alicdn.com/kf/H62cff41b7b8045c2b4d32f437cec75baq/Apple-iPad-2021-11-Wi-Fi-256-GB-mhqu3ru-mhqv3ru.jpg"
+                         alt="" class="img-thumbnail">
+                    <a>
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+
+                <!--Card Body-->
+                <div class="card-body card-body-cascade text-center">
+                    <!--Card Title-->
+                    <h4 class="card-title"><strong><a href="">Ipad</a></strong></h4>
+                    <!-- Card Description-->
+                    <p class="card-text">Our Ipad catalog.</p>
+                    <!--Card button-->
+                    <button onclick='location.href = "Camera_Catalog"' type="submit" class="btn btn-outline-info">
+                        Proceed
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Green Screen -->
+        <div class="col-lg">
+            <div class="card card-cascade card-ecommerce wider shadow mb-5">
+                <!--Card image-->
+                <div class="view view-cascade overlay text-center">
+                    <img class="card-img-top img-thumbnail"
+                         src="https://ccimg.canadacomputers.com/Products/1000x1000/231/1473/169732/96885.jpg"
+                         alt="" class="img-thumbnail">
+                    <a>
+                        <div class="mask rgba-white-slight"></div>
+                    </a>
+                </div>
+
+                <!--Card Body-->
+                <div class="card-body card-body-cascade text-center">
+                    <!--Card Title-->
+                    <h4 class="card-title"><strong><a href="">Green Screen</a></strong></h4>
+                    <!-- Card Description-->
+                    <p class="card-text">Our green screen catalog.</p>
+                    <!--Card button-->
+                    <button onclick='location.href = "Camera_Catalog"' type="submit" class="btn btn-outline-info">
+                        Proceed
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="container">
+<!-- Delete -->
+{% comment %}<div class="container">
     <button type="button" class="btn btn-outline-success">Order</button>
     <button type="button" class="btn btn-outline-info">Return</button>
-</div>
+</div>{% endcomment %}
 
 <!-- Footer Section Begin -->
 <footer class="footer spad">
