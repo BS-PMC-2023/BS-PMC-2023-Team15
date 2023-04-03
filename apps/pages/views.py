@@ -18,7 +18,7 @@ def malfunction_view (request):
 def products_view (request):
     return render(request, "products_page.html")
 def studio_view (request):
-    return render(request, "studio_list.html")
+    return render(request, "studio_page.html")
 def podcast_view (request):
     return render(request, "podcast_page.html")
 def contact_view(request):
