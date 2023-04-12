@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 
 import apps.pages.views
 import apps.item.views
@@ -33,3 +35,7 @@ urlpatterns = [
     path('profile', apps.pages.views.profile_view, name='profile'),
     path('camera_catalog', apps.item.views.camera_catalog_view, name='camera_catalog'),
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
