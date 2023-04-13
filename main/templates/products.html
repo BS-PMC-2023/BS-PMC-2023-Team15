@@ -7,7 +7,6 @@
             <!-- Camera -->
             {% for category in categories %}
                 <div class="px-3">
-                    {#                card#}
                     {% include 'snippets/category.html' with image=category.image item=category.name item_description=category.description %}
                 </div>
             {% endfor %}

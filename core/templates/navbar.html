@@ -1,0 +1,100 @@
+{% load static %}
+<div class="header__top">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="header__top__left">
+                    <ul>
+                        <li>Sami Shamoon College of Engineering</li>
+                        <li>VCStorage</li>
+                        <li> ~ Tali / Leon / Dori / Dani ~</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="header__top__right">
+                    <div class="header__top__right__social">
+
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                        <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                    </div>
+                    <div class="header__top__right__language">
+                        <img src="{% static '/media/language.png' %}" alt="">
+                        <div>English</div>
+                        <span class="arrow_carrot-down"></span>
+                        <ul>
+                            <li><a href="#">עברית</a></li>
+                            <li><a href="#">English</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+
+            <a href="./student" class="navbar-brand mx-4">
+                <img src="{% static '/media/SCE.png' %}" alt="">
+            </a>
+
+            {#            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"#}
+            {#                    data-bs-target="#navbarSupportedContent"#}
+            {#                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">#}
+            {#                <span class="navbar-toggler-icon"></span>#}
+            {#            </button>#}
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                    <li class="nav-item">
+                        <a class="nav-link tali" href="{% url 'main' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link tali" href="">Profile</a>
+                    </li>
+                    <li class="nav-item">
+
+                        <div class="dropdown">
+                            <button class="nav-link tali dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                Pages
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item"  href="./products">Products</a></li>
+                                <li><a class="dropdown-item"  href="./studio">Studios</a></li>
+                                <li><a class="dropdown-item"  href="./podcast">Podcast Rooms</a></li>
+                                <li><a class="dropdown-item"  href="./malfunction">Malfunctions</a></li>
+                            </ul>
+                        </div>
+{#                    <a class="nav-link tali" href="#">Pages</a>#}
+{#                    <ul class="dropdown dropdown-menu">#}
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link tali_green" href="./contact">Contact</a>
+                    </li>
+                </ul>
+
+                <div class="hero__search__phone mx-5">
+                    <div class="hero__search__phone__icon">
+                        <i class="fa fa-phone"></i>
+                    </div>
+                    <div class="hero__search__phone__text">
+                        <h5>+972 1-800-207-777</h5>
+                        <span>  Sun-Thur 10:00-13:00</span>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </nav>
+</div>

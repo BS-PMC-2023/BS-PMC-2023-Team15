@@ -40,8 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'django.contrib.sites',
-    'apps.item',
-    'apps.pages',
     'database',
     'core',
     'main',

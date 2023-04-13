@@ -1,5 +1,5 @@
-<!DOCTYPE html>
 {% load static %}
+<!DOCTYPE html>
 <html lang="zxx">
 
 <head>
@@ -22,83 +22,7 @@
 
 <body>
 
-<!-- Header Section Begin -->
-<header class="header">
-    <div class="header__top">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="header__top__left">
-                        <ul>
-                            <li>Sami Shamoon College of Engineering</li>
-                            <li>VCStorage</li>
-                            <li> ~ Tali / Leon / Dori / Dani ~</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="header__top__right">
-                        <div class="header__top__right__social">
-
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                            <a href="#"><i class="fa fa-pinterest-p"></i></a>
-                        </div>
-                        <div class="header__top__right__language">
-                            <img src="{% static '/media/language.png' %}" alt="">
-                            <div>English</div>
-                            <span class="arrow_carrot-down"></span>
-                            <ul>
-                                <li><a href="#">עברית</a></li>
-                                <li><a href="#">English</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-sm">
-                <div class="header__logo">
-                    <a href="./student"><img src="{% static '/media/SCE.png' %}" alt=""></a>
-                </div>
-            </div>
-            <div class="col-lg-6 my-4 col-sm">
-                <nav class="header__menu">
-                    <ul>
-                        <li><a href="./student">Home</a></li>
-                        <li><a href="./profile">Profile</a></li>
-                        <li><a href="#">Pages</a>
-                            <ul class="header__menu__dropdown">
-                                <li><a href="./products">Products</a></li>
-                                <li><a href="./studio">Studios</a></li>
-                                <li><a href="./podcast">Podcast Rooms</a></li>
-                                <li><a href="./malfunction">Malfunctions</a></li>
-                            </ul>
-                        </li>
-                        <li class="active"><a href="./contact">Contact</a></li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="col-lg-3 my-3">
-                <br>
-                <div class="hero__search__phone">
-                        <div class="hero__search__phone__icon">
-                            <i class="fa fa-phone"></i>
-                        </div>
-                        <div class="hero__search__phone__text">
-                            <h5>+972 1-800-207-777</h5>
-                            <span>  Sun-Thur 10:00-13:00</span>
-                        </div>
-                    </div>
-            </div>
-        </div>
-    </div>
-</header>
+{% include 'navbar.html' %}
 
 {% include 'search_bar.html' %}
 
@@ -108,61 +32,21 @@
 
 <div class="container">
 </div>
-<!-- Footer Section Begin -->
-<footer class="footer spad">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="footer__about">
-                    <ul>
-                        <li>Address: Haim Nachman Bialik St 56, Be'er Sheva</li>
-                        <li>Phone: 1-800-207-777</li>
-                        <li>Email: SCE@SCE.co.il</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
-                <div class="footer__widget">
-                    <h6>Useful Links</h6>
-                    <ul>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Our Services</a></li>
-                        <li><a href="#">Projects</a></li>
-                    </ul>
-                    <ul>
-                        <li><a href="./contact">Contact</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-12">
-                <div class="footer__widget">
-                    <h6>Join Our Newsletter Now</h6>
-                    <p>Get E-mail updates about our latest news.</p>
-                    <form action="#">
-                        <input type="text" placeholder="Enter your mail">
-                        <button type="submit" class="site-btn">Subscribe</button>
-                    </form>
-                    <div class="footer__widget__social">
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-instagram"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="#"><i class="fa fa-pinterest"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- Js Plugins -->
-        <script src="/js/jquery-3.3.1.min.js"></script>
-        <script src="/js/bootstrap.min.js"></script>
-        <script src="/js/jquery.nice-select.min.js"></script>
-        <script src="/js/jquery-ui.min.js"></script>
-        <script src="/js/mixitup.min.js"></script>
-        <script src="/js/jquery.slicknav.js"></script>
-        <script src="/js/owl.carousel.min.js"></script>
-        <script src="/js/main.js"></script>
-    </div>
-</footer>
+{% include 'footer.html' %}
+
+
 </body>
+
+<!-- Js Plugins -->
+
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"  ></script>
+<script src="{% static "js/bootstrap.bundle.js" %}" ></script>
+<script src="/js/jquery.nice-select.min.js" type="javascript"></script>
+<script src="/js/jquery-ui.min.js" type="javascript"></script>
+<script src="/js/mixitup.min.js" type="javascript"></script>
+<script src="/js/jquery.slicknav.js" type="javascript"></script>
+<script src="/js/owl.carousel.min.js" type="javascript"></script>
+<script src="/js/main.js" type="javascript"></script>
+
 </html>

@@ -14,12 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 
-import apps.pages.views
-import apps.item.views
 import core.views
 import main.views
 
@@ -27,16 +25,17 @@ import main.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', main.views.main_view, name='main'),
-    path('lecturer', apps.pages.views.lecturer_view, name='lecturer'),
-    path('manager', apps.pages.views.manager_view, name='manager'),
+    # path('lecturer', apps.pages.views.lecturer_view, name='lecturer'),
+    # path('manager', apps.pages.views.manager_view, name='manager'),
     path('malfunction', main.views.malfunction_view, name='malfunction'),
     path('products', main.views.product_view, name='products'),
     path('studio', main.views.studio_view, name='studio'),
     path('podcast', main.views.podcast_view, name='podcast'),
-    path('contact', apps.pages.views.contact_view, name='contact'),
-    path('login', apps.pages.views.login_view, name='login'),
-    path('profile', apps.pages.views.profile_view, name='profile'),
-    path('camera_catalog', apps.item.views.camera_catalog_view, name='camera_catalog'),
+    path('category/', include('main.urls'), name='category'),
+    # path('contact', apps.pages.views.contact_view, name='contact'),
+    # path('login', apps.pages.views.login_view, name='login'),
+    # path('profile', apps.pages.views.profile_view, name='profile'),
+    # path('camera_catalog', apps.item.views.camera_catalog_view, name='camera_catalog'),
 ]
 
 

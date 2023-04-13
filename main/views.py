@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from database.models import Category
+from database.models import Category, Equipment
 # Create your views here.
 
 def main_view(request):
@@ -20,3 +20,13 @@ def podcast_view(request):
 
 def malfunction_view(request):
     return render(request, 'malfunction.html', {})
+
+
+def category_view(request, category):
+    # category = Category.objects.get(name=category)
+    items = Equipment.objects.filter(category=category)
+    return render(request, 'catalog.html', {"items":items})
+
+
+def item_view(request, category, item):
+    return render(request, 'item.html', {})
