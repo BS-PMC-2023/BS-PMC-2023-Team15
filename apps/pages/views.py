@@ -21,7 +21,7 @@ def malfunction_view (request):
     return render(request, "malfunction_page.html")
 
 def products_view (request):
-    return render(request, "products_page.html")
+    return render(request, "products.html")
 
 def studio_view (request):
     return render(request, "studio_page.html")

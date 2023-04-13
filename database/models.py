@@ -16,7 +16,7 @@ class Student(models.Model):
 #model named equipement: serial number - string, category, brand, model, details
 class Equipment(models.Model):
     serial_number = models.CharField(max_length=100, primary_key=True)
-    category = models.CharField(max_length=100)
+    category = models.ForeignKey('Category', on_delete=models.CASCADE)
     brand = models.CharField(max_length=100)
     model = models.CharField(max_length=100)
     details = models.TextField(max_length=1000)
@@ -68,3 +68,16 @@ class Studio(models.Model):
 
     def __str__(self):
         return f"{self.room} - {self.name}"
+
+
+# Category - name
+class Category(models.Model):
+    name = models.CharField(max_length=100, primary_key=True)
+    image = models.ImageField(upload_to='categories/', default='default.png')
+    description = models.TextField(max_length=1000, default='No description')
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "Categories"
+
