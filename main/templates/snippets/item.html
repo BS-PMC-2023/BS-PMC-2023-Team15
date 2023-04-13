@@ -3,7 +3,7 @@
     <!--Card image-->
     <div class="view view-cascade overlay text-center">
         <img class="card-img-top img-thumbnail"
-             src="{{ MEDIA_URL }}media/default.png" alt="">
+             src="/{{ MEDIA_URL }}media/{{ item.image  }}" alt="">
 {#        TODO: Change default to media/equipment/...#}
         <a>
             <div class="mask rgba-white-slight"></div>
@@ -13,10 +13,11 @@
     <!--Card Body-->
     <div class="card-body card-body-cascade text-center">
         <!--Card Title-->
-        <h4 class="card-title"><strong><a href="">{{ item_brand }} {{ item_model }}</a></strong></h4>
+        <h4 class="card-title"><strong><a href="">{{ item.brand }} {{ item.model }}</a></strong></h4>
+
         <!-- Card Description-->
         <p class="card-text">{{ item_serial_number }}</p>
-        <!--Card button-->
+            <!--Card button-->
         <button onclick='' type="submit" class="btn btn-primary">
             Borrow
         </button>

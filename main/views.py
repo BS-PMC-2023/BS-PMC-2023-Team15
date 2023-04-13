@@ -28,5 +28,7 @@ def category_view(request, category):
     return render(request, 'catalog.html', {"items":items})
 
 
-def item_view(request, category, item):
-    return render(request, 'item.html', {})
+def item_view(request, category, item, item_brand, item_model, item_description, item_image, item_price, item_quantity, item_category):
+    item = Equipment.objects.get(name=item)
+
+    return render(request, 'item.html', {"item_brand":item_brand, "item_model":item_model, "item_description":item_description, "item_image":item_image, "item_price":item_price, "item_quantity":item_quantity, "item_category":item_category, "item":item})
