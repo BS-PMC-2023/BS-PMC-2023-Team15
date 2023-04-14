@@ -34,6 +34,7 @@ urlpatterns = [
     path('category/', include('main.urls'), name='category'),
     path('details/', main.views.item_view, name='details'),
     path('details/', include('main.urls')),
+    path('category/<category>/details/', include('main.urls')),
     # path('contact', apps.pages.views.contact_view, name='contact'),
     # path('login', apps.pages.views.login_view, name='login'),
     # path('profile', apps.pages.views.profile_view, name='profile'),

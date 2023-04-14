@@ -5,11 +5,11 @@
     <!-- Product Catalog-->
     <div class="container-fluid">
         <div class="d-flex flex-wrap justify-content-center">
+
             <!-- Camera -->
             {% for item in items %}
                 <div class="px-3">
-
-                    {% include 'snippets/item.html' with item_brand=item.brand item_model=item.model item_serial_numer=item.serial_number   %}
+                    {% include 'snippets/item.html' with item_brand=item.brand item_model=item.model item_serial_number=item.serial_number   %}
                 </div>
             {% endfor %}
 

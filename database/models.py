@@ -13,6 +13,18 @@ class Student(models.Model):
     def __str__(self):
         return self.full_name
 
+
+class Category(models.Model):
+    name = models.CharField(max_length=100, primary_key=True)
+    image = models.ImageField(upload_to='categories/', default='default.png')
+    description = models.TextField(max_length=1000, default='No description')
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "Categories"
+
+
 #model named equipement: serial number - string, category, brand, model, details
 class Equipment(models.Model):
     serial_number = models.CharField(max_length=100, primary_key=True)
@@ -23,7 +35,7 @@ class Equipment(models.Model):
     image = models.ImageField(upload_to='equipment/', default='default.png')
 
     def __str__(self):
-        return f"{self.category}: {self.serial_number} - {self.brand} - {self.model}"
+        return self.serial_number
 
     class Meta:
         verbose_name_plural = "Equipment"
@@ -71,13 +83,3 @@ class Studio(models.Model):
 
 
 # Category - name
-class Category(models.Model):
-    name = models.CharField(max_length=100, primary_key=True)
-    image = models.ImageField(upload_to='categories/', default='default.png')
-    description = models.TextField(max_length=1000, default='No description')
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name_plural = "Categories"
-

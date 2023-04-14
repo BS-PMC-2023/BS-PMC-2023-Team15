@@ -16,9 +16,11 @@
         <!--Card Title-->
         <h4 class="card-title"><strong><a href="">{{ item_brand }} {{ item_model }}</a></strong></h4>
         <!-- Card Description-->
+        <h1>AAAA</h1>
         <p class="card-text">{{ item_serial_number }}</p>
+
         <!--Card button-->
-        <a href="/details" class="btn btn-outline-info">
+        <a href="{{ item.category }}/details/" class="btn btn-outline-info">
             borrow
         </a>
     </div>

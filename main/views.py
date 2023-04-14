@@ -1,8 +1,9 @@
-from django.shortcuts import render
-from database.models import Category, Equipment,Reservation
+from database.models import Category, Equipment
 from django.shortcuts import render, redirect
 from .forms import ReservationForm
-# Create your views here.
+from django.shortcuts import get_object_or_404
+from database.models import Reservation
+from datetime import date
 
 def main_view(request):
     return render(request, 'categories.html', {} )
@@ -30,14 +31,10 @@ def category_view(request, category):
     return render(request, 'catalog.html', {"items":items})
 
 
-def item_view(request):
-    return render(request, 'details.html', {
-    })
-
-
-from django.shortcuts import render, redirect
-from database.models import Reservation
-from datetime import date
+def item_view(request, item):
+    # Get the category object based on the category name
+    item = get_object_or_404(Category, name=item)
+    return render(request, 'details.html', {"item": item})
 
 
 def reserve_item(request):
