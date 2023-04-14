@@ -1,15 +1,15 @@
-from database.models import Category, Equipment, IssueReport, IssueStatus
+from database.models import Category, Equipment, IssueReport
 from django.shortcuts import render, redirect
 from .forms import ReservationForm
 from django.shortcuts import get_object_or_404
 from database.models import Reservation
-from datetime import date
+from datetime import datetime
 
 def main_view(request):
     return render(request, 'categories.html', {} )
 
 
-def product_view(request):
+def categories_view(request):
     categories = Category.objects.all()
     return render(request, 'products.html', {'categories': categories})
 
@@ -36,8 +36,9 @@ def item_detail_view(request, item):
     # item = get_object_or_404(Category, serial_number=item)
     result = Equipment.objects.get(serial_number=item)
     issues = IssueReport.objects.filter(item=result)
+    date_min = datetime.now().date().isoformat()
     print(result)
-    return render(request, 'details.html', {"item": result, "issues": issues})
+    return render(request, 'details.html', {"item": result, "issues": issues, "date_min": date_min})
 
 
 
