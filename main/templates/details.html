@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <!-- Product Catalog-->
+    <div class="container-fluid">
+        <div class="d-flex flex-wrap justify-content-center">
+            <!-- Camera -->
+
+                <div class="px-3">
+                    {% include 'snippets/checkout.html' with item_brand=item.brand item_model=item.model item_serial_numer=item.serial_number   %}
+
+                </div>
+
+
+
+
+        </div>
+
+    </div>
+{% endblock %}

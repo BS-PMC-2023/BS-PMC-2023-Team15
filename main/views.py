@@ -28,5 +28,6 @@ def category_view(request, category):
     return render(request, 'catalog.html', {"items":items})
 
 
-def item_view(request, category, item):
-    return render(request, 'item.html', {})
+def item_view(request):
+    return render(request, 'details.html', {
+    })
