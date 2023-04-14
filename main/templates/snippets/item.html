@@ -14,14 +14,14 @@
     <!--Card Body-->
     <div class="card-body card-body-cascade text-center">
         <!--Card Title-->
-        <h4 class="card-title"><strong><a href="">{{ item_brand }} {{ item_model }}</a></strong></h4>
+        <h4 class="card-title"><strong><a href="">{{ item.brand }} {{ item.model }}</a></strong></h4>
         <!-- Card Description-->
         <h1>AAAA</h1>
-        <p class="card-text">{{ item_serial_number }}</p>
+        <p class="card-text">{{ item.serial_number }}</p>
 
         <!--Card button-->
-        <a href="{{ item.category }}/details/" class="btn btn-outline-info">
-            borrow
+        <a href="{% url 'details' item=item.serial_number %}" class="btn-primary btn">
+            Select
         </a>
     </div>
 </div>

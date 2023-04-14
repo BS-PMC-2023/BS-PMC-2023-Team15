@@ -1,4 +1,4 @@
-from database.models import Category, Equipment
+from database.models import Category, Equipment, IssueReport, IssueStatus
 from django.shortcuts import render, redirect
 from .forms import ReservationForm
 from django.shortcuts import get_object_or_404
@@ -28,13 +28,17 @@ def malfunction_view(request):
 def category_view(request, category):
     # category = Category.objects.get(name=category)
     items = Equipment.objects.filter(category=category)
-    return render(request, 'catalog.html', {"items":items})
+    return render(request, 'catalog.html', {"items": items})
 
 
-def item_view(request, item):
+def item_detail_view(request, item):
     # Get the category object based on the category name
-    item = get_object_or_404(Category, name=item)
-    return render(request, 'details.html', {"item": item})
+    # item = get_object_or_404(Category, serial_number=item)
+    result = Equipment.objects.get(serial_number=item)
+    issues = IssueReport.objects.filter(item=result)
+    print(result)
+    return render(request, 'details.html', {"item": result, "issues": issues})
+
 
 
 def reserve_item(request):

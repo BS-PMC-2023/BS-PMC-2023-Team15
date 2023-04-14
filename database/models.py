@@ -43,14 +43,13 @@ class Equipment(models.Model):
 
 #model named reservations: email-PK, ID number-PK, item - ID, date - from, date - to
 class Reservation(models.Model):
-    student_email = models.CharField(max_length=100,  primary_key=True)
-    student_id = models.CharField(max_length=100)
-    item_serial_number = models.CharField(max_length=100)
-    date_from = models.DateField()
+    student = models.ForeignKey('Student', on_delete=models.CASCADE)
+    item = models.ForeignKey('Equipment', on_delete=models.CASCADE)
+    date_from = models.DateField(primary_key=True)
     date_to = models.DateField()
 
     class Meta:
-        unique_together = ('student_email', 'student_id', 'item_serial_number')
+        unique_together = ('student', 'item', 'date_from')
 
     def __str__(self):
         return self.student_email
@@ -58,18 +57,18 @@ class Reservation(models.Model):
 
 #model named issue report: item_serial_number,student_email, date when opened, date when closed,status details (no foreign keys)
 class IssueReport(models.Model):
-    item_serial_number = models.CharField(max_length=100, primary_key=True)
-    student_email = models.CharField(max_length=100)
+    student = models.ForeignKey('Student', on_delete=models.CASCADE)
+    item = models.ForeignKey('Equipment', on_delete=models.CASCADE)
     date_opened = models.DateField()
-    date_closed = models.DateField()
-    status = models.CharField(max_length=100)
-    details = models.TextField(max_length=1000)
+    date_closed = models.DateField(default=None, null=True, blank=True)
+    status = models.ForeignKey('IssueStatus', on_delete=models.CASCADE)
+    details = models.TextField(max_length=1000, default='No details', blank=False, null=False, primary_key=True)
 
     class Meta:
-        unique_together = ('item_serial_number', 'student_email', 'date_opened')
+        unique_together = (('student', 'item', 'date_opened', 'date_closed','status'),)
 
     def __str__(self):
-        return f"{self.item_serial_number} - {self.student_email} - {self.date_opened}"
+        return f'{self.item}: {self.details}'
 
 # Studio: room - pk, name, image - default: default.png, details
 class Studio(models.Model):
@@ -82,4 +81,11 @@ class Studio(models.Model):
         return f"{self.room} - {self.name}"
 
 
-# Category - name
+# IssueStatus - GOOD, BAD, SEVERE
+class IssueStatus(models.Model):
+    status = models.CharField(max_length=100, primary_key=True)
+
+    class Meta:
+        verbose_name_plural = "Issue Status"
+    def __str__(self):
+        return self.status
