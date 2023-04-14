@@ -8,10 +8,24 @@
                 <h1>Reserve</h1>
             </div>
 
-            <form method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Reserve</button>
+           <form method="post" action="{% url 'reserve_item' %}">
+              {% csrf_token %}
+              <label for="student_email">Student Email:</label>
+              <input type="email" name="student_email" >
+              <br>
+              <label for="student_id">Student ID:</label>
+              <input type="text" name="student_id" >
+              <br>
+              <label for="item_serial_number">Item Serial Number:</label>
+              <input type="text" name="item_serial_number" >
+              <br>
+              <label for="date_from">Date From:</label>
+              <input type="date" name="date_from" >
+              <br>
+              <label for="date_to">Date To:</label>
+              <input type="date" name="date_to" >
+              <br>
+              <input type="submit" value="Reserve">
             </form>
         </div>
     </div>

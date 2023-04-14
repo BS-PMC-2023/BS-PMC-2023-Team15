@@ -35,22 +35,34 @@ def item_view(request):
     })
 
 
+from django.shortcuts import render, redirect
+from database.models import Reservation
+from datetime import date
+
+
 def reserve_item(request):
     if request.method == 'POST':
-        form = ReservationForm(request.POST)
-        if form.is_valid():
-            # student_email = form.cleaned_data['student_email']
-            student_id = form.cleaned_data['student_id']
-            item_serial_number = form.cleaned_data['item_serial_number']
-            date_from = form.cleaned_data['date_from']
-            date_to = form.cleaned_data['date_to']
-            reservation = Reservation( student_id=student_id, item_serial_number=item_serial_number, date_from=date_from, date_to=date_to)
-            reservation.save()
-            return redirect('reserve_item')
-    else:
-        form = ReservationForm()
-    return render(request, 'reserve.html', {'form': form})
+        # Get the relevant data from the request
+        student_email = request.POST['student_email']
+        student_id = request.POST['student_id']
+        item_serial_number = request.POST['item_serial_number']
+        date_from = request.POST['date_from']
+        date_to = request.POST['date_to']
 
+        # Create a new Reservation object
+        reservation = Reservation(student_email=student_email,
+                                  student_id=student_id,
+                                  item_serial_number=item_serial_number,
+                                  date_from=date_from,
+                                  date_to=date_to)
 
+        # Save the Reservation object to the database
+        reservation.save()
+
+        # Redirect to a success page or return a success message
+        return redirect('/products')  # Replace 'success_page' with the appropriate URL or view name
+
+    # Render the reservation page
+    return render(request, 'reserve.html')
 
 
