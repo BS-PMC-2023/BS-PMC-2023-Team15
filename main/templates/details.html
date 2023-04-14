@@ -2,18 +2,21 @@
 
 
 {% block content %}
-    <!-- Product Catalog-->
     <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+
+                <h3 class="text-center">Checkout</h3>
+            </div>
+        </div>
+
+    <div class="container-fluid">
+
         <div class="d-flex flex-wrap justify-content-center">
-            <!-- Camera -->
 
                 <div class="px-3">
-                    {% include 'snippets/checkout.html' with item_brand=item.brand item_model=item.model item_serial_numer=item.serial_number   %}
-
+                    {% include 'snippets/checkout.html' with item_brand=item.brand item_model=item.model item_serial_numer=item.serial_number item_image=item.image  %}
                 </div>
-
-
-
 
         </div>
 

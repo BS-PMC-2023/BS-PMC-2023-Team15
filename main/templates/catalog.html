@@ -8,6 +8,7 @@
             <!-- Camera -->
             {% for item in items %}
                 <div class="px-3">
+
                     {% include 'snippets/item.html' with item_brand=item.brand item_model=item.model item_serial_numer=item.serial_number   %}
                 </div>
             {% endfor %}
