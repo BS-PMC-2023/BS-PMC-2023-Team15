@@ -33,6 +33,7 @@ class Equipment(models.Model):
     model = models.CharField(max_length=100)
     details = models.TextField(max_length=1000)
     image = models.ImageField(upload_to='equipment/', default='default.png')
+    is_available = models.BooleanField(default=True)
 
     def __str__(self):
         return self.serial_number
@@ -45,14 +46,14 @@ class Equipment(models.Model):
 class Reservation(models.Model):
     student = models.ForeignKey('Student', on_delete=models.CASCADE)
     item = models.ForeignKey('Equipment', on_delete=models.CASCADE)
-    date_from = models.DateField(primary_key=True)
+    date_from = models.DateField()
     date_to = models.DateField()
 
     class Meta:
         unique_together = ('student', 'item', 'date_from')
 
     def __str__(self):
-        return self.student_email
+        return self.student.email
 
 
 #model named issue report: item_serial_number,student_email, date when opened, date when closed,status details (no foreign keys)

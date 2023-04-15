@@ -2,8 +2,10 @@ from database.models import Category, Equipment, IssueReport
 from django.shortcuts import render, redirect
 from .forms import ReservationForm
 from django.shortcuts import get_object_or_404
-from database.models import Reservation
+from database.models import Reservation, Student
 from datetime import datetime
+from django.http import HttpResponse, HttpResponseRedirect
+
 
 def main_view(request):
     return render(request, 'categories.html', {} )
@@ -34,37 +36,50 @@ def category_view(request, category):
 def item_detail_view(request, item):
     # Get the category object based on the category name
     # item = get_object_or_404(Category, serial_number=item)
+    form=ReservationForm()
+    if request.method == 'POST':
+        form = ReservationForm(request.POST)
+        if form.is_valid():
+            student_id = form.cleaned_data['student_id']
+            item_serial_number = form.cleaned_data['item_serial_number']
+            date_from = form.cleaned_data['date_from']
+            date_to = form.cleaned_data['date_to']
+
+            # Process the form data as required
+            student = Student.objects.get(student_id=student_id)
+            item = Equipment.objects.get(serial_number=item_serial_number)
+            reservation = Reservation(student=student, item=item, date_from=date_from, date_to=date_to)
+            reservation.save()
+
+            # Redirect to a new URL after successful form submission
+            return redirect('products')
+
+
     result = Equipment.objects.get(serial_number=item)
     issues = IssueReport.objects.filter(item=result)
     date_min = datetime.now().date().isoformat()
-    print(result)
-    return render(request, 'details.html', {"item": result, "issues": issues, "date_min": date_min})
 
+    return render(request, 'details.html', {"form": form, "item": result, "issues": issues, "date_min": date_min})
 
 
 def reserve_item(request):
     if request.method == 'POST':
-        # Get the relevant data from the request
-        student_email = request.POST['student_email']
-        student_id = request.POST['student_id']
-        item_serial_number = request.POST['item_serial_number']
-        date_from = request.POST['date_from']
-        date_to = request.POST['date_to']
+        form = ReservationForm(request.POST)
+        if form.is_valid():
+            student_id = form.cleaned_data['student_id']
+            item_serial_number = form.cleaned_data['item_serial_number']
+            date_from = form.cleaned_data['date_from']
+            date_to = form.cleaned_data['date_to']
 
-        # Create a new Reservation object
-        reservation = Reservation(student_email=student_email,
-                                  student_id=student_id,
-                                  item_serial_number=item_serial_number,
-                                  date_from=date_from,
-                                  date_to=date_to)
+            # Process the form data as required
+            student = Student.objects.get(student_id=student_id)
+            item = Equipment.objects.get(serial_number=item_serial_number)
+            reservation = Reservation(student=student, item=item, date_from=date_from, date_to=date_to)
+            reservation.save()
 
-        # Save the Reservation object to the database
-        reservation.save()
+            # Redirect to a new URL after successful form submission
+            return redirect('products')
+    else:
+        form = ReservationForm()
 
-        # Redirect to a success page or return a success message
-        return redirect('/products')  # Replace 'success_page' with the appropriate URL or view name
-
-    # Render the reservation page
-    return render(request, 'reserve.html')
-
-
+    return render(request, 'catalog.html')
