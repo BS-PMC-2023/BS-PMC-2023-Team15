@@ -9,7 +9,8 @@
         <div class="row">
         <div class="col-lg-3 col-md-3 col-sm-6 text-center">
             <div class="contact__widget">
-                <a href="./products"><img src="{% static '/media/basket.png' %}" alt=""></a>
+                <a href="{% url 'categories' %}">
+                    <img src="{% static '/media/basket.png' %}" alt=""></a>
                 <h4>Product List</h4>
                 <p>Order products.</p>
             </div>
