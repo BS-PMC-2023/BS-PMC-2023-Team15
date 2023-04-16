@@ -60,7 +60,7 @@ def item_detail_view(request, item):
     issues = IssueReport.objects.filter(item=result)
     date_min = datetime.now().date().isoformat()
 
-    return render(request, 'details.html', {"form": form, "item": result, "issues": issues, "date_min": date_min})
+    return render(request, 'details_products.html', {"form": form, "item": result, "issues": issues, "date_min": date_min})
 
 
 def reserve_item(request):

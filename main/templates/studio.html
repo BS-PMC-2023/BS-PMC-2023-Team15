@@ -2,13 +2,13 @@
 
 
 {% block content %}
-    <!-- Product Catalog-->
+    <!-- Studio Catalog-->
     <div class="container-fluid">
         <div class="d-flex flex-wrap justify-content-center">
-            <!-- Camera -->
+            <!-- Studio -->
             {% for studio in studios %}
                 <div class="px-3">
-                    {% include 'snippets/studio_snip.html' with studio=studio %}
+                    {% include 'snippets/studios.html' with studio=studio %}
                 </div>
             {% endfor %}
 
