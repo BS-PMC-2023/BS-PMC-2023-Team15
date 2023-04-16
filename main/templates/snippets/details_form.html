@@ -1,13 +1,6 @@
+{%extends 'details_base.html'%}
 
-<div class="input-group my-3" role="group" aria-label="Basic example">
-    <span class="input-group-text" id="addon-wrapping">From: </span>
-    <input type="date" class="btn btn-outline-primary" min="{{ date_min }}" name="date_from">
-
-    <span class="input-group-text" id="addon-wrapping">To: </span>
-    <input type="date" class="btn btn-outline-primary" name="date_to">
-
-    <span class="input-group-text" id="addon-wrapping"></span>
-
+{%block item %}
     <input type="hidden" name="item" value="{{ item.serial_number }}">
-    <button type="submit" class="btn btn-success">Borrow</button>
-</div>
+{%endblock item %}
+
