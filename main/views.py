@@ -1,4 +1,4 @@
-from database.models import Category, Equipment, IssueReport
+from database.models import Category, Equipment, IssueReport, Studio
 from django.shortcuts import render, redirect
 from .forms import ReservationForm
 from django.shortcuts import get_object_or_404
@@ -17,7 +17,8 @@ def categories_view(request):
 
 
 def studio_view(request):
-    return render(request, 'studio.html', {})
+    studios = Studio.objects.all()
+    return render(request, 'studio.html', {'studios': studios})
 
 
 def podcast_view(request):
@@ -83,3 +84,34 @@ def reserve_item(request):
         form = ReservationForm()
 
     return render(request, 'catalog.html')
+
+
+def studio_detail_view(request, studio):
+    # Get the category object based on the category name
+    # item = get_object_or_404(Category, serial_number=item)
+    form=ReservationForm()
+    if request.method == 'POST':
+        form = ReservationForm(request.POST)
+        if form.is_valid():
+            student_id = form.cleaned_data['student_id']
+            studio_room = form.cleaned_data['item_room']
+            date_from = form.cleaned_data['date_from']
+            date_to = form.cleaned_data['date_to']
+
+            # Process the form data as required
+            student = Student.objects.get(student_id=student_id)
+            studio = Studio.objects.get(room=studio_room)
+            reservation = Reservation(student=student, studio=studio, date_from=date_from, date_to=date_to)
+            reservation.save()
+
+            # Redirect to a new URL after successful form submission
+            return redirect('products')
+
+    result = Studio.objects.get(room=studio)
+    #issues = IssueReport.objects.filter(studio=result)
+    date_min = datetime.now().date().isoformat()
+
+#TODO: add issues to studio
+
+    return render(request, 'details_studio.html', {"form": form, "studio": result, "date_min": date_min})
+

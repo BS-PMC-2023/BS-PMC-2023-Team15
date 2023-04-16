@@ -1,105 +1,125 @@
 {% extends 'base.html' %}
 
+
 {% block content %}
-    <!-- Studio Catalog-->
-    <div class="container">
-        <div class="row">
-            <!-- Studio 1-->
-            <div class="col">
-                <div class="card card-cascade card-ecommerce wider shadow mb-5">
-                    <!--Card image-->
-                    <div class="view view-cascade overlay text-center">
-                        <img class="card-img-top img-thumbnail"
-                             src="https://media.istockphoto.com/id/1093914934/photo/empty-studio-with-photography-lighting.jpg?s=612x612&w=0&k=20&c=WI0OApbMzeRviRwFR9tISanskRu_TEFxA8ztYZERsVA="
-                             alt="">
-                        <a>
-                            <div class="mask rgba-white-slight"></div>
-                        </a>
-                    </div>
-
-                    <!--Card Body-->
-                    <div class="card-body card-body-cascade text-center">
-                        <!--Card Title-->
-                        <h4 class="card-title"><strong><a href="">Studio Room 1</a></strong></h4>
-                        <!-- Card Description-->
-                        <p class="card-text">Our Studio Rooms.</p>
-                        <!--Card button-->
-                        <button type="button" class="btn btn-outline-info">Proceed</button>
-                    </div>
+    <!-- Product Catalog-->
+    <div class="container-fluid">
+        <div class="d-flex flex-wrap justify-content-center">
+            <!-- Camera -->
+            {% for studio in studios %}
+                <div class="px-3">
+                    {% include 'snippets/studio_snip.html' with studio=studio %}
                 </div>
-            </div>
-            <!-- Studio 2-->
-            <div class="col">
-                <div class="card card-cascade card-ecommerce wider shadow mb-5">
-                    <!--Card image-->
-                    <div class="view view-cascade overlay text-center">
-                        <img class="card-img-top img-thumbnail"
-                             src="https://media.istockphoto.com/id/1093914934/photo/empty-studio-with-photography-lighting.jpg?s=612x612&w=0&k=20&c=WI0OApbMzeRviRwFR9tISanskRu_TEFxA8ztYZERsVA="
-                             alt="">
-                        <a>
-                            <div class="mask rgba-white-slight"></div>
-                        </a>
-                    </div>
+            {% endfor %}
 
-                    <!--Card Body-->
-                    <div class="card-body card-body-cascade text-center">
-                        <!--Card Title-->
-                        <h4 class="card-title"><strong><a href="">Studio Room 2</a></strong></h4>
-                        <!-- Card Description-->
-                        <p class="card-text">Our Studio Rooms.</p>
-                        <!--Card button-->
-                        <button type="button" class="btn btn-outline-info">Proceed</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Studio 3-->
-            <div class="col">
-                <div class="card card-cascade card-ecommerce wider shadow mb-5">
-                    <!--Card image-->
-                    <div class="view view-cascade overlay text-center">
-                        <img class="card-img-top img-thumbnail"
-                             src="https://media.istockphoto.com/id/1093914934/photo/empty-studio-with-photography-lighting.jpg?s=612x612&w=0&k=20&c=WI0OApbMzeRviRwFR9tISanskRu_TEFxA8ztYZERsVA="
-                             alt="">
-                        <a>
-                            <div class="mask rgba-white-slight"></div>
-                        </a>
-                    </div>
-
-                    <!--Card Body-->
-                    <div class="card-body card-body-cascade text-center">
-                        <!--Card Title-->
-                        <h4 class="card-title"><strong><a href="">Studio Room 3</a></strong></h4>
-                        <!-- Card Description-->
-                        <p class="card-text">Our Studio Rooms.</p>
-                        <!--Card button-->
-                        <button type="button" class="btn btn-outline-info">Proceed</button>
-                    </div>
-                </div>
-            </div>
-            <!-- Studio 4-->
-            <div class="col">
-                <div class="card card-cascade card-ecommerce wider shadow mb-5">
-                    <!--Card image-->
-                    <div class="view view-cascade overlay text-center">
-                        <img class="card-img-top img-thumbnail"
-                             src="https://media.istockphoto.com/id/1093914934/photo/empty-studio-with-photography-lighting.jpg?s=612x612&w=0&k=20&c=WI0OApbMzeRviRwFR9tISanskRu_TEFxA8ztYZERsVA="
-                             alt="">
-                        <a>
-                            <div class="mask rgba-white-slight"></div>
-                        </a>
-                    </div>
-
-                    <!--Card Body-->
-                    <div class="card-body card-body-cascade text-center">
-                        <!--Card Title-->
-                        <h4 class="card-title"><strong><a href="">Studio Room 4</a></strong></h4>
-                        <!-- Card Description-->
-                        <p class="card-text">Our Studio Rooms.</p>
-                        <!--Card button-->
-                        <button type="button" class="btn btn-outline-info">Proceed</button>
-                    </div>
-                </div>
-            </div>
         </div>
+
     </div>
 {% endblock %}
+
+
+
+
+{#{% block content %}#}
+{#    <!-- Studio Catalog-->#}
+{#    <div class="container">#}
+{#        <div class="row">#}
+{#            <!-- Studio 1-->#}
+{#            <div class="col">#}
+{#                <div class="card card-cascade card-ecommerce wider shadow mb-5">#}
+{#                    <!--Card image-->#}
+{#                    <div class="view view-cascade overlay text-center">#}
+{#                        <img class="card-img-top img-thumbnail"#}
+{#                             src="https://media.istockphoto.com/id/1093914934/photo/empty-studio-with-photography-lighting.jpg?s=612x612&w=0&k=20&c=WI0OApbMzeRviRwFR9tISanskRu_TEFxA8ztYZERsVA="#}
+{#                             alt="">#}
+{#                        <a>#}
+{#                            <div class="mask rgba-white-slight"></div>#}
+{#                        </a>#}
+{#                    </div>#}
+{##}
+{#                    <!--Card Body-->#}
+{#                    <div class="card-body card-body-cascade text-center">#}
+{#                        <!--Card Title-->#}
+{#                        <h4 class="card-title"><strong><a href="">Studio Room 1</a></strong></h4>#}
+{#                        <!-- Card Description-->#}
+{#                        <p class="card-text">Our Studio Rooms.</p>#}
+{#                        <!--Card button-->#}
+{#                        <button type="button" class="btn btn-outline-info">Proceed</button>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <!-- Studio 2-->#}
+{#            <div class="col">#}
+{#                <div class="card card-cascade card-ecommerce wider shadow mb-5">#}
+{#                    <!--Card image-->#}
+{#                    <div class="view view-cascade overlay text-center">#}
+{#                        <img class="card-img-top img-thumbnail"#}
+{#                             src="https://media.istockphoto.com/id/1093914934/photo/empty-studio-with-photography-lighting.jpg?s=612x612&w=0&k=20&c=WI0OApbMzeRviRwFR9tISanskRu_TEFxA8ztYZERsVA="#}
+{#                             alt="">#}
+{#                        <a>#}
+{#                            <div class="mask rgba-white-slight"></div>#}
+{#                        </a>#}
+{#                    </div>#}
+{##}
+{#                    <!--Card Body-->#}
+{#                    <div class="card-body card-body-cascade text-center">#}
+{#                        <!--Card Title-->#}
+{#                        <h4 class="card-title"><strong><a href="">Studio Room 2</a></strong></h4>#}
+{#                        <!-- Card Description-->#}
+{#                        <p class="card-text">Our Studio Rooms.</p>#}
+{#                        <!--Card button-->#}
+{#                        <button type="button" class="btn btn-outline-info">Proceed</button>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <!-- Studio 3-->#}
+{#            <div class="col">#}
+{#                <div class="card card-cascade card-ecommerce wider shadow mb-5">#}
+{#                    <!--Card image-->#}
+{#                    <div class="view view-cascade overlay text-center">#}
+{#                        <img class="card-img-top img-thumbnail"#}
+{#                             src="https://media.istockphoto.com/id/1093914934/photo/empty-studio-with-photography-lighting.jpg?s=612x612&w=0&k=20&c=WI0OApbMzeRviRwFR9tISanskRu_TEFxA8ztYZERsVA="#}
+{#                             alt="">#}
+{#                        <a>#}
+{#                            <div class="mask rgba-white-slight"></div>#}
+{#                        </a>#}
+{#                    </div>#}
+{##}
+{#                    <!--Card Body-->#}
+{#                    <div class="card-body card-body-cascade text-center">#}
+{#                        <!--Card Title-->#}
+{#                        <h4 class="card-title"><strong><a href="">Studio Room 3</a></strong></h4>#}
+{#                        <!-- Card Description-->#}
+{#                        <p class="card-text">Our Studio Rooms.</p>#}
+{#                        <!--Card button-->#}
+{#                        <button type="button" class="btn btn-outline-info">Proceed</button>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            <!-- Studio 4-->#}
+{#            <div class="col">#}
+{#                <div class="card card-cascade card-ecommerce wider shadow mb-5">#}
+{#                    <!--Card image-->#}
+{#                    <div class="view view-cascade overlay text-center">#}
+{#                        <img class="card-img-top img-thumbnail"#}
+{#                             src="https://media.istockphoto.com/id/1093914934/photo/empty-studio-with-photography-lighting.jpg?s=612x612&w=0&k=20&c=WI0OApbMzeRviRwFR9tISanskRu_TEFxA8ztYZERsVA="#}
+{#                             alt="">#}
+{#                        <a>#}
+{#                            <div class="mask rgba-white-slight"></div>#}
+{#                        </a>#}
+{#                    </div>#}
+{##}
+{#                    <!--Card Body-->#}
+{#                    <div class="card-body card-body-cascade text-center">#}
+{#                        <!--Card Title-->#}
+{#                        <h4 class="card-title"><strong><a href="">Studio Room 4</a></strong></h4>#}
+{#                        <!-- Card Description-->#}
+{#                        <p class="card-text">Our Studio Rooms.</p>#}
+{#                        <!--Card button-->#}
+{#                        <button type="button" class="btn btn-outline-info">Proceed</button>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#{% endblock %}#}

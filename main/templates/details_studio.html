@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container my-5">
+        <div class="row row-cols-sm-1">
+            <!--First image-->
+            <div class="col-lg-6 mx-2 mb-sm-5 text-center">
+                <img class="animate__fadeIn animate__animated shadow" src="/{{ MEDIA_URL }}media/{{ studio.image }}" alt="">
+            </div>
+
+
+            <! --details-->
+            <div class="col-lg my-sm-2 ">
+                <h1 class="">{{ studio.room }} {{ studio.name }}</h1>
+                <p class="">{{ studio.details }} </p>
+                <h3 class="">ID: {{ studio.room }}</h3>
+                <h4 class="shadow" style="color: #3CC032">Availability: {{ studio.is_available }}</h4>
+
+{#            {% url 'reserve' student=123 item=item.serial_number date_from='2023-08-20' date_to='2023-08-21' %}#}
+
+            <form method="post"  id="reserve-form">
+                {% csrf_token %}
+                {{ form }}
+            </form>
+
+
+                <table class="table border shadow ">
+                    <thead>
+
+                    <tr>
+                        <th scope="col">Status</th>
+                        <th scope="col">Details</th>
+                        <th scope="col">User</th>
+                        <th scope="col">Opened</th>
+                        <th scope="col">Closed</th>
+                    </tr>
+                    </thead>
+
+                    <tbody class="">
+                    {% for issue in issues %}
+                        {% if issue.status.status == "GOOD" %}
+                            <tr class="table-success">
+                                <td><span class="badge text-bg-success">OK</span></td>
+
+                                {% elif issue.status.status == "SEVERE" %}
+                            <tr class="table-warning">
+                                <td><span class="badge text-bg-warning">Severe</span></td>
+
+                                {% elif issue.status.status == "BAD" %}
+                            <tr class="table-danger">
+                                <td><span class="badge text-bg-danger">Broken</span></td>
+                                {% else %}
+                            <tr>
+                            <td><span class="badge text-bg-info">Unknown</span></td>
+                        {% endif %}
+                    <td>{{ issue.details }}</td>
+                    <td class="fw-bold">{{ issue.student }}</td>
+                    <td>{{ issue.date_opened }}</td>
+                    <td>{{ issue.date_closed }}</td>
+                    </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="5" class="">No issues! 😁</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+
+
