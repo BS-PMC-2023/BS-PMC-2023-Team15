@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <!-- Product Catalog-->
+    <div class="container-fluid">
+        <div class="d-flex flex-wrap justify-content-center">
+
+            <!-- Camera -->
+            {% for item in items %}
+                <div class="px-3">
+                    {% include 'snippets/item.html' with item=item   %}
+                </div>
+            {% endfor %}
+
+        </div>
+
+    </div>
+{% endblock %}

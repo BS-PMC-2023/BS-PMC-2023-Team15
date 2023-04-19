@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/elegant-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/animate.min.css' %}"/>
+
+    <title>{% block title %}{% endblock %} | VCStorge</title>
+</head>
+
+<body class="">
+
+{% include 'navbar.html' %}
+
+{#{% include 'search_bar.html' %}#}
+
+{% block content %}
+
+{% endblock content %}
+
+<div class="container">
+</div>
+
+{% include 'footer.html' %}
+
+
+</body>
+
+<!-- Js Plugins -->
+
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static "js/bootstrap.bundle.js" %}"></script>
+<script src="/js/jquery.nice-select.min.js" type="javascript"></script>
+<script src="/js/jquery-ui.min.js" type="javascript"></script>
+<script src="/js/mixitup.min.js" type="javascript"></script>
+<script src="/js/jquery.slicknav.js" type="javascript"></script>
+<script src="/js/owl.carousel.min.js" type="javascript"></script>
+<script src="/js/main.js" type="javascript"></script>
+
+</html>

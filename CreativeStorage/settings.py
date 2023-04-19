@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-jx+yl^9f&!3(6vi0c!$v2xck(!22j9e7h7jsi4guok1q+6^l5v
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["192.168.1.114", "141.226.10.83", '*']
 
 
 # Application definition
@@ -40,10 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'django.contrib.sites',
-    'apps.item',
-    'apps.pages',
-
     'database',
+    'core',
+    'main',
 
 ]
 
@@ -90,6 +89,7 @@ DATABASES = {
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

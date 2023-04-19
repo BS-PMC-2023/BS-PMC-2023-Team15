@@ -1,38 +1,8 @@
-{% extends 'base.html' %}
+{% extends '../core/templates/base.html' %}
 {% load static %}
+
 <title>{%block title%}Student Page{%endblock%}</title>
 
-<div class="container">
-     {% block content %}
-    <div class="row">
-        <div class="col-lg-3 col-md-3 col-sm-6 text-center">
-            <div class="contact__widget">
-                <a href="./products"><img src="{% static '/media/basket.png' %}" alt=""></a>
-                <h4>Product List</h4>
-                <p>Order products.</p>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 text-center">
-            <div class="contact__widget">
-                <a href="./studio"><img src="{% static '/media/light-box.png' %}" alt=""></a>
-                <h4>Studio List</h4>
-                <p>Book Studio.</p>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 text-center">
-            <div class="contact__widget">
-                <a href="./podcast"><img src="{% static '/media/podcast.png' %}" alt=""></a>
-                <h4>Podcast List</h4>
-                <p>Book Podcast Room.</p>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 text-center">
-            <div class="contact__widget">
-                <a href="./malfunction"><img src="{% static '/media/error-message.png' %}" alt=""></a>
-                <h4>Malfunction Report</h4>
-                <p>Report for malfunctions.</p>
-            </div>
-        </div>
-    </div>
-    {% endblock %}
-</div>
+{% block content %}
+
+{% endblock %}

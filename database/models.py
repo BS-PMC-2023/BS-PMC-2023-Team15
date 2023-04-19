@@ -13,17 +13,30 @@ class Student(models.Model):
     def __str__(self):
         return self.full_name
 
+
+class Category(models.Model):
+    name = models.CharField(max_length=100, primary_key=True)
+    image = models.ImageField(upload_to='categories/', default='default.png')
+    description = models.TextField(max_length=1000, default='No description')
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "Categories"
+
+
 #model named equipement: serial number - string, category, brand, model, details
 class Equipment(models.Model):
     serial_number = models.CharField(max_length=100, primary_key=True)
-    category = models.CharField(max_length=100)
+    category = models.ForeignKey('Category', on_delete=models.CASCADE)
     brand = models.CharField(max_length=100)
     model = models.CharField(max_length=100)
     details = models.TextField(max_length=1000)
     image = models.ImageField(upload_to='equipment/', default='default.png')
+    is_available = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"{self.category}: {self.serial_number} - {self.brand} - {self.model}"
+        return self.serial_number
 
     class Meta:
         verbose_name_plural = "Equipment"
@@ -31,33 +44,32 @@ class Equipment(models.Model):
 
 #model named reservations: email-PK, ID number-PK, item - ID, date - from, date - to
 class Reservation(models.Model):
-    student_email = models.CharField(max_length=100,  primary_key=True)
-    student_id = models.CharField(max_length=100)
-    item_serial_number = models.CharField(max_length=100)
+    student = models.ForeignKey('Student', on_delete=models.CASCADE)
+    item = models.ForeignKey('Equipment', on_delete=models.CASCADE)
     date_from = models.DateField()
     date_to = models.DateField()
 
     class Meta:
-        unique_together = ('student_email', 'student_id', 'item_serial_number')
+        unique_together = ('student', 'item', 'date_from')
 
     def __str__(self):
-        return self.student_email
+        return self.student.email
 
 
 #model named issue report: item_serial_number,student_email, date when opened, date when closed,status details (no foreign keys)
 class IssueReport(models.Model):
-    item_serial_number = models.CharField(max_length=100, primary_key=True)
-    student_email = models.CharField(max_length=100)
+    student = models.ForeignKey('Student', on_delete=models.CASCADE)
+    item = models.ForeignKey('Equipment', on_delete=models.CASCADE)
     date_opened = models.DateField()
-    date_closed = models.DateField()
-    status = models.CharField(max_length=100)
-    details = models.TextField(max_length=1000)
+    date_closed = models.DateField(default=None, null=True, blank=True)
+    status = models.ForeignKey('IssueStatus', on_delete=models.CASCADE)
+    details = models.TextField(max_length=1000, default='No details', blank=False, null=False, primary_key=True)
 
     class Meta:
-        unique_together = ('item_serial_number', 'student_email', 'date_opened')
+        unique_together = (('student', 'item', 'date_opened', 'date_closed','status'),)
 
     def __str__(self):
-        return f"{self.item_serial_number} - {self.student_email} - {self.date_opened}"
+        return f'{self.item}: {self.details}'
 
 # Studio: room - pk, name, image - default: default.png, details
 class Studio(models.Model):
@@ -68,3 +80,13 @@ class Studio(models.Model):
 
     def __str__(self):
         return f"{self.room} - {self.name}"
+
+
+# IssueStatus - GOOD, BAD, SEVERE
+class IssueStatus(models.Model):
+    status = models.CharField(max_length=100, primary_key=True)
+
+    class Meta:
+        verbose_name_plural = "Issue Status"
+    def __str__(self):
+        return self.status

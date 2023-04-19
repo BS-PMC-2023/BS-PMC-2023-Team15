@@ -4,7 +4,7 @@ from django.contrib import admin, messages
 from django.forms import forms
 from django.shortcuts import redirect, render
 from django.urls import path
-from .models import Student, Equipment, Reservation, IssueReport,Studio
+from .models import Student, Equipment, Reservation, IssueReport,Studio,Category,IssueStatus
 
 
 class CsvImportForm(forms.Form):
@@ -55,3 +55,5 @@ admin.site.register(Reservation)
 admin.site.register(IssueReport)
 admin.site.register(Equipment, EquipmentAdmin)
 admin.site.register(Studio)
+admin.site.register(Category)
+admin.site.register(IssueStatus)
