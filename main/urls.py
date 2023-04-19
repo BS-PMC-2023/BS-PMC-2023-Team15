@@ -10,5 +10,6 @@ urlpatterns = [
     # path('/item/', admin.site.urls),
     path('<category>', main.views.category_view, name='category'),
     path('details/<item>', main.views.item_detail_view, name='details'),
+    path('details_studio/<studio>', main.views.studio_detail_view, name='details_studio'),
 
 ]
