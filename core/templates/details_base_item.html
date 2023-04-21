@@ -2,22 +2,23 @@
 
 {% block content %}
     <div class="container my-5">
-        <div class="row row-cols-sm-1">
+        <div class="row row-cols-sm-1 ">
             <!--First image-->
             <div class="col-lg-6 mx-2 mb-sm-5 text-center">
-                {% block image %}
-                <img class="animate__fadeIn animate__animated shadow" src="/{{ MEDIA_URL }}media/{{ item.image }}" alt="">
-                {% endblock image %}
-
+                <img class="animate__fadeIn animate__animated " src="/{{ MEDIA_URL }}media/{{ item.image }}" alt="">
             </div>
 
 
             <! --details-->
-            <div class="col-lg my-sm-2 ">
-                {% block details %}
-
-                {% endblock details %}
-
+            <div class="col-lg my-sm-2">
+                <h1 class="">{{ item.brand }} {{ item.model }}</h1>
+                <p class="">{{ item.details }} </p>
+                <h3 class="">ID: <span class="badge bg-secondary">{{ item.serial_number }}</span></h3>
+                {% if  item.is_available %}
+                    <h2 class="badge bg-success mt-3">Available</h2>
+                {% else %}
+                    <h2 class="badge bg-danger  mt-3">Not Available </h2>
+                {% endif %}
 
 {#            {% url 'reserve' student=123 item=item.serial_number date_from='2023-08-20' date_to='2023-08-21' %}#}
 
