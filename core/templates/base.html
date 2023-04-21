@@ -24,28 +24,18 @@
 
 <body class="">
 
-<div class="d-flex flex-column h-100">
+{% include 'navbar.html' %}
 
-    <div class="mb-1">
-        {% include 'navbar.html' %}
+{#{% include 'search_bar.html' %}#}
 
-    </div>
+{% block content %}
 
+{% endblock content %}
 
-    {% include 'search_bar.html' %}
-
-    <div class="my-auto ">
-        {% block content %}
-        {% endblock content %}
-
-    </div>
-
-    <div class="mt-auto">
-
-        {% include 'footer.html' %}
-    </div>
-
+<div class="container">
 </div>
+
+{% include 'footer.html' %}
 
 
 </body>
@@ -54,7 +44,6 @@
 
 <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
 <script src="{% static "js/bootstrap.bundle.js" %}"></script>
-
 <script src="/js/jquery.nice-select.min.js" type="javascript"></script>
 <script src="/js/jquery-ui.min.js" type="javascript"></script>
 <script src="/js/mixitup.min.js" type="javascript"></script>
