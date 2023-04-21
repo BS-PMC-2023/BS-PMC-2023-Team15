@@ -69,16 +69,16 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item"  href="{% url 'categories' %}">Products</a></li>
-                                <li><a class="dropdown-item"  href="./studio">Studios</a></li>
-                                <li><a class="dropdown-item"  href="./podcast">Podcast Rooms</a></li>
-                                <li><a class="dropdown-item"  href="./malfunction">Malfunctions</a></li>
+                                <li><a class="dropdown-item"  href="{% url 'studio' %}">Studios</a></li>
+                                <li><a class="dropdown-item"  href="{% url 'podcast' %}">Podcast Rooms</a></li>
+                                <li><a class="dropdown-item"  href="{% url 'malfunction' %}">Malfunctions</a></li>
                             </ul>
                         </div>
 {#                    <a class="nav-link tali" href="#">Pages</a>#}
 {#                    <ul class="dropdown dropdown-menu">#}
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link tali_green" href="./contact">Contact</a>
+                        <a class="nav-link tali_green" href="">Contact</a>
                     </li>
                 </ul>
 

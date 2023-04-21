@@ -1,25 +1,8 @@
-
-
-<div class="card card-cascade card-ecommerce wider shadow mb-5" style="width: 16rem">
-    <!--Card image-->
-    <div class="view view-cascade overlay text-center">
-        <img class="card-img-top img-thumbnail"
-             src="/{{ MEDIA_URL }}media/{{ category.image }}" alt="">
-{#        TODO: Change default to media/category/...#}
-        <a>
-            <div class="mask rgba-white-slight"></div>
-        </a>
-    </div>
-
-    <!--Card Body-->
-    <div class="card-body card-body-cascade text-center">
-        <!--Card Title-->
-        <h4 class="card-title"><strong><a href="">{{ item }}</a></strong></h4>
-        <!-- Card Description-->
-        <p class="card-text">{{ item_description }}</p>
-        <!--Card button-->
-        <a href="category/{{ item }}" class="btn btn-outline-info">
-            Proceed
-        </a>
-    </div>
+<div class="card shadow mb-5" style="width: 18rem">
+  <img src="/{{ MEDIA_URL }}media/{{ category.image }}" class="card-img-top img-thumbnail object-fit-contain" alt="..." style="height: 18rem;">
+  <div class="card-body">
+    <h2 class="card-title text-primary fw-bold">{{ item }}</h2>
+    <p class="card-text fs-5">{{ item_description }}.</p>
+    <a href="{% url 'category' category=item %}" class="btn btn-outline-success ">Proceed →</a>
+  </div>
 </div>
