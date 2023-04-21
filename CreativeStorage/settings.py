@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'database',
     'core',
     'main',
-    'accounts',
+
 ]
 
 MIDDLEWARE = [
@@ -76,6 +76,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'CreativeStorage.wsgi.application'
 
+
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
@@ -85,8 +86,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-LOGIN_REDIRECT_URL = '/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
