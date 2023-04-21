@@ -36,20 +36,23 @@ def category_view(request, category):
 def item_detail_view(request, item):
     # Get the category object based on the category name
     # item = get_object_or_404(Category, serial_number=item)
-    form = ReservationForm()
+    form=ReservationForm()
     if request.method == 'POST':
         form = ReservationForm(request.POST)
-        # if form.is_valid():
-        student_id = 123 #TODO: get student id from session cookie
-        item_serial_number = item
-        date_from = form.data['date_from']
-        date_to = form.data['date_to']
+        if form.is_valid():
+            student_id = form.cleaned_data['student_id']
+            item_serial_number = form.cleaned_data['item_serial_number']
+            date_from = form.cleaned_data['date_from']
+            date_to = form.cleaned_data['date_to']
 
-        # Process the form data as required
-        student = Student.objects.get(id=student_id)
-        item = Equipment.objects.get(serial_number=item_serial_number)
-        reservation = Reservation(student=student, item=item, date_from=date_from, date_to=date_to)
-        reservation.save()
+            # Process the form data as required
+            student = Student.objects.get(student_id=student_id)
+            item = Equipment.objects.get(serial_number=item_serial_number)
+            reservation = Reservation(student=student, item=item, date_from=date_from, date_to=date_to)
+            reservation.save()
+
+            # Redirect to a new URL after successful form submission
+            return redirect('products')
 
 
     result = Equipment.objects.get(serial_number=item)
@@ -57,3 +60,26 @@ def item_detail_view(request, item):
     date_min = datetime.now().date().isoformat()
 
     return render(request, 'details.html', {"form": form, "item": result, "issues": issues, "date_min": date_min})
+
+
+def reserve_item(request):
+    if request.method == 'POST':
+        form = ReservationForm(request.POST)
+        if form.is_valid():
+            student_id = form.cleaned_data['student_id']
+            item_serial_number = form.cleaned_data['item_serial_number']
+            date_from = form.cleaned_data['date_from']
+            date_to = form.cleaned_data['date_to']
+
+            # Process the form data as required
+            student = Student.objects.get(student_id=student_id)
+            item = Equipment.objects.get(serial_number=item_serial_number)
+            reservation = Reservation(student=student, item=item, date_from=date_from, date_to=date_to)
+            reservation.save()
+
+            # Redirect to a new URL after successful form submission
+            return redirect('products')
+    else:
+        form = ReservationForm()
+
+    return render(request, 'catalog.html')

@@ -7,6 +7,7 @@ import main.views
 
 
 urlpatterns = [
+    path('reserve', main.views.reserve_item, name='reserve'),
     # path('/item/', admin.site.urls),
     path('<category>', main.views.category_view, name='category'),
     path('details/<item>', main.views.item_detail_view, name='details'),
