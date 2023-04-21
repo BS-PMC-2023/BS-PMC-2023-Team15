@@ -1,14 +1,13 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.conf import settings
 # Create your models here.
 
 #model named students - full name, id, email, phone number, password
 class Student(models.Model):
     full_name = models.CharField(max_length=100)
-    student_id = models.CharField(max_length=10)
+    id = models.IntegerField(primary_key=True)
     email = models.EmailField(max_length=100)
-    phone_number = models.IntegerField(default=0, null=True)
+    phone_number = models.IntegerField()
     password = models.CharField(max_length=100)
 
     def __str__(self):
