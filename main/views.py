@@ -48,8 +48,8 @@ def item_detail_view(request, item):
 
         # Process the form data as required
         student = Student.objects.get(id=student_id)
-        item = Equipment.objects.get(serial_number=item_serial_number)
-        reservation = Reservation(student=student, item=item, date_from=date_from, date_to=date_to)
+        item_to_borrow = Equipment.objects.get(serial_number=item_serial_number)
+        reservation = Reservation(student=student, item=item_to_borrow, date_from=date_from, date_to=date_to)
         reservation.save()
 
 
