@@ -71,6 +71,6 @@ def item_detail_view(request, item):
 
 
 def overdue(request):
-    reservations = Reservation.objects.all()
+    reservations = Reservation.objects.filter(returned=False)
     context = {'reservations': reservations}
     return render(request, 'overdue.html', context)

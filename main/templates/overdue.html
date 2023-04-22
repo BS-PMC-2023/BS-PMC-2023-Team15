@@ -13,6 +13,7 @@
                                 <th style="text-align: left; padding: 12px; border-bottom: 1px solid #ddd;">Item</th>
                                 <th style="text-align: left; padding: 12px; border-bottom: 1px solid #ddd;">Date Borrowed</th>
                                 <th style="text-align: left; padding: 12px; border-bottom: 1px solid #ddd;">Due Date</th>
+                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #ddd;">Returned</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -22,6 +23,8 @@
                                 <td style="text-align: left; padding: 12px; border-bottom: 1px solid #ddd;">{{ reservation.item }}</td>
                                 <td style="text-align: left; padding: 12px; border-bottom: 1px solid #ddd;">{{ reservation.date_from }}</td>
                                 <td style="text-align: left; padding: 12px; border-bottom: 1px solid #ddd;">{{ reservation.date_to }}</td>
+                                <td style="text-align: left; padding: 12px; border-bottom: 1px solid #ddd;">{{ reservation.returned }}</td>
+
                             </tr>
                             {% endfor %}
                         </tbody>
