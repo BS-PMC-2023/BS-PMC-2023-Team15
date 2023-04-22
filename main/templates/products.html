@@ -9,7 +9,7 @@
 
             <!-- Camera -->
     {% for category in categories %}
-        {% if category.name != 'Studio' %}
+        {% if category.name != 'Studio' and category.name !=  'Podcast'%}
             <div class="px-3">
                 {% include 'snippets/category.html' with image=category.image item=category.name item_description=category.description %}
             </div>
