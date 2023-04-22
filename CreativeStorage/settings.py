@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'database',
     'core',
     'main',
+    'accounts',
 
 ]
 
@@ -86,6 +87,8 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+LOGIN_REDIRECT_URL = '/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
