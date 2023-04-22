@@ -45,6 +45,16 @@ def item_detail_view(request, item):
         date_from = form.data['date_from']
         date_to = form.data['date_to']
 
+        # catch ValidationError
+        try:
+            date_from = datetime.strptime(date_from, '%Y-%m-%d').date()
+            date_to = datetime.strptime(date_to, '%Y-%m-%d').date()
+        except ValueError:
+            return HttpResponse("Invalid date format")
+
+        if date_from > date_to :
+            return HttpResponse("Invalid date range")
+
         # Process the form data as required
         student = Student.objects.get(id=student_id)
         item = Equipment.objects.get(serial_number=item_serial_number)
