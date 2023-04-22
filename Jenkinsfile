@@ -3,12 +3,12 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'docker build -t CreativeStorage .'
+                sh 'docker build -t creativestorage .'
             }
         }
         stage('Test') {
             steps {
-                sh 'docker run --rm CreativeStorage python manage.py test'
+                sh 'docker run --rm creativestorage python manage.py test'
             }
         }
     }
