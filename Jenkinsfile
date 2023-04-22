@@ -3,12 +3,12 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'docker build -t my-django-app .'
+                sh 'docker build -t CreativeStorage .'
             }
         }
         stage('Test') {
             steps {
-                sh 'docker run --rm my-django-app python manage.py test'
+                sh 'docker run --rm CreativeStorage python manage.py test'
             }
         }
     }
