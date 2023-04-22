@@ -26,7 +26,7 @@ import main.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', main.views.main_view, name='main'),
-    path("accounts/", include("django.contrib.auth.urls")),
+    path('accounts/', include("django.contrib.auth.urls")),
     path('malfunction', main.views.malfunction_view, name='malfunction'),
     path('categories', main.views.categories_view, name='categories'),
     path('studio', main.views.studio_view, name='studio'),
