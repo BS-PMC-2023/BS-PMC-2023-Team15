@@ -5,21 +5,21 @@
     <table class="table table-bordered">
         <thead class="thead-dark">
             <tr class="bg-secondary-subtle">
-                <th style="text-align: left; padding: 12px;">Student</th>
-                <th style="text-align: left; padding: 12px;">Item</th>
-                <th style="text-align: left; padding: 12px;">Date Borrowed</th>
-                <th style="text-align: left; padding: 12px;">Due Date</th>
-                <th style="text-align: left; padding: 12px;">Returned</th>
+                <th>Student</th>
+                <th>Item</th>
+                <th>Date Borrowed</th>
+                <th>Due Date</th>
+                <th>Returned</th>
             </tr>
         </thead>
         <tbody>
             {% for reservation in reservations %}
             <tr>
-                <td style="text-align: left; padding: 12px;">{{ reservation.student }}</td>
-                <td style="text-align: left; padding: 12px;">{{ reservation.item }}</td>
-                <td style="text-align: left; padding: 12px;">{{ reservation.date_from }}</td>
-                <td style="text-align: left; padding: 12px;">{{ reservation.date_to }}</td>
-                <td style="text-align: left; padding: 12px;">{{ reservation.returned }}</td>
+                <td>{{ reservation.student }}</td>
+                <td>{{ reservation.item }}</td>
+                <td>{{ reservation.date_from }}</td>
+                <td>{{ reservation.date_to }}</td>
+                <td>{{ reservation.returned }}</td>
             </tr>
             {% empty %}
                 <tr>
