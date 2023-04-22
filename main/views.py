@@ -19,11 +19,13 @@ def categories_view(request):
 
 @login_required
 def studio_view(request):
-    return render(request, 'studio.html', {})
+    categories = Category.objects.all()
+    return render(request, 'studio.html', {'categories': categories})
 
 @login_required
 def podcast_view(request):
-    return render(request, 'podcast.html', {})
+    categories = Category.objects.all()
+    return render(request, 'podcast.html', {'categories': categories})
 @login_required
 def malfunction_view(request):
     return render(request, 'malfunction.html', {})
