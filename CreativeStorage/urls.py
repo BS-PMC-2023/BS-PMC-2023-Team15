@@ -32,6 +32,8 @@ urlpatterns = [
     path('studio', main.views.studio_view, name='studio'),
     path('podcast', main.views.podcast_view, name='podcast'),
     path('category/', include('main.urls'), name='category'),
+    path('overdue/', main.views.overdue, name='overdue'),
+
     # path('contact', apps.pages.views.contact_view, name='contact'),
     # path('profile', apps.pages.views.profile_view, name='profile'),
 ]

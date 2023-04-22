@@ -6,6 +6,7 @@ from database.models import Reservation, Student
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
+from datetime import date
 
 @login_required
 def main_view(request):
@@ -46,6 +47,16 @@ def item_detail_view(request, item):
         date_from = form.data['date_from']
         date_to = form.data['date_to']
 
+        # catch ValidationError
+        try:
+            date_from = datetime.strptime(date_from, '%Y-%m-%d').date()
+            date_to = datetime.strptime(date_to, '%Y-%m-%d').date()
+        except ValueError:
+            return HttpResponse("Invalid date format")
+
+        if date_from > date_to :
+            return HttpResponse("Invalid date range")
+
         # Process the form data as required
         student = Student.objects.get(id=student_id)
         item = Equipment.objects.get(serial_number=item_serial_number)
@@ -57,4 +68,12 @@ def item_detail_view(request, item):
     issues = IssueReport.objects.filter(item=result)
     date_min = datetime.now().date().isoformat()
 
+
     return render(request, 'details.html', {"form": form, "item": result, "issues": issues, "date_min": date_min})
+
+
+def overdue(request):
+    today = date.today()
+    reservations = Reservation.objects.filter(returned=False, date_to__lt=today)
+    context = {'reservations': reservations}
+    return render(request, 'overdue.html', context)
