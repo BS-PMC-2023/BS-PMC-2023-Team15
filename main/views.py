@@ -57,3 +57,9 @@ def item_detail_view(request, item):
     date_min = datetime.now().date().isoformat()
 
     return render(request, 'details.html', {"form": form, "item": result, "issues": issues, "date_min": date_min})
+
+
+def overdue(request):
+    reservations = Reservation.objects.all()
+    context = {'reservations': reservations}
+    return render(request, 'overdue.html', context)

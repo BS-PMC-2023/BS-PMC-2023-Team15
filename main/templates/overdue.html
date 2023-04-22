@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div style="justify-content:center;  display: flex; margin-top: 50px;">
+
+                <div style="max-width: 800px;">
+                    <table style="border-collapse: collapse; width: 100%; font-size: 16px;">
+                        <thead>
+                            <tr>
+                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #ddd;">Student</th>
+                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #ddd;">Item</th>
+                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #ddd;">Date Borrowed</th>
+                                <th style="text-align: left; padding: 12px; border-bottom: 1px solid #ddd;">Due Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for reservation in reservations %}
+                            <tr>
+                                <td style="text-align: left; padding: 12px; border-bottom: 1px solid #ddd;">{{ reservation.student }}</td>
+                                <td style="text-align: left; padding: 12px; border-bottom: 1px solid #ddd;">{{ reservation.item }}</td>
+                                <td style="text-align: left; padding: 12px; border-bottom: 1px solid #ddd;">{{ reservation.date_from }}</td>
+                                <td style="text-align: left; padding: 12px; border-bottom: 1px solid #ddd;">{{ reservation.date_to }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -7,8 +7,10 @@ import main.views
 
 
 urlpatterns = [
+    path('overdue/<items>', main.views.overdue, name='overdue'),
     # path('/item/', admin.site.urls),
     path('<category>', main.views.category_view, name='category'),
     path('details/<item>', main.views.item_detail_view, name='details'),
+
 
 ]
