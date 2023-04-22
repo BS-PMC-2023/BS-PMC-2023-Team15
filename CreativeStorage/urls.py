@@ -14,19 +14,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
 import core.views
+import accounts.views
 import main.views
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', main.views.main_view, name='main'),
-    # path('lecturer', apps.pages.views.lecturer_view, name='lecturer'),
-    # path('manager', apps.pages.views.manager_view, name='manager'),
+    path("accounts/", include("django.contrib.auth.urls")),
     path('malfunction', main.views.malfunction_view, name='malfunction'),
     path('categories', main.views.categories_view, name='categories'),
     path('studio', main.views.studio_view, name='studio'),
@@ -35,9 +35,7 @@ urlpatterns = [
     path('overdue/', main.views.overdue, name='overdue'),
 
     # path('contact', apps.pages.views.contact_view, name='contact'),
-    # path('login', apps.pages.views.login_view, name='login'),
     # path('profile', apps.pages.views.profile_view, name='profile'),
-    # path('camera_catalog', apps.item.views.camera_catalog_view, name='camera_catalog'),
 ]
 
 

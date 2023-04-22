@@ -36,7 +36,7 @@ class Equipment(models.Model):
     is_available = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.serial_number
+        return self.serial_number + " " + self.brand + " " + self.model
 
     class Meta:
         verbose_name_plural = "Equipment"
