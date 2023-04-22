@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404
 from database.models import Reservation, Student
 from datetime import datetime
 from django.http import HttpResponse, HttpResponseRedirect
+from datetime import date
 
 
 def main_view(request):
@@ -71,6 +72,7 @@ def item_detail_view(request, item):
 
 
 def overdue(request):
-    reservations = Reservation.objects.filter(returned=False)
+    today = date.today()
+    reservations = Reservation.objects.filter(returned=False, date_to__lt=today)
     context = {'reservations': reservations}
     return render(request, 'overdue.html', context)
