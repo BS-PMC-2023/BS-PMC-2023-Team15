@@ -2,20 +2,27 @@
 
 {% block content %}
     <!-- Product Catalog-->
+        {% include 'search_bar.html' %}
     <h2 class="text-center mb-5">Select a category</h2>
     <div class="container-fluid">
         <div class="d-flex flex-wrap justify-content-center">
+
             <!-- Camera -->
-            {% for category in categories %}
-                <div class="px-3">
-                    {% include 'snippets/category.html' with image=category.image item=category.name item_description=category.description %}
-                </div>
-            {% endfor %}
+    {% for category in categories %}
+        {% if category.name != 'Studio' and category.name !=  'Podcast'%}
+            <div class="px-3">
+                {% include 'snippets/category.html' with image=category.image item=category.name item_description=category.description %}
+            </div>
+        {% endif %}
+    {% endfor %}
 
-        </div>
-
+   </div>
     </div>
 {% endblock %}
+
+
+
+
 
 {#            <!-- Tripod -->#}
 {#            <div class="col-md">#}

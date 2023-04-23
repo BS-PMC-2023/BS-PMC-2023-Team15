@@ -48,6 +48,7 @@ class Reservation(models.Model):
     item = models.ForeignKey('Equipment', on_delete=models.CASCADE)
     date_from = models.DateField()
     date_to = models.DateField()
+    returned = models.BooleanField(default=False)
 
     class Meta:
         unique_together = ('student', 'item', 'date_from')
