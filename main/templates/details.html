@@ -16,17 +16,25 @@
                 <h3 class="">ID: <span class="badge bg-secondary">{{ item.serial_number }}</span></h3>
                 {% if  item.is_available %}
                     <h2 class="badge bg-success mt-3">Available</h2>
+                    <form method="post"  id="reserve-form">
+                        {% csrf_token %}
+                        {{ form }}
+                    </form>
                 {% else %}
                     <h2 class="badge bg-danger  mt-3">Not Available </h2>
+                    <div class="input-group my-3" role="group" aria-label="Basic example">
+                        <label class="input-group-text " >Enter to queue: </label>
+                    {#    <input type="hidden" name="item" value="{{ item.serial_number }}">#}
+                        <button type="submit" class="btn btn-success">Queue</button>
+                    </div>
                 {% endif %}
 
 {#            {% url 'reserve' student=123 item=item.serial_number date_from='2023-08-20' date_to='2023-08-21' %}#}
 
-            <form method="post"  id="reserve-form">
-                {% csrf_token %}
-                {{ form }}
-            </form>
-
+{#            <form method="post"  id="reserve-form">#}
+{#                {% csrf_token %}#}
+{#                {{ form }}#}
+{#            </form>#}
 
                 <table class="table border shadow ">
                     <thead>
