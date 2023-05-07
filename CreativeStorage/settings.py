@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ["192.168.1.114", "141.226.10.83", '*']
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -142,3 +143,14 @@ STATICFILES_DIRS = [
 ]
 
 SITE_ID = 1
+
+
+# For more go to  https://django-jazzmin.readthedocs.io/
+# Jazzmin settings
+JAZZMIN_SETTINGS = {
+    "site_title": "Creative Storage",
+    "site_header": "Creative Storage",
+    "copyright": "Team 15",
+
+}
+
