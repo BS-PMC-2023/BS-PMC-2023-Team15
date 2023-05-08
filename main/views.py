@@ -1,3 +1,5 @@
+from django.views.decorators.cache import never_cache
+
 from database.models import Category, Equipment, IssueReport
 from django.shortcuts import render, redirect
 from .forms import ReservationForm
@@ -37,6 +39,7 @@ def category_view(request, category):
     return render(request, 'catalog.html', {"items": items})
 
 @login_required
+@never_cache
 def item_detail_view(request, item):
     # Get the category object based on the category name
     # item = get_object_or_404(Category, serial_number=item)

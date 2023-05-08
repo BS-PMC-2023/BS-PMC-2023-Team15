@@ -20,13 +20,13 @@
                     <h2 class="badge bg-danger  mt-3">Not Available </h2>
                 {% endif %}
 
-{#            {% url 'reserve' student=123 item=item.serial_number date_from='2023-08-20' date_to='2023-08-21' %}#}
+                {#            {% url 'reserve' student=123 item=item.serial_number date_from='2023-08-20' date_to='2023-08-21' %}#}
 
-            <form method="post"  id="reserve-form">
-                {% csrf_token %}
-                {{ form }}
-            </form>
-
+                <form method="post" id="reserve-form">
+                    {% csrf_token %}
+                    {{ form }}
+                </form>
+{#                {% include 'snippets/details_form.html' %}#}
 
                 <table class="table border shadow ">
                     <thead>
@@ -72,6 +72,8 @@
             </div>
         </div>
     </div>
+
+
 
 {% endblock %}
 
