@@ -1,7 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="container my-5">
+    <div class="container my-2">
+
+        {% if messages %}
+            {% for message in messages %}
+                <div {% if message.tags == "error" %} class="alert alert-danger" {% endif %}
+                    {% if message.tags == "success" %} class="alert alert-success" {% endif %}
+                                           role="alert"> {{ message }}</div>
+            {% endfor %}
+            </ul>
+        {% endif %}
+
         <div class="row row-cols-sm-1 ">
             <!--First image-->
             <div class="col-lg-6 mx-2 mb-sm-5 text-center">
@@ -20,13 +30,14 @@
                     <h2 class="badge bg-danger  mt-3">Not Available </h2>
                 {% endif %}
 
+
                 {#            {% url 'reserve' student=123 item=item.serial_number date_from='2023-08-20' date_to='2023-08-21' %}#}
 
                 <form method="post" id="reserve-form">
                     {% csrf_token %}
                     {{ form }}
                 </form>
-{#                {% include 'snippets/details_form.html' %}#}
+                {#                {% include 'snippets/details_form.html' %}#}
 
                 <table class="table border shadow ">
                     <thead>

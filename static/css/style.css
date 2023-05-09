@@ -1,34 +1,3 @@
-/******************************************************************
-  Template Name: Ogani
-  Description:  Ogani eCommerce  HTML Template
-  Author: Colorlib
-  Author URI: https://colorlib.com
-  Version: 1.0
-  Created: Colorlib
-******************************************************************/
-
-/*------------------------------------------------------------------
-[Table of contents]
-
-1.  Template default CSS
-	1.1	Variables
-	1.2	Mixins
-	1.3	Flexbox
-	1.4	Reset
-2.  Helper Css
-3.  Header Section
-4.  Hero Section
-5.  Service Section
-6.  Categories Section
-7.  Featured Section
-8.  Latest Product Section
-9.  Contact
-10.  Footer Style
--------------------------------------------------------------------*/
-
-/*----------------------------------------*/
-/* Template default CSS
-/*----------------------------------------*/
 
 html,
 body {
@@ -3734,3 +3703,26 @@ ol {
     display: block;
 }
 
+
+.btn-primary{
+   --bs-btn-color: #fff;
+--bs-btn-bg: #7fad39;
+--bs-btn-border-color: #7fad39;
+--bs-btn-hover-color: #fff;
+--bs-btn-hover-bg: #6c9a2c;
+--bs-btn-hover-border-color: #5e8727;
+--bs-btn-focus-shadow-rgb: 122,173,57;
+
+--bs-btn-active-color: #fff;
+--bs-btn-active-bg: #5e8727;
+--bs-btn-active-border-color: #5e7f24;
+--bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+--bs-btn-disabled-color: #fff;
+--bs-btn-disabled-bg: #7fad39;
+--bs-btn-disabled-border-color: #7fad39;
+
+}
+
+:root {
+    --bs-blue: #7fad39;
+}

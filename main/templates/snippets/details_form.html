@@ -1,5 +1,4 @@
 <div class="my-3 " role="group" aria-label="Basic example">
-
     <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1">From:</span>
         <input id="date_from" type="date" class="btn btn-outline-primary" min="{{ date_min }}" name="date_from"
@@ -35,16 +34,16 @@
 </div>
 
 <script>
-    $("#date_to").prop("disabled", true);
+    $("#date_to").prop("readonly", true);
     $(function () {
         // When the "Custom" radio button is selected, enable the "date_to" input
         $("#btnradio4").click(function () {
-            $("#date_to").prop("disabled", false);
+            $("#date_to").prop("readonly", false);
         });
 
         // When any other radio button is selected, disable the "date_to" input
         $("input[name=btnradio]").not("#btnradio4").click(function () {
-            $("#date_to").prop("disabled", true);
+            $("#date_to").prop("readonly", true);
         });
     });
 

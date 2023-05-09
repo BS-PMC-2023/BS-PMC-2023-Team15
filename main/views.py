@@ -1,5 +1,5 @@
 from django.views.decorators.cache import never_cache
-
+from django.contrib import messages
 from database.models import Category, Equipment, IssueReport
 from django.shortcuts import render, redirect
 from .forms import ReservationForm
@@ -9,6 +9,7 @@ from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from datetime import date
+from django.views.decorators.http import require_http_methods
 
 @login_required
 def main_view(request):
@@ -29,8 +30,12 @@ def podcast_view(request):
     categories = Category.objects.all()
     return render(request, 'podcast.html', {'categories': categories})
 @login_required
-def malfunction_view(request):
-    return render(request, 'malfunction.html', {})
+def malfunction_view(request, serial):
+    return render(request, 'malfunction.html', {"item": serial})
+
+def malfunction_send(request):
+    # add malfunction to DB
+    return redirect('main')
 
 @login_required
 def category_view(request, category):
@@ -56,17 +61,24 @@ def item_detail_view(request, item):
         try:
             date_from = datetime.strptime(date_from, '%Y-%m-%d').date()
             date_to = datetime.strptime(date_to, '%Y-%m-%d').date()
+            if date_from > date_to: raise ArithmeticError
+            # Process the form data as required
+            student = Student.objects.get(id=student_id)
+            item_to_borrow = Equipment.objects.get(serial_number=item_serial_number)
+            reservation = Reservation(student=student, item=item_to_borrow, date_from=date_from, date_to=date_to)
+            reservation.save()
+            messages.success(request, 'Item reserved successfully')
+
         except ValueError:
-            return HttpResponse("Invalid date format")
+            messages.error(request, 'Invalid date format')
+            # return HttpResponse("Invalid date format")
+        except ArithmeticError:
+            messages.error(request, 'Invalid date range')
+        except:
+            messages.error(request, 'Could not reserve item: already reserved')
 
-        if date_from > date_to :
-            return HttpResponse("Invalid date range")
+            # return HttpResponse("Invalid date range")
 
-        # Process the form data as required
-        student = Student.objects.get(id=student_id)
-        item_to_borrow = Equipment.objects.get(serial_number=item_serial_number)
-        reservation = Reservation(student=student, item=item_to_borrow, date_from=date_from, date_to=date_to)
-        reservation.save()
 
 
     result = Equipment.objects.get(serial_number=item)
@@ -82,3 +94,17 @@ def overdue(request):
     reservations = Reservation.objects.filter(returned=False, date_to__lt=today)
     context = {'reservations': reservations}
     return render(request, 'overdue.html', context)
+
+
+def profile_view(request):
+
+    my_items = Reservation.objects.filter(student=123, returned=False)
+    return render(request, 'profile.html', {"my_items": my_items})
+
+def profile_return(request,item):
+    if request.method != "POST":
+        return redirect('main')
+    reservation = Reservation.objects.get(id=item, student=123)
+    reservation.returned = True
+    reservation.save()
+    return redirect('profile')
