@@ -41,6 +41,7 @@ def item_detail_view(request, item):
     # Get the category object based on the category name
     # item = get_object_or_404(Category, serial_number=item)
     form = ReservationForm()
+    s = 'A'
     if request.method == 'POST':
         form = ReservationForm(request.POST)
         # if form.is_valid():
@@ -56,22 +57,32 @@ def item_detail_view(request, item):
         except ValueError:
             return HttpResponse("Invalid date format")
 
-        if date_from > date_to :
+        if date_from > date_to:
             return HttpResponse("Invalid date range")
 
         # Process the form data as required
         student = Student.objects.get(id=student_id)
         item_to_borrow = Equipment.objects.get(serial_number=item_serial_number)
-        reservation = Reservation(student=student, item=item_to_borrow, date_from=date_from, date_to=date_to)
+        try:
+            reservation_check = Reservation.objects.get(item= item_to_borrow, status= 'B', date_to__gte= datetime.today())
+            s = 'Q'
+        except:
+            s = 'B'
+        reservation = Reservation(student=student, item=item_to_borrow, date_from=date_from, date_to=date_to, status= s)
         reservation.save()
 
+    try:
+        item_to_borrow = Equipment.objects.get(serial_number=item)
+        reservation_check = Reservation.objects.get(item=item_to_borrow, status='B', date_to__gte=datetime.today())
+        s = 'Q'
+    except:
+        s = 'A'
 
     result = Equipment.objects.get(serial_number=item)
     issues = IssueReport.objects.filter(item=result)
     date_min = datetime.now().date().isoformat()
 
-
-    return render(request, 'details.html', {"form": form, "item": result, "issues": issues, "date_min": date_min})
+    return render(request, 'details.html', {"form": form, "item": result, "issues": issues, "date_min": date_min, "status": s})
 
 
 def overdue(request):
