@@ -49,6 +49,8 @@ class Reservation(models.Model):
     date_from = models.DateField()
     date_to = models.DateField()
     returned = models.BooleanField(default=False)
+    statuses = [('B', 'Borrowed'), ('Q', 'In queue'), ('M', 'malfunction'), ('A', 'Available')]
+    status = models.CharField(max_length=100, choices=statuses, default=statuses[3])
 
     class Meta:
         unique_together = ('student', 'item', 'date_from')
@@ -67,7 +69,7 @@ class IssueReport(models.Model):
     details = models.TextField(max_length=1000, default='No details', blank=False, null=False, primary_key=True)
 
     class Meta:
-        unique_together = (('student', 'item', 'date_opened', 'date_closed','status'),)
+        unique_together = (('student', 'item', 'date_opened', 'date_closed', 'status'),)
 
     def __str__(self):
         return f'{self.item}: {self.details}'

@@ -49,6 +49,9 @@ class EquipmentAdmin(admin.ModelAdmin):
         payload = {"form": form}
         return render(request, "admin/csv_upload.html", payload)
 
+
+
+
 # Register models
 admin.site.register(Student)
 admin.site.register(Reservation)
