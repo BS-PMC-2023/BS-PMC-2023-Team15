@@ -45,9 +45,10 @@ class Equipment(models.Model):
 #model named reservations: email-PK, ID number-PK, item - ID, date - from, date - to
 class Reservation(models.Model):
     student = models.ForeignKey('Student', on_delete=models.CASCADE)
-    item = models.ForeignKey('Equipment', on_delete=models.CASCADE)
+    item = models.ForeignKey('Equipment', on_delete=models.CASCADE, related_name='item')
     date_from = models.DateField()
     date_to = models.DateField()
+    id = models.AutoField(primary_key=True)
     returned = models.BooleanField(default=False)
     statuses = [('B', 'Borrowed'), ('Q', 'In queue'), ('M', 'malfunction'), ('A', 'Available')]
     status = models.CharField(max_length=100, choices=statuses, default=statuses[3])
