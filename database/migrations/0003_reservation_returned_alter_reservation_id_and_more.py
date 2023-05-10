@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('database', '0001_initial'),
+        ('database', '0002_reservation_returned_reservation_status'),
     ]
 
     operations = [
