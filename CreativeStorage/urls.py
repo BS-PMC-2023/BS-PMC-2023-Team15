@@ -24,7 +24,7 @@ import main.views
 
 
 urlpatterns = [
-    path('admin', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('', main.views.main_view, name='main'),
     path('accounts/', include("django.contrib.auth.urls")),
     path('malfunction/<serial>', main.views.malfunction_view, name='malfunction'),
@@ -33,6 +33,7 @@ urlpatterns = [
     path('categories/podcast', main.views.podcast_view, name='podcast'),
     path('category/', include('main.urls'), name='category'),
     path('overdue/', main.views.overdue, name='overdue'),
+    path('history/', main.views.history, name='history'),
     path("<item>", main.views.profile_return, name='return'),
     path('profile/<item>/return', main.views.profile_return, name='return'),
     path('profile/view', main.views.profile_view, name='profile'),

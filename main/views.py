@@ -95,6 +95,11 @@ def overdue(request):
     context = {'reservations': reservations}
     return render(request, 'overdue.html', context)
 
+def history(request):
+    reservations = Reservation.objects.all()
+    context = {'reservations': reservations}
+    return render(request, 'history_lec.html', context)
+
 
 def profile_view(request):
 
