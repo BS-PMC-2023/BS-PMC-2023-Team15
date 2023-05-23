@@ -24,7 +24,7 @@ import main.views
 
 
 urlpatterns = [
-    path('admin', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('', main.views.main_view, name='main'),
     path('accounts/', include("django.contrib.auth.urls")),
     path('malfunction/<serial>', main.views.malfunction_view, name='malfunction'),
