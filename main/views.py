@@ -9,6 +9,7 @@ from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from datetime import date
+import base64, qrcode, io
 from django.views.decorators.http import require_http_methods
 
 @login_required
@@ -85,8 +86,17 @@ def item_detail_view(request, item):
     issues = IssueReport.objects.filter(item=result)
     date_min = datetime.now().date().isoformat()
 
+    # qr code
+    img = qrcode.make(item)
+    byteIO = io.BytesIO()
+    img.save(byteIO, format='PNG')
+    byteArr = byteIO.getvalue()
 
-    return render(request, 'details.html', {"form": form, "item": result, "issues": issues, "date_min": date_min})
+    image_data = base64.b64encode(byteArr).decode('utf-8')
+
+
+
+    return render(request, 'details.html', {"form": form, "item": result, "issues": issues, "date_min": date_min, "qr": image_data})
 
 
 def overdue(request):

@@ -77,7 +77,7 @@
                     {% if user.is_superuser %}
 
                         <li class="nav-item"><a class="nav-link tali_green" href="{% url 'overdue' %}">Overdue: <span
-                                id="overdue" class="">{{ overdue |default:0 }}</span> </a></li>
+                                id="overdue" class="text-danger fw-bold">{{ overdue |default:0 }}</span> </a></li>
 
                     {% endif %}
                 </ul>
