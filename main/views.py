@@ -13,7 +13,7 @@ from django.views.decorators.http import require_http_methods
 
 @login_required
 def main_view(request):
-    return render(request, 'categories.html', {} )
+    return render(request, 'categories.html',{} )
 
 @login_required
 def categories_view(request):
