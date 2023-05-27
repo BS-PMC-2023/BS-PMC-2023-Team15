@@ -3741,12 +3741,14 @@ ol {
 
 }
 
-.text-primary{
+.text-primary {
     --bs-primary-rgb: 122, 173, 57;
 }
+
 ::selection {
-  background-color: #7fad39;
-  color: white;
+    background-color: #7fad39;
+    color: white;
+
 }
 
 :root {

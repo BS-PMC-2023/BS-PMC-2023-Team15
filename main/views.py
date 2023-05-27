@@ -1,3 +1,5 @@
+from django.contrib.auth.models import User
+from django.dispatch import receiver
 from django.views.decorators.cache import never_cache
 from django.contrib import messages
 from database.models import Category, Equipment, IssueReport
@@ -11,6 +13,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from datetime import date
 import base64, qrcode, io
 from django.views.decorators.http import require_http_methods
+from django.db.models.signals import post_save, post_delete
 
 @login_required
 def main_view(request):
@@ -52,8 +55,7 @@ def item_detail_view(request, item):
     form = ReservationForm()
     if request.method == 'POST':
         form = ReservationForm(request.POST)
-        # if form.is_valid():
-        student_id = 123 #TODO: get student id from session cookie
+        student = Student.objects.get(email=request.user)
         item_serial_number = item
         date_from = form.data['date_from']
         date_to = form.data['date_to']
@@ -63,8 +65,6 @@ def item_detail_view(request, item):
             date_from = datetime.strptime(date_from, '%Y-%m-%d').date()
             date_to = datetime.strptime(date_to, '%Y-%m-%d').date()
             if date_from > date_to: raise ArithmeticError
-            # Process the form data as required
-            student = Student.objects.get(id=student_id)
             item_to_borrow = Equipment.objects.get(serial_number=item_serial_number)
             reservation = Reservation(student=student, item=item_to_borrow, date_from=date_from, date_to=date_to)
             reservation.save()
@@ -108,13 +108,58 @@ def overdue(request):
 
 def profile_view(request):
 
-    my_items = Reservation.objects.filter(student=123, returned=False)
+    student = Student.objects.get(email=request.user)
+    my_items = Reservation.objects.filter(student=student.id, returned=False)
     return render(request, 'profile.html', {"my_items": my_items})
 
 def profile_return(request,item):
     if request.method != "POST":
         return redirect('main')
-    reservation = Reservation.objects.get(id=item, student=123)
+    student = Student.objects.get(email=request.user.email)
+    reservation = Reservation.objects.get(id=item, student=student.id)
     reservation.returned = True
     reservation.save()
     return redirect('profile')
+
+
+
+def history(request,user):
+    if user == None: user = request.user
+    users = User.objects.all()
+    if user == "admin": user = "admin@gmail.com"
+    student = Student.objects.get(email=user)
+    my_items = Reservation.objects.filter(student=student.id)
+    return  render(request, 'history.html', {"reservations": my_items, "users": users})
+
+@receiver(post_save, sender=Student)
+def new_user(sender, instance, created, **kwargs):
+    if created:
+        user = User.objects.create(username=instance.email)
+        user.set_password(instance.password)
+        user.save()
+
+
+@receiver(post_delete, sender=Student)
+def del_user(sender, instance, **kwargs):
+    try:
+        user = User.objects.get(username=instance.email)
+        user.delete()
+    except:
+        pass
+
+
+
+@login_required
+def search(request):
+    q = request.GET.get('query')
+    if q is None:
+        return redirect('/')
+    by_serial = Equipment.objects.filter(serial_number__contains=q)
+    by_category = Equipment.objects.filter(category__name__contains=q)
+    by_brand = Equipment.objects.filter(brand__contains=q)
+    by_model = Equipment.objects.filter(model__contains=q)
+    s = by_serial.union(by_category, by_brand, by_model)
+    if s.exists():
+        return render(request,'catalog.html', {'items': s})
+
+    return render(request,'catalog.html', {'items': None})

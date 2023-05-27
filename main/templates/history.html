@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+    <div class="container">
+
+
+        <div class="input-group mb-5">
+            <label class="input-group-text" for="std">Student:</label>
+            <select class="form-select" id="std" onchange="location=this.value">
+                <option selected disabled>Choose a student...</option>
+                {% for u in users %}
+                    <option value="{% url 'history' user=u %}"> <a>({{ u }}){{ u.first_name }} {{ u.last_name }}</a></option>
+                {% endfor %}
+            </select>
+        </div>
+
+
+
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+            <tr class="bg-secondary-subtle">
+                <th>Student</th>
+                <th>Item</th>
+                <th>Date Borrowed</th>
+                <th>Due Date</th>
+                <th>Returned</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for reservation in reservations %}
+                <tr>
+                    <td>{{ reservation.student }}</td>
+                    <td>{{ reservation.item }}</td>
+                    <td>{{ reservation.date_from }}</td>
+                    <td>{{ reservation.date_to }}</td>
+                    <td>{{ reservation.returned }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5" class="">No Items was taken by user! 👍</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,18 +1,12 @@
 {% load static %}
+
 <div class="navbar bg-body-tertiary">
     <div class="container d-flex">
         <div class="ml-auto p-2">
             <div class="d-flex align-items-center">
 
-                <h4 class="mx-4 al">Hello {{ user }}!</h4>
-                <div class="mx-4">
-                    <form action="{% url 'logout' %}?next=/login" method="post">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-outline-danger">Logout</button>
+                <h4 class="mx-4 al">Hello {{ student }}! 👋</h4>
 
-
-                    </form>
-                </div>
             </div>
         </div>
 
@@ -34,7 +28,15 @@
                         <li><a href="#">English</a></li>
                     </ul>
                 </div>
+
+                <div class="mx-4">
+                    <form action="{% url 'logout' %}?next=/login" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-danger">Logout</button>
+                    </form>
+                </div>
             </div>
+
         </div>
 
     </div>
@@ -68,6 +70,9 @@
                                 <li><a class="dropdown-item" href="{% url 'categories' %}">Products</a></li>
                                 <li><a class="dropdown-item" href="{% url 'studio' %}">Studios</a></li>
                                 <li><a class="dropdown-item" href="{% url 'podcast' %}">Podcast Rooms</a></li>
+                                {% if user.is_superuser %}
+                                    <li><a class="dropdown-item" href="{% url 'history' user=user %}">History </a></li>
+                                {% endif %}
 
                             </ul>
                         </div>
