@@ -33,6 +33,7 @@ urlpatterns = [
     path('categories/podcast', main.views.podcast_view, name='podcast'),
     path('category/', include('main.urls'), name='category'),
     path('overdue/', main.views.overdue, name='overdue'),
+    path('statistics', main.views.stats, name='stats'),
     path('history/<user>', main.views.history, name='history'),
     path('search', main.views.search, name='search'),
     path("<item>", main.views.profile_return, name='return'),

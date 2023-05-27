@@ -71,7 +71,8 @@
                                 <li><a class="dropdown-item" href="{% url 'studio' %}">Studios</a></li>
                                 <li><a class="dropdown-item" href="{% url 'podcast' %}">Podcast Rooms</a></li>
                                 {% if user.is_superuser %}
-                                    <li><a class="dropdown-item" href="{% url 'history' user=user %}">History </a></li>
+                                    <li><a class="dropdown-item" href="{% url 'history' user=user %}">History 📔</a></li>
+                                     <li><a class="dropdown-item" href="{% url 'stats' %}">Statistics 📊</a></li>
                                 {% endif %}
 
                             </ul>

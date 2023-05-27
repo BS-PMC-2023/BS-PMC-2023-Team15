@@ -163,3 +163,18 @@ def search(request):
         return render(request,'catalog.html', {'items': s})
 
     return render(request,'catalog.html', {'items': None})
+
+
+def stats(request):
+
+    categories = Category.objects.all()
+    items = Equipment.objects.all()
+
+    # number of item reservation per item per category in this form "category": {"item": number_of_reservations}
+    reservations = {}
+    for category in categories:
+        reservations[category.name] = {}
+        for item in items.filter(category=category):
+            reservations[category.name][f"{item.brand} {item.model}"] = Reservation.objects.filter(item=item, item__category=category).count()
+
+    return render(request, 'statistics.html', {"reservations": reservations})
