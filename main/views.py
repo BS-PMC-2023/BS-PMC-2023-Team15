@@ -107,8 +107,9 @@ def overdue(request):
 
 
 def profile_view(request):
-
-    student = Student.objects.get(email=request.user)
+    usr = request.user
+    if request.user.username == "admin": usr = request.user.email
+    student = Student.objects.get(email=usr)
     my_items = Reservation.objects.filter(student=student.id, returned=False)
     return render(request, 'profile.html', {"my_items": my_items})
 
