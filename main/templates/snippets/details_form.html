@@ -24,13 +24,6 @@
                value="{{ date_min }}">
     </div>
 
-
-    {#    <input type="hidden" name="item" value="{{ item.serial_number }}">#}
-    <div class="input-group  ">
-        <button type="submit" class="btn btn-primary">Borrow</button>
-    </div>
-
-
 </div>
 
 <script>
@@ -66,8 +59,8 @@
             else if (value === "Custom") return;
             // Set the value of the date_to input
             var day = ("0" + date.getDate()).slice(-2);
-            var month = ("0" + (date.getMonth()+ 1)).slice(-2);
-            var  year = date.getFullYear();
+            var month = ("0" + (date.getMonth() + 1)).slice(-2);
+            var year = date.getFullYear();
 
             value = year + "-" + month + "-" + day;
             $("#date_to").val(value);

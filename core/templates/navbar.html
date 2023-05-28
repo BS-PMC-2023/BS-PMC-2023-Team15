@@ -36,9 +36,7 @@
                     </form>
                 </div>
             </div>
-
         </div>
-
     </div>
 </div>
 
@@ -81,15 +79,14 @@
                         {#                    <ul class="dropdown dropdown-menu">#}
                     </li>
                     {% if user.is_superuser %}
-
+{#                        <li class="nav-item"><a class="nav-link tali_green" href="{% url 'requests' %}">Requests</a></li>#}
                         <li class="nav-item"><a class="nav-link tali_green" href="{% url 'overdue' %}">Overdue: <span
                                 id="overdue" class="text-danger fw-bold">{{ overdue |default:0 }}</span> </a></li>
 
                     {% endif %}
                 </ul>
 
-
-                <div class="hero__search__phone mx-5">
+                <div class="hero__search__phone mx-6">
                     <div class="hero__search__phone__icon">
                         <i class="fa fa-phone animate__tada animate__animated animate__infinite animate__slow"></i>
                     </div>
@@ -98,10 +95,7 @@
                         <span>  Sun-Thur 10:00-13:00</span>
                     </div>
                 </div>
-
             </div>
-
-
         </div>
     </nav>
 </div>

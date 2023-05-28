@@ -32,6 +32,7 @@ urlpatterns = [
     path('categories/studio', main.views.studio_view, name='studio'),
     path('categories/podcast', main.views.podcast_view, name='podcast'),
     path('category/', include('main.urls'), name='category'),
+    path('requests/', main.views.requests, name='requests'),
     path('overdue/', main.views.overdue, name='overdue'),
     path('statistics', main.views.stats, name='stats'),
     path('history/<user>', main.views.history, name='history'),

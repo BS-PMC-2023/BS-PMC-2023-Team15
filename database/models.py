@@ -50,7 +50,7 @@ class Reservation(models.Model):
     date_to = models.DateField()
     id = models.AutoField(primary_key=True)
     returned = models.BooleanField(default=False)
-    statuses = [('B', 'Borrowed'), ('Q', 'In queue'), ('M', 'malfunction'), ('A', 'Available')]
+    statuses = [('B', 'Borrowed'), ('Q', 'In queue'), ('M', 'malfunction'), ('A', 'Available'), ('W', 'Waiting')]
     status = models.CharField(max_length=100, choices=statuses, default=statuses[3])
 
     class Meta:

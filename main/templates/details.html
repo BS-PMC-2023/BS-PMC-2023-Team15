@@ -27,9 +27,6 @@
                 <h3 class="">ID: <span class="badge bg-secondary">{{ item.serial_number }}</span></h3>
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#qrmodal">Show QR 📷</button>
                 {% if  status == 'A' %}
-
-                <h3 class="">ID: <span class="badge bg-secondary">{{ item.serial_number }}</span>
-                </h3>
                     <h2 class="badge bg-success mt-3">Available</h2>
                 {% else %}
                     <h2 class="badge bg-danger  mt-3">Not Available </h2>
@@ -39,7 +36,7 @@
                     {% csrf_token %}
                     {{ form }}
                     {% if status == 'A' %}
-                        <button type="submit" class="btn btn-success">Borrow</button>
+                        <button type="submit" class="btn btn-primary">Borrow</button>
                     {% else %}
                         <button type="submit" class="btn btn-warning">Queue</button>
                     {% endif %}

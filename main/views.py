@@ -1,3 +1,5 @@
+from django.contrib.auth.models import User
+from django.dispatch import receiver
 from django.views.decorators.cache import never_cache
 from django.contrib import messages
 from database.models import Category, Equipment, IssueReport
@@ -38,6 +40,9 @@ def malfunction_view(request, serial):
 def malfunction_send(request):
     # add malfunction to DB
     return redirect('main')
+@login_required
+def policy_view(request):
+    return render(request, 'policy.html',)
 
 @login_required
 def category_view(request, category):
@@ -51,34 +56,49 @@ def item_detail_view(request, item):
     # Get the category object based on the category name
     # item = get_object_or_404(Category, serial_number=item)
     form = ReservationForm()
+    s = 'A'
     if request.method == 'POST':
         form = ReservationForm(request.POST)
-        student = Student.objects.get(email=request.user)
+        u =request.user
+        if u.username =='admin':
+            u = u.email
+        student = Student.objects.get(email=u)
         item_serial_number = item
         date_from = form.data['date_from']
         date_to = form.data['date_to']
 
         # catch ValidationError
+        item_to_borrow = Equipment.objects.get(serial_number=item_serial_number)
         try:
             date_from = datetime.strptime(date_from, '%Y-%m-%d').date()
             date_to = datetime.strptime(date_to, '%Y-%m-%d').date()
-            if date_from > date_to: raise ArithmeticError
-            item_to_borrow = Equipment.objects.get(serial_number=item_serial_number)
-            reservation = Reservation(student=student, item=item_to_borrow, date_from=date_from, date_to=date_to)
+            if date_from > date_to:
+                raise ArithmeticError
+            reservation = Reservation(student=student, item=item_to_borrow, date_from=date_from, date_to=date_to, status='B')
             reservation.save()
+            s = 'Q'
             messages.success(request, 'Item reserved successfully')
 
         except ValueError:
             messages.error(request, 'Invalid date format')
+            s='Q'
             # return HttpResponse("Invalid date format")
         except ArithmeticError:
             messages.error(request, 'Invalid date range')
+            s = 'Q'
         except:
             messages.error(request, 'Could not reserve item: already reserved')
+            s = 'Q'
 
             # return HttpResponse("Invalid date range")
 
-
+    try:
+        item_to_borrow = Equipment.objects.get(serial_number=item)
+        if Reservation.status == 'B' or Reservation.status == 'Q':
+            Reservation.objects.get(item=item_to_borrow, date_to__gte=datetime.today())
+            s = 'Q'
+    except:
+        s = 'A'
 
     result = Equipment.objects.get(serial_number=item)
     issues = IssueReport.objects.filter(item=result)
@@ -89,13 +109,11 @@ def item_detail_view(request, item):
     byteIO = io.BytesIO()
     img.save(byteIO, format='PNG')
     byteArr = byteIO.getvalue()
-
     image_data = base64.b64encode(byteArr).decode('utf-8')
+    return render(request, 'details.html', {"form": form, "item": result, "issues": issues, "date_min": date_min, "qr": image_data, "status": s})
 
-
-
-    return render(request, 'details.html', {"form": form, "item": result, "issues": issues, "date_min": date_min, "qr": image_data})
-
+def requests(request):
+    return render(request, 'requests.html', )
 
 def overdue(request):
     today = date.today()
