@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container my-3 mb-2">
+        {% for res in reservations %}
+            <h3>{{ res }}</h3>
+            <canvas id="chart{{ forloop.counter }}"></canvas>
+        {% endfor %}
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        {% for cat, item in reservations.items %}
+            const ctx{{ forloop.counter }} = document.getElementById('chart{{ forloop.counter }}')
+
+            new Chart(ctx{{ forloop.counter }}, {
+                type: 'bar',
+                data: {
+                    labels: [ {%  for i, count in item.items %}
+                        '{{ i }}',
+                    {% endfor %} ],
+                    datasets: [{
+                        label: '# of Reservations total',
+                        data: [ {%  for i, count in item.items %}
+                            {{ count }},
+                        {% endfor %} ],
+                        borderWidth: 1,
+                        borderColor: randomColor(),
+                        backgroundColor: randomColor()
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        {% endfor %}
+
+        function randomColor() {
+            // Get a random number between 0 and 16777215
+            var randomNumber = Math.floor(Math.random() * 16777215);
+
+            // Convert the random number to a hex string.
+            var hexString = '#' + randomNumber.toString(16).padStart(6, '0');
+
+            // Return the hex string.
+            return hexString;
+        }
+    </script>
+{% endblock %}

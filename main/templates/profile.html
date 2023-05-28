@@ -31,6 +31,9 @@
                         <a class="btn-primary btn" href="{% url 'malfunction' serial=my_item.item.serial_number %}">Open Issue</a>
                     </td>
                 </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4">No items to show 🧾</td>
             {% endfor %}
             </tbody>
         </table>

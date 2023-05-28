@@ -1,33 +1,37 @@
 {% load static %}
-<div class="header__top">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="header__top__left">
+
+<div class="navbar bg-body-tertiary">
+    <div class="container d-flex">
+        <div class="ml-auto p-2">
+            <div class="d-flex align-items-center">
+                <h4 class="mx-4 al">Hello {{ student }}!👋</h4>
+            </div>
+        </div>
+
+        <div class="mr-auto p-2">
+            <div class=" d-flex align-items-center">
+                <div class="mx-2">
+
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/sce.vc/"><i class="fa fa-instagram"></i></a>
+                </div>
+
+                <div class="header__top__right__language mx-2">
+                    <img src="{% static '/media/language.png' %}" alt="">
+                    <div>English</div>
+                    <span class="arrow_carrot-down"></span>
                     <ul>
-                        <li>Sami Shamoon College of Engineering</li>
-                        <li>VCStorage</li>
-                        <li> ~ Tali / Leon / Dori / Dani ~</li>
+                        <li><a href="#">עברית</a></li>
+                        <li><a href="#">English</a></li>
                     </ul>
                 </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="header__top__right">
-                    <div class="header__top__right__social">
 
-                        <a href="#"><i class="fa fa-facebook"></i></a>
-                        <a href="#"><i class="fa fa-twitter"></i></a>
-                        <a href="https://www.instagram.com/sce.vc/"><i class="fa fa-instagram"></i></a>
-                    </div>
-                    <div class="header__top__right__language">
-                        <img src="{% static '/media/language.png' %}" alt="">
-                        <div>English</div>
-                        <span class="arrow_carrot-down"></span>
-                        <ul>
-                            <li><a href="#">עברית</a></li>
-                            <li><a href="#">English</a></li>
-                        </ul>
-                    </div>
+                <div class="mx-4">
+                    <form action="{% url 'logout' %}?next=/login" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-danger">Logout</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -41,7 +45,7 @@
             <a href="{% url 'main' %}" class="navbar-brand mx-4">
                 <img src="{% static '/media/SCE.png' %}" alt="">
             </a>
-            <div class="collapse navbar-collapse mx-3" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse mx-2" id="navbarSupportedContent">
 
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
@@ -49,7 +53,7 @@
                         <a class="nav-link tali" href="{% url 'main' %}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link tali" href="{% url 'profile'  %}">My items</a>
+                        <a class="nav-link tali" href="{% url 'profile' %}">My items</a>
                     </li>
                     <li class="nav-item">
 
@@ -59,22 +63,28 @@
                                 Pages
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item"  href="{% url 'categories' %}">Products</a></li>
-                                <li><a class="dropdown-item"  href="{% url 'studio' %}">Studios</a></li>
-                                <li><a class="dropdown-item"  href="{% url 'podcast' %}">Podcast Rooms</a></li>
-                                <li><a class="dropdown-item"  href="{% url 'overdue' %}">Overdue</a></li>
-                                <li><a class="dropdown-item"  href="{% url 'history' %}">History</a></li>
+                                <li><a class="dropdown-item" href="{% url 'categories' %}">Products</a></li>
+                                <li><a class="dropdown-item" href="{% url 'studio' %}">Studios</a></li>
+                                <li><a class="dropdown-item" href="{% url 'podcast' %}">Podcast Rooms</a></li>
+                                {% if user.is_superuser %}
+                                    <li><a class="dropdown-item" href="{% url 'history' user=user %}">History 📔</a></li>
+                                     <li><a class="dropdown-item" href="{% url 'stats' %}">Statistics 📊</a></li>
+                                {% endif %}
+
                             </ul>
                         </div>
-{#                    <a class="nav-link tali" href="#">Pages</a>#}
-{#                    <ul class="dropdown dropdown-menu">#}
+                        {#                    <a class="nav-link tali" href="#">Pages</a>#}
+                        {#                    <ul class="dropdown dropdown-menu">#}
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link tali_green" href="">Contact</a>
-                    </li>
+                    {% if user.is_superuser %}
+{#                        <li class="nav-item"><a class="nav-link tali_green" href="{% url 'requests' %}">Requests</a></li>#}
+                        <li class="nav-item"><a class="nav-link tali_green" href="{% url 'overdue' %}">Overdue: <span
+                                id="overdue" class="text-danger fw-bold">{{ overdue |default:0 }}</span> </a></li>
+
+                    {% endif %}
                 </ul>
 
-                <div class="hero__search__phone mx-5">
+                <div class="hero__search__phone mx-6">
                     <div class="hero__search__phone__icon">
                         <i class="fa fa-phone animate__tada animate__animated animate__infinite animate__slow"></i>
                     </div>
@@ -83,10 +93,7 @@
                         <span>  Sun-Thur 10:00-13:00</span>
                     </div>
                 </div>
-
             </div>
-
-
         </div>
     </nav>
 </div>
