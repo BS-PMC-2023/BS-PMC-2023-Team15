@@ -81,11 +81,9 @@ def item_detail_view(request, item):
 
         except ValueError:
             messages.error(request, 'Invalid date format')
-            s='Q'
             # return HttpResponse("Invalid date format")
         except ArithmeticError:
             messages.error(request, 'Invalid date range')
-            s = 'Q'
         except:
             messages.error(request, 'Could not reserve item: already reserved')
             s = 'Q'
