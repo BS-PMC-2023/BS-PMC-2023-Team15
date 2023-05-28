@@ -54,7 +54,7 @@ class Reservation(models.Model):
     status = models.CharField(max_length=100, choices=statuses, default=statuses[3])
 
     class Meta:
-        unique_together = ('student', 'item', 'date_from')
+        unique_together = ('student', 'item', 'date_from', 'status')
 
     def __str__(self):
         return self.student.email

@@ -38,6 +38,10 @@ def malfunction_send(request):
     return redirect('main')
 
 @login_required
+def policy_view(request):
+    return render(request, 'policy.html',)
+
+@login_required
 def category_view(request, category):
     # category = Category.objects.get(name=category)
     items = Equipment.objects.filter(category=category)
@@ -49,6 +53,7 @@ def item_detail_view(request, item):
     # Get the category object based on the category name
     # item = get_object_or_404(Category, serial_number=item)
     form = ReservationForm()
+    s='A'
     if request.method == 'POST':
         form = ReservationForm(request.POST)
         # if form.is_valid():
@@ -58,16 +63,15 @@ def item_detail_view(request, item):
         date_to = form.data['date_to']
 
         # catch ValidationError
+        student = Student.objects.get(id=student_id)
+        item_to_borrow = Equipment.objects.get(serial_number=item_serial_number)
         try:
             date_from = datetime.strptime(date_from, '%Y-%m-%d').date()
             date_to = datetime.strptime(date_to, '%Y-%m-%d').date()
             if date_from > date_to: raise ArithmeticError
-            # Process the form data as required
-            student = Student.objects.get(id=student_id)
-            item_to_borrow = Equipment.objects.get(serial_number=item_serial_number)
-            reservation = Reservation(student=student, item=item_to_borrow, date_from=date_from, date_to=date_to)
-            reservation.save()
-            messages.success(request, 'Item reserved successfully')
+            reservation_check = Reservation.objects.get(item=item_to_borrow, status='B', date_to__gte=datetime.today())
+            s = 'Q'
+            # messages.success(request, 'Item reserved successfully')
 
         except ValueError:
             messages.error(request, 'Invalid date format')
@@ -75,10 +79,19 @@ def item_detail_view(request, item):
         except ArithmeticError:
             messages.error(request, 'Invalid date range')
         except:
+            s = 'B'
+            reservation = Reservation(student=student, item=item_to_borrow, date_from=date_from, date_to=date_to,
+                                      status=s)
+            reservation.save()
+            messages.success(request, 'Item reserved successfully')
             messages.error(request, 'Could not reserve item: already reserved')
 
-            # return HttpResponse("Invalid date range")
-
+    try:
+        item_to_borrow = Equipment.objects.get(serial_number=item)
+        reservation_check = Reservation.objects.get(item=item_to_borrow, status='B', date_to__gte=datetime.today())
+        s = 'Q'
+    except:
+        s = 'A'
 
 
     result = Equipment.objects.get(serial_number=item)
@@ -86,7 +99,7 @@ def item_detail_view(request, item):
     date_min = datetime.now().date().isoformat()
 
 
-    return render(request, 'details.html', {"form": form, "item": result, "issues": issues, "date_min": date_min})
+    return render(request, 'details.html', {"form": form, "item": result, "issues": issues, "date_min": date_min, "status": s})
 
 
 def overdue(request):
