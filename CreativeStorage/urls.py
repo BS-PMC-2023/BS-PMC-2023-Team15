@@ -28,6 +28,7 @@ urlpatterns = [
     path('', main.views.main_view, name='main'),
     path('accounts/', include("django.contrib.auth.urls")),
     path('malfunction/<serial>', main.views.malfunction_view, name='malfunction'),
+    path('report', main.views.mal_view, name='mal'),
     path('categories', main.views.categories_view, name='categories'),
     path('categories/studio', main.views.studio_view, name='studio'),
     path('categories/podcast', main.views.podcast_view, name='podcast'),

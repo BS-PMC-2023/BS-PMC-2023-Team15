@@ -136,7 +136,8 @@ def profile_return(request,item):
     reservation.save()
     return redirect('profile')
 
-
+def mal_view(request):
+    return render(request, 'mal.html', )
 
 def history(request,user):
     if user == None: user = request.user
