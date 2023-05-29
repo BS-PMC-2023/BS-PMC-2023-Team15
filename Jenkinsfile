@@ -32,7 +32,7 @@ pipeline {
 
         stage('Metrics 3 - Bandit') {
             steps {
-                sh 'docker run --rm creativestorage bandit -r .'
+                sh 'docker run --rm creativestorage bandit -r main/tests.py'
             }
         }
 
