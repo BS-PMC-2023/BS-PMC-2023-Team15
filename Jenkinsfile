@@ -32,13 +32,13 @@ pipeline {
 
         stage('Metrics 3 - Bandit') {
             steps {
-                sh 'docker run --rm creativestorage bandit -r main/tests.py'
+                sh 'docker run --rm creativestorage bandit -r manage.py test'
             }
         }
 
         stage('Metrics 4 - Pylint') {
             steps {
-                sh 'docker run --rm creativestorage pylint creativestorage'
+                sh 'docker run --rm creativestorage pylint main/tests.py'
             }
         }
     }
