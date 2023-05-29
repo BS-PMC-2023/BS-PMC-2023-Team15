@@ -1,19 +1,17 @@
 pipeline {
     agent any
 
-    stages {
-        stage('Install pipenv') {
-            steps {
-                sh 'apt-get update' // Update package lists
-                sh 'apt-get install -y python3-dev python3-pip' // Install Python and pip
-                sh 'pip install pipenv' // Install pipenv
-            }
-        }
 
+stages{
+      stage('Checkout') {
+                steps {
+                    checkout scm
+                }
+            }
         stage('Build') {
             steps {
                 sh 'pipenv install -r requirements.txt' // Install dependencies from requirements.txt
-                sh 'docker build -t creativestorage .'
+                sh 'docker build -t creativestorage'
             }
         }
 
@@ -54,4 +52,5 @@ pipeline {
             echo 'Build failed!' // Display failure message
         }
     }
+}
 }
