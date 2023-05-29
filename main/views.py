@@ -2,6 +2,8 @@ from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.views.decorators.cache import never_cache
 from django.contrib import messages
+
+from accounts import forms
 from database.models import Category, Equipment, IssueReport
 from django.shortcuts import render, redirect
 from .forms import ReservationForm
@@ -207,5 +209,61 @@ def stats(request):
             reservations[category.name][f"{item.brand} {item.model}"] = Reservation.objects.filter(item=item, item__category=category).count()
 
     return render(request, 'statistics.html', {"reservations": reservations})
+
+import csv
+from django.shortcuts import render
+from database.models import Student
+
+from django.core.exceptions import ObjectDoesNotExist
+
+def addstudents(request):
+    if request.method == 'POST':
+        csv_file = request.FILES.get('csv_file')
+        if not csv_file:
+            return render(request, 'addstudents.html', {'error': 'Please select a CSV file.'})
+        if not csv_file.name.endswith('.csv'):
+            return render(request, 'addstudents.html', {'error': 'Please upload a valid CSV file.'})
+
+        csv_text = csv_file.read().decode('utf-8').splitlines()
+        csv_reader = csv.reader(csv_text)
+        next(csv_reader)  # Skip the header row if present
+        for row in csv_reader:
+            full_name = row[0]
+            id_str = row[1]
+            email = row[2]
+            phone_number_str = row[3]
+            password = row[4]
+
+            # Validate the id field
+            try:
+                id = int(id_str)
+            except ValueError:
+                return render(request, 'addstudents.html', {'error': f"Invalid value for 'id' field: {id_str}."})
+
+            # Validate the phone_number field
+            try:
+                phone_number = int(phone_number_str)
+            except ValueError:
+                return render(request, 'addstudents.html', {'error': f"Invalid value for 'phone_number' field: {phone_number_str}."})
+
+            try:
+                # Check if student already exists
+                student = Student.objects.get(id=id)
+                continue  # Skip adding the student and proceed to the next row
+            except ObjectDoesNotExist:
+                pass
+
+            student = Student(
+                full_name=full_name,
+                id=id,
+                email=email,
+                phone_number=phone_number,
+                password=password
+            )
+            student.save()
+
+        return render(request, 'addstudents.html', {'success': 'CSV file uploaded successfully.'})
+
+    return render(request, 'addstudents.html')
 
 
