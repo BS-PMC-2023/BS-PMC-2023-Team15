@@ -3,11 +3,7 @@ pipeline {
 
 
 stages{
-      stage('Checkout') {
-                steps {
-                    checkout scm
-                }
-            }
+
         stage('Build') {
             steps {
                 sh 'pipenv install -r requirements.txt' // Install dependencies from requirements.txt
