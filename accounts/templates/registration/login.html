@@ -8,139 +8,149 @@
 <!-- Section: Design Block -->
 <section class="background-radial-gradient overflow-hidden">
     <style>
+
         .background-radial-gradient {
-    background-color: hsl(320, 70%, 80%); /* Pink color */
-    background-image: radial-gradient(650px circle at 0% 0%,
-        hsl(280, 70%, 80%) 8%, /* Purple color */
-        hsl(60, 80%, 90%) 35%, /* Chrome color */
-        hsl(260, 70%, 70%) 75%, /* Purple color */
-        hsl(280, 70%, 60%) 80%,
-        transparent 100%),
-    radial-gradient(1250px circle at 100% 100%,
-        hsl(260, 70%, 80%) 15%, /* Purple color */
-        hsl(280, 80%, 90%) 35%, /* Chrome color */
-        hsl(260, 70%, 70%) 75%, /* Purple color */
-        hsl(280, 70%, 60%) 80%,
-        transparent 100%);
-    height: 100vh;
-    box-shadow: inset 0 0 400px white;
-}
-        #radius-shape-1 {
-            height: 1100px;
-            width: 850px;
-            top: -315px;
-            left: 85px;
-            overflow: hidden;
-            position: relative;
-            opacity: 0.2;
+            background-color: hsl(320, 70%, 80%); /* Pink color */
+            background-image: radial-gradient(650px circle at 0% 0%,
+                hsl(280, 70%, 80%) 8%, /* Purple color */
+                hsl(60, 80%, 90%) 35%, /* Chrome color */
+                hsl(260, 70%, 70%) 75%, /* Purple color */
+                hsl(280, 70%, 60%) 80%,
+                transparent 100%),
+            radial-gradient(1250px circle at 100% 100%,
+                hsl(260, 70%, 80%) 15%, /* Purple color */
+                hsl(280, 80%, 90%) 35%, /* Chrome color */
+                hsl(260, 70%, 70%) 75%, /* Purple color */
+                hsl(280, 70%, 60%) 80%,
+                transparent 100%);
+            height: 100vh;
+            box-shadow: inset 0 0 400px white;
         }
 
-        #radius-shape-1 img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .radius-shape-1 {
+          position: fixed;
+          top: 0;
+          right: 0;
+          opacity: 0.05;
+          height: 100vh;
+          overflow: hidden;
         }
 
-
-        #radius-shape-2 {
-            height: 750px;
-            width: 750px;
-            top: -300px;
-            left: -700px;
-            overflow: hidden;
-            position: relative;
+        .radius-shape-1 img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
         }
 
-        #radius-shape-2 img {
-            display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .radius-shape-2 {
+          position: fixed;
+          left: 50%;
+          transform: translateX(-50%);
+          top: 0;
+          overflow: hidden;
         }
 
-        .bg-glass {
-            background-color: hsla(0, 0%, 100%, 0.9) !important;
-            backdrop-filter: saturate(200%) blur(25px);
+        .radius-shape-2 img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
         }
+
+        .radius-shape-3 {
+          position: fixed;
+          top: 0;
+          left: 0;
+          opacity: 0.05;
+          height: 100vh;
+          overflow: hidden;
+        }
+
+        .radius-shape-3 img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .container{
+
+
+        }
+
     </style>
 
-    <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
-        <div class="row gx-lg-5 align-items-center mb-5">
+<div class="container" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+    <div style="display: flex; flex-direction: row; align-items: center;">
 
+       <div class="col-lg-6 mb-5 mb-lg-0" style="position: relative; z-index: 2;">
+    <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(225, 48%, 15%)">
+        SCE Warehouse <br/>
+        <span class="my-5 display-5 fw-bold ls-tight" style="color: hsl(275, 100%, 50%);">for your experience</span>
+    </h1>
+    <h6 class="mb-4 opacity-70" style="color: hsl(225, 48%, 15%); font-size: 18px; line-height: 1.5; font-weight: 500; letter-spacing: 1px;">
+        Welcome to the Visual Communication Warehouse!
+    </h6>
+    <p class="mb-4 opacity-70" style="color: hsl(225, 48%, 15%); font-size: 16px; line-height: 1.6;">
+        As students of visual communication, you have entered a captivating sanctuary where ideas breathe life and visual stories unfold with enchanting grace. Step into this ethereal warehouse, meticulously crafted to nurture your growth, ignite your exploration, and elevate your prowess in the boundless realm of visual communication.
+    </p>
+</div>
 
-           <div class="col-lg-6 mb-5 mb-lg-0 " style="z-index: 10;">
-                <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(225, 48%, 15%)">
-                    SCE Warehouse <br/>
-                    <span class="my-5 display-5 fw-bold ls-tight" style="color:hsl(275, 100%, 50%);">for your experience</span>
-                </h1>
-                <h6 class="mb-4 opacity-70" style="color: hsl(225, 48%, 15%); font-size: 18px; line-height: 1.5; font-weight: 500; letter-spacing: 1px;">
-                    Welcome to the Visual Communication Warehouse!
-                </h6>
-                <p class="mb-4 opacity-70" style="color: hsl(225, 48%, 15%); font-size: 16px; line-height: 1.6;">
-                    As students of visual communication, you have entered a captivating sanctuary where ideas breathe life and visual stories unfold with enchanting grace. Step into this ethereal warehouse, meticulously crafted to nurture your growth, ignite your exploration, and elevate your prowess in the boundless realm of visual communication.
-                </p>
-           </div>
-
-            <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
-                <div id="radius-shape-1" class="position-absolute shadow-5-strong">
-                    <img src="/static/media/text.png" alt="TEXT">
-                </div>
-                <div id="radius-shape-2" class="position-absolute shadow-5-strong">
-                    <img src="/static/media/medusa.png" alt="Medusa">
-                </div>
-
-
-
-
-                <div class="position-fixed " style="margin-left: 220px; margin-top: -120px;" >
-                <div class="card bg-light shadow rounded-lg" style="width: 450px;">
-                    <div class="card-body px-4 py-5" style="font-family: monospace">
-                         <div class="text-center mb-4">
-                             <h3>Good to see you again 🛒</h3>
-                         </div>
-                        <form method="post">
-                            {% csrf_token %}
-
-                            <div class="mb-3 text-center" style="font-family: monospace">
-                                <label class="form-label" >Username</label>
-                                {{ form.username }}
-                            </div>
-                            <div class="mb-3 text-center" style="font-family: monospace">
-                                <label class="form-label">Password</label>
-                                {{ form.password }}
-                            </div>
-                            {% if form.errors or form.non_field_errors %}
-                                <div class="mb-3 p-3 bg-danger text-white rounded">
-                                    {% for field in form %}
-                                        {{ field.errors }}
-                                    {% endfor %}
-
-                                    {{ form.non_field_errors }}
-                                </div>
-                            {% endif %}
-                            <div class="text-center">
-                              <button type="submit" class="btn btn-primary btn-purple">
-                                Log In
-                             </button>
-                                <style>
-                                    .btn-purple {
-                                        background-color: purple;
-                                        color: white;
-                                    }
-                                </style>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+        <div class="col-lg-6 mb-5 mb-lg-0">
+            <div class="radius-shape-1">
+                <img src="/static/media/text.png" alt="TEXT">
+            </div>
+            <div class="radius-shape-3">
+                <img src="/static/media/text.png" alt="TEXT3">
+            </div>
+            <div class="radius-shape-2">
+                <img src="/static/media/medusa.png" alt="Medusa">
             </div>
 
+            <div class="card bg-light shadow rounded-lg" style="width: 450px; margin-left: 150px;">
+                <div class="card-body px-4 py-5" style="font-family: monospace">
+                    <div class="text-center mb-4">
+                        <h3>Good to see you again 🛒</h3>
+                    </div>
+                    <form method="post">
+                        {% csrf_token %}
 
+                        <div class="mb-3 text-center" style="font-family: monospace">
+                            <label class="form-label">Username</label>
+                            {{ form.username }}
+                        </div>
+                        <div class="mb-3 text-center" style="font-family: monospace">
+                            <label class="form-label">Password</label>
+                            {{ form.password }}
+                        </div>
+                        {% if form.errors or form.non_field_errors %}
+                            <div class="mb-3 p-3 bg-danger text-white rounded">
+                                {% for field in form %}
+                                    {{ field.errors }}
+                                {% endfor %}
 
-
+                                {{ form.non_field_errors }}
+                            </div>
+                        {% endif %}
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-purple">
+                                Log In
+                            </button>
+                            <style>
+                                .btn-purple {
+                                    background-color: purple;
+                                    color: white;
+                                }
+                            </style>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+</div>
+
 </section>
 </body>
 </html>
