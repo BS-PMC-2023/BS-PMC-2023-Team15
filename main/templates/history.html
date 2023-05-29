@@ -11,7 +11,7 @@
             <select class="form-select" id="std" onchange="location=this.value">
                 <option selected disabled>Choose a student...</option>
                 {% for u in users %}
-                    <option value="{% url 'history' user=u %}"> <a>({{ u }}){{ u.first_name }} {{ u.last_name }}</a></option>
+                    <option value="{% url 'history' user=u %}"> <a>({{ u }}) {{ u.first_name }} {{ u.last_name }}</a></option>
                 {% endfor %}
             </select>
         </div>

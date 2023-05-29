@@ -13,7 +13,6 @@ class ViewsTest(TestCase):
         self.c = Client()
         self.user = User.objects.create_user(username='testuser', password='12345')
 
-
         # add category
         Category.objects.create(name='category1')
         Equipment.objects.create(serial_number='item1', category=Category.objects.get(name='category1'))
@@ -74,3 +73,24 @@ class ViewsTest(TestCase):
         self.assertContains(response, 'date_from')
         self.assertContains(response, 'date_to')
 
+    def test_history(self):
+        self.c.logout()
+        self.c.login(username="admin", password="admin")
+
+        student = Student.objects.create(id=312, full_name='milky', email='milky@gmail.com', phone_number=123456789,
+                               password='test')
+        # student.save()
+
+        response = self.c.post('/history/milky@gmail.com')
+        self.assertEqual(response.status_code, 200)
+
+
+    def test_statistics(self):
+        self.c.logout()
+        self.c.login(username="admin", password="admin")
+        response = self.c.get('/statistics')
+        self.assertEqual(response.status_code, 200)
+
+    def test_policy(self):
+        response = self.c.get('/policy')
+        self.assertEqual(response.status_code, 200)
