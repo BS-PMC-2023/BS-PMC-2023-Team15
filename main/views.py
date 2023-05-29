@@ -2,6 +2,8 @@ from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.views.decorators.cache import never_cache
 from django.contrib import messages
+
+from accounts import forms
 from database.models import Category, Equipment, IssueReport
 from django.shortcuts import render, redirect
 from .forms import ReservationForm
@@ -120,11 +122,18 @@ def overdue(request):
     return render(request, 'overdue.html', context)
 
 
+
+
 def profile_view(request):
     usr = request.user
     if request.user.username == "admin": usr = request.user.email
     student = Student.objects.get(email=usr)
     my_items = Reservation.objects.filter(student=student.id, returned=False)
+
+    if request.user.username == "lecturer": usr = request.user.email
+    student = Student.objects.get(email=usr)
+    my_items = Reservation.objects.filter(student=student.id, returned=False)
+
     return render(request, 'profile.html', {"my_items": my_items})
 
 def profile_return(request,item):
@@ -142,9 +151,15 @@ def mal_view(request):
 def history(request,user):
     if user == None: user = request.user
     users = User.objects.all()
+
     if user == "admin": user = "admin@gmail.com"
     student = Student.objects.get(email=user)
     my_items = Reservation.objects.filter(student=student.id)
+
+    if user == "lecturer": user = "lecturer@gmail.com"
+    student = Student.objects.get(email=user)
+    my_items = Reservation.objects.filter(student=student.id)
+
     return  render(request, 'history.html', {"reservations": my_items, "users": users})
 
 @receiver(post_save, sender=Student)
@@ -194,3 +209,61 @@ def stats(request):
             reservations[category.name][f"{item.brand} {item.model}"] = Reservation.objects.filter(item=item, item__category=category).count()
 
     return render(request, 'statistics.html', {"reservations": reservations})
+
+import csv
+from django.shortcuts import render
+from database.models import Student
+
+from django.core.exceptions import ObjectDoesNotExist
+
+def addstudents(request):
+    if request.method == 'POST':
+        csv_file = request.FILES.get('csv_file')
+        if not csv_file:
+            return render(request, 'addstudents.html', {'error': 'Please select a CSV file.'})
+        if not csv_file.name.endswith('.csv'):
+            return render(request, 'addstudents.html', {'error': 'Please upload a valid CSV file.'})
+
+        csv_text = csv_file.read().decode('utf-8').splitlines()
+        csv_reader = csv.reader(csv_text)
+        next(csv_reader)  # Skip the header row if present
+        for row in csv_reader:
+            full_name = row[0]
+            id_str = row[1]
+            email = row[2]
+            phone_number_str = row[3]
+            password = row[4]
+
+            # Validate the id field
+            try:
+                id = int(id_str)
+            except ValueError:
+                return render(request, 'addstudents.html', {'error': f"Invalid value for 'id' field: {id_str}."})
+
+            # Validate the phone_number field
+            try:
+                phone_number = int(phone_number_str)
+            except ValueError:
+                return render(request, 'addstudents.html', {'error': f"Invalid value for 'phone_number' field: {phone_number_str}."})
+
+            try:
+                # Check if student already exists
+                student = Student.objects.get(id=id)
+                continue  # Skip adding the student and proceed to the next row
+            except ObjectDoesNotExist:
+                pass
+
+            student = Student(
+                full_name=full_name,
+                id=id,
+                email=email,
+                phone_number=phone_number,
+                password=password
+            )
+            student.save()
+
+        return render(request, 'addstudents.html', {'success': 'CSV file uploaded successfully.'})
+
+    return render(request, 'addstudents.html')
+
+

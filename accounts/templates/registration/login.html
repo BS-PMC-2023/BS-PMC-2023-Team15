@@ -9,40 +9,45 @@
 <section class="background-radial-gradient overflow-hidden">
     <style>
         .background-radial-gradient {
-            background-color: hsl(99, 46%, 70%);
-            background-image: radial-gradient(650px circle at 0% 0%,
-            hsl(148, 85%, 86%) 8%,
-            hsl(148, 85%, 86%) 35%,
-            hsl(148, 53%, 49%) 75%,
-            hsl(148, 53%, 45%) 80%,
-            transparent 100%),
-            radial-gradient(1250px circle at 100% 100%,
-                    hsl(148, 85%, 86%) 15%,
-                    hsl(151, 91%, 70%) 35%,
-                    hsl(148, 53%, 49%) 75%,
-                    hsl(148, 53%, 45%) 80%,
-                    transparent 100%);
-            height: 100vh;
-            box-shadow: inset 0 0 400px white;
-        }
-
+    background-color: hsl(320, 70%, 80%); /* Pink color */
+    background-image: radial-gradient(650px circle at 0% 0%,
+        hsl(280, 70%, 80%) 8%, /* Purple color */
+        hsl(60, 80%, 90%) 35%, /* Chrome color */
+        hsl(260, 70%, 70%) 75%, /* Purple color */
+        hsl(280, 70%, 60%) 80%,
+        transparent 100%),
+    radial-gradient(1250px circle at 100% 100%,
+        hsl(260, 70%, 80%) 15%, /* Purple color */
+        hsl(280, 80%, 90%) 35%, /* Chrome color */
+        hsl(260, 70%, 70%) 75%, /* Purple color */
+        hsl(280, 70%, 60%) 80%,
+        transparent 100%);
+    height: 100vh;
+    box-shadow: inset 0 0 400px white;
+}
         #radius-shape-1 {
             height: 220px;
             width: 220px;
-            top: -60px;
-            left: -130px;
-            background: radial-gradient(#a8d68f, #25794c);
+            top: 190px;
+            left: -500px;
+
             overflow: hidden;
         }
 
         #radius-shape-2 {
-            border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
-            bottom: -60px;
-            right: -110px;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(#6df8b5, #2b8c59);
+            height: 700px;
+            width: 700px;
+            top: -90px;
+            left: -700px;
             overflow: hidden;
+            position: relative;
+        }
+
+        #radius-shape-2 img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .bg-glass {
@@ -53,13 +58,14 @@
 
     <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
         <div class="row gx-lg-5 align-items-center mb-5">
-            <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
-                <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(135, 48%, 97%)">
+
+
+           <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+                <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(225, 48%, 15%)">
                     SCE Warehouse <br/>
-                    <span class="my-5 display-5 fw-bold ls-tight"
-                          style="color: hsl(135, 48%, 86%)">for your experience</span>
+                    <span class="my-5 display-5 fw-bold ls-tight" style="color: hsl(225, 48%, 35%)">for your experience</span>
                 </h1>
-                <p class="mb-4 opacity-70" style="color: hsl(135, 48%, 97%)">
+                <p class="mb-4 opacity-70" style="color: hsl(225, 48%, 15%)">
                     Welcome to SCE warehouse website!
                     We are delighted to offer you an extensive range of products that meet your business needs.
                     With our vast selection of items, you will find everything you need under one roof.
@@ -67,30 +73,31 @@
             </div>
 
             <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
-                <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
-                <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+                <div id="radius-shape-1" class="position-absolute shadow-5-strong"></div>
+               <div id="radius-shape-2" class="position-absolute shadow-5-strong">
+                    <img src="/static/media/medusa.png" alt="Medusa">
+               </div>
 
-                <div class="card bg-glass shadow">
-                    <div class="card-body px-4 py-5 px-md-5">
-
+               <div class="d-flex justify-content-center align-items-center ">
+                <div class="card bg-light shadow rounded-lg">
+                    <div class="card-body px-4 py-5">
                         <form method="post">
                             {% csrf_token %}
-                            <div>
+                            <div class="text-center mb-4">
                                 <h3>Log In</h3>
-                                <br>
                             </div>
-                            <div class="mb-3">
-                                <label class="form-label">Username</label><br>
+                            <div class="mb-3 text-center">
+                                <label class="form-label">Username</label>
                                 {{ form.username }}
                             </div>
 
-                            <div class="mb-3">
-                                <label class="form-label">Password</label><br>
+                            <div class="mb-3 text-center">
+                                <label class="form-label">Password</label>
                                 {{ form.password }}
                             </div>
 
                             {% if form.errors or form.non_field_errors %}
-                                <div class="mb-3 p-6 bg-red-100 rounded-xl">
+                                <div class="mb-3 p-3 bg-danger text-white rounded">
                                     {% for field in form %}
                                         {{ field.errors }}
                                     {% endfor %}
@@ -99,12 +106,22 @@
                                 </div>
                             {% endif %}
 
-                            <button type="submit" class="btn btn-primary btn-block mb-4">
+                            <div class="text-center">
+                              <button type="submit" class="btn btn-primary btn-purple">
                                 Log In
-                            </button>
+                             </button>
+                                <style>
+                                    .btn-purple {
+                                        background-color: purple;
+                                        color: white;
+                                    }
+                                </style>
+                            </div>
                         </form>
                     </div>
                 </div>
+            </div>
+
             </div>
         </div>
     </div>
