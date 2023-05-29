@@ -42,6 +42,7 @@ urlpatterns = [
     path('profile/<item>/return', main.views.profile_return, name='return'),
     path('profile/view', main.views.profile_view, name='profile'),
     path('policy/', main.views.policy_view, name='policy'),
+    path('addstudents/', main.views.addstudents, name='addstudents'),
 
     # path('contact', apps.pages.views.contact_view, name='contact'),
 ]
