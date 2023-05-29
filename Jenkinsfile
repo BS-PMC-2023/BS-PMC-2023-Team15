@@ -17,7 +17,7 @@ pipeline {
         stage('Metrics 1 - Coverage') {
             steps {
                 sh 'docker run --rm creativestorage coverage run manage.py test'
-                sh 'docker run --rm creativestorage coverage report'
+                echo sh 'docker run --rm creativestorage coverage report'
 
             }
         }
