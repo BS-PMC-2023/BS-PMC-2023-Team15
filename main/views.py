@@ -120,11 +120,18 @@ def overdue(request):
     return render(request, 'overdue.html', context)
 
 
+
+
 def profile_view(request):
     usr = request.user
     if request.user.username == "admin": usr = request.user.email
     student = Student.objects.get(email=usr)
     my_items = Reservation.objects.filter(student=student.id, returned=False)
+
+    if request.user.username == "lecturer": usr = request.user.email
+    student = Student.objects.get(email=usr)
+    my_items = Reservation.objects.filter(student=student.id, returned=False)
+
     return render(request, 'profile.html', {"my_items": my_items})
 
 def profile_return(request,item):
@@ -142,9 +149,15 @@ def mal_view(request):
 def history(request,user):
     if user == None: user = request.user
     users = User.objects.all()
+
     if user == "admin": user = "admin@gmail.com"
     student = Student.objects.get(email=user)
     my_items = Reservation.objects.filter(student=student.id)
+
+    if user == "lecturer": user = "lecturer@gmail.com"
+    student = Student.objects.get(email=user)
+    my_items = Reservation.objects.filter(student=student.id)
+
     return  render(request, 'history.html', {"reservations": my_items, "users": users})
 
 @receiver(post_save, sender=Student)
@@ -194,3 +207,5 @@ def stats(request):
             reservations[category.name][f"{item.brand} {item.model}"] = Reservation.objects.filter(item=item, item__category=category).count()
 
     return render(request, 'statistics.html', {"reservations": reservations})
+
+
