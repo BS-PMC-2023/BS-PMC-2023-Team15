@@ -26,7 +26,7 @@ pipeline {
 
         stage('Metrics 2 - Radon') {
             steps {
-                sh 'docker run --rm creativestorage radon cc --show-complexity --total-average'
+                sh 'docker run --rm creativestorage radon cc --show-complexity --total-average main/tests.py'
             }
         }
 
