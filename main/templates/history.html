@@ -5,16 +5,38 @@
 
     <div class="container">
 
+<div class="input-group mb-5">
+    <label class="input-group-text" for="selectType">Select Type:</label>
+    <select class="form-select" id="selectType" onchange="handleSelection(this.value)">
+        <option selected disabled>Choose an option...</option>
+        <option value="students">Students</option>
+        <option value="items">Items</option>
+    </select>
+</div>
 
+<div id="studentSection" style="display: none;">
+    <div class="input-group mb-5">
+        <label class="input-group-text" for="std">Student:</label>
+        <select class="form-select" id="std" onchange="location=this.value">
+            <option selected disabled>Choose a student...</option>
+            {% for u in users %}
+                <option value="{% url 'history' user=u %}"><a>({{ u }}) {{ u.first_name }} {{ u.last_name }}</a></option>
+            {% endfor %}
+        </select>
+    </div>
+</div>
+
+<div id="itemSection" style="display: none;">
         <div class="input-group mb-5">
-            <label class="input-group-text" for="std">Student:</label>
-            <select class="form-select" id="std" onchange="location=this.value">
-                <option selected disabled>Choose a student...</option>
-                {% for u in users %}
-                    <option value="{% url 'history' user=u %}"> <a>({{ u }}) {{ u.first_name }} {{ u.last_name }}</a></option>
-                {% endfor %}
-            </select>
-        </div>
+        <label class="input-group-text" for="std">Items:</label>
+        <select class="form-select" id="std" onchange="location=this.value">
+            <option selected disabled>Choose a student...</option>
+            {% for r in reservations %}
+                <option value="{% url 'history' user=r %}"><a>({{ r }})  {{ r.item }}</a></option>
+            {% endfor %}
+        </select>
+    </div>
+</div>
 
 
 
@@ -45,4 +67,22 @@
             </tbody>
         </table>
     </div>
+
+    <script>
+    function handleSelection(value) {
+        var studentSection = document.getElementById("studentSection");
+        var itemSection = document.getElementById("itemSection");
+
+        if (value === "students") {
+            studentSection.style.display = "block";
+            itemSection.style.display = "none";
+        } else if (value === "items") {
+            studentSection.style.display = "none";
+            itemSection.style.display = "block";
+        }
+    }
+</script>
 {% endblock %}
+
+
+
