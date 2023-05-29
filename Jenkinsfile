@@ -16,10 +16,28 @@ pipeline {
          //coverage report
         stage('Metrics 1 - Coverage') {
             steps {
-                sh 'docker run --rm creativestorage pip install coverage'
                 sh 'docker run --rm creativestorage coverage run manage.py test'
                 sh 'docker run --rm creativestorage coverage report'
 
+            }
+        }
+
+
+        stage('Metrics 2 - Radon') {
+            steps {
+                sh 'docker run --rm creativestorage radon cc --show-complexity --total-average'
+            }
+        }
+
+        stage('Metrics 3 - Bandit') {
+            steps {
+                sh 'docker run --rm creativestorage bandit -r .'
+            }
+        }
+
+        stage('Metrics 4 - Pylint') {
+            steps {
+                sh 'docker run --rm creativestorage pylint creativestorage'
             }
         }
     }
