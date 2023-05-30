@@ -12,7 +12,7 @@
   <form method="post" enctype="multipart/form-data" style="text-align: center;">
     {% csrf_token %}
     <input type="file" name="csv_file" accept=".csv" style="margin-bottom: 10px;"><br>
-    <button type="submit" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer;">Upload</button>
+    <input type="submit" value="Upload" style="padding: 10px 20px; background-color: #4285F4; color: white; border: none; cursor: pointer;">
   </form>
 </div>
 {% endblock %}
