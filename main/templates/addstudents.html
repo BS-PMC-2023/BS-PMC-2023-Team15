@@ -3,6 +3,9 @@
 {% block content %}
 <div style="border: 1px solid #ccc; padding: 20px; width: 400px; margin: 0 auto;">
   <h3 style="text-align: center; font-size: 24px;">Upload CSV file to add students:</h3>
+  <div style="text-align: center; margin-bottom: 20px;">
+    <img src="/media/categories/csv_icon.png" alt="CSV Icon" style="width: 50px;">
+  </div>
   {% if error %}
     <p class="error" style="text-align: center; color: red;">{{ error }}</p>
   {% endif %}
