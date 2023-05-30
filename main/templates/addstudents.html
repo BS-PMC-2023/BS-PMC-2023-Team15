@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div style="border: 1px solid #ccc; padding: 20px; width: 400px; margin: 0 auto;">
-  <h3 style="text-align: center; font-size: 24px;">Upload CSV file to add students:</h3>
+<div style="border: 1px solid #ccc; padding: 20px; width: 400px; margin: 0 auto; background-color: #f7f7f7;">
+  <h3 style="text-align: center; font-size: 24px; color: #333;">Upload CSV file to add students:</h3>
   <div style="text-align: center; margin-bottom: 20px;">
     <img src="/media/categories/csv_icon.png" alt="CSV Icon" style="width: 50px;">
   </div>
@@ -17,7 +17,7 @@
     <input type="file" name="csv_file" accept=".csv" style="margin-bottom: 10px;"><br>
     <input type="submit" value="Upload" style="padding: 10px 20px; background-color: #4285F4; color: white; border: none; cursor: pointer;">
   </form>
-  <p style="text-align: center; margin-top: 10px;">Note: Maximum file size allowed is 10MB.</p>
-  <p style="text-align: center;">Please ensure the CSV file follows the required format.</p>
+  <p style="text-align: center; margin-top: 10px; color: #666;">Note: Maximum file size allowed is 10MB.</p>
 </div>
 {% endblock %}
+
