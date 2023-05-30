@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="contact-form spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="contact__form__title">
+                        <form action="{% url 'pass_item' %}" method="post" id="passForm">
+                            {% csrf_token %}
+                            <select name="student" id="student">
+                                <option selected disabled>Choose a student...</option>
+                                {% for u in users %}
+                                    <option value="{{ u.id }}">{{ u.name }}</option>
+                                {% endfor %}
+                            </select>
+                            <br><br>
+                            <h2 id="issueHeading">Open Issue for {{ item }}</h2>
+                            <textarea placeholder="Your message" name="message" id="messageTextarea"></textarea>
+                            <button type="submit" class="site-btn">Pass item</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
