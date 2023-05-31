@@ -267,11 +267,50 @@ def addstudents(request):
     return render(request, 'addstudents.html')
 
 
-def pass_item_view(request, item):
-    users = User.objects.all()
-    if request.method == "POST":
-        student = Student.objects.get(email=request.user.email)
-        reservation = Reservation.objects.get(id=item, student=student.id)
-        reservation.save()
+# def pass_item_view(request, item):
+#     student = Student.objects.all()
+#     #reservation = Reservation.objects.get(id=item)
+#  #   if request.method == "POST":
+#         #if user == "admin": user = "admin@gmail.com"
+#         #student = Student.objects.get(email=user)
+#
+#     return render(request, 'pass_item.html', {"item": item, "student": student})
+#
+#
+# def pass_item_to_student(request, item, student):
+#     if request.method != "POST":
+#         return redirect('main')
+#     student = Student.objects.get(id=student)
+#     reservation = Reservation.objects.get(id=item)
+#     reservation.student = student
+#     reservation.save()
+#     return redirect('profile')
 
-    return render(request, 'pass_item.html', {"users": users , "item": item})
+
+def pass_item_view(request, item):
+    students = Student.objects.all()
+    return render(request, 'pass_item.html', {"item": item, "students": students})
+
+def pass_item_to_student(request, item, student):
+    date = datetime.today()
+
+    if request.method == "POST":
+        item = Equipment.objects.get(serial_number=item)
+        student = Student.objects.get(full_name=student)
+        reservation = Reservation.objects.create(student=student, item=item, date_from=date,
+                                                date_to=date, returned=False, status='B')
+        reservation.save()
+        return redirect('profile')
+    else:
+        return redirect('/')
+
+
+# def pass_item_to_student_confirm(request, item,student):
+#     if request.method == "POST":
+#         reservation=Reservation.objects.create(student=student,item=item,date_from=datetime.date.today(),
+#                                            date_to=datetime.date.today(),returned=False,status='B')
+#         reservation.save()
+#         return redirect('profile')
+#     else:
+#         return redirect('/')
+

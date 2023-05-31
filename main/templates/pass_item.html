@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="contact-form spad">
+  {% comment %}  <div class="contact-form spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="contact__form__title">
-                        <form action="{% url 'pass_item' %}" method="post" id="passForm">
+                        <form action="{% url 'pass_item '  %}" method="post" id="passForm">
                             {% csrf_token %}
                             <select name="student" id="student">
                                 <option selected disabled>Choose a student...</option>
-                                {% for u in users %}
-                                    <option value="{{ u.id }}">{{ u.name }}</option>
+                                {% for u in student %}
+                                    <option value="{{ u.id }}">{{ u.full_name }}</option>
                                 {% endfor %}
                             </select>
                             <br><br>
@@ -23,5 +23,52 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>{% endcomment %}
+
+{% comment %}        <h1>Pass Item</h1>
+    <form method="POST" >
+        {% csrf_token %}
+        <label for="student">Select Student:</label>
+        <select id="student" name="student">
+            {% for student in students %}
+                <option value="{% url 'pass_item_to_student' item student %}"><a>{{ student.full_name }}</a></option>
+            {% endfor %}
+
+        </select>
+        <br><br>
+                            <form method="POST"
+                              action="{% url 'pass_item_to_student_confirm' item student %}" class="btn">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-primary btn">Pass item</button>
+                            </form>
+    </form>
+
+    {% endcomment %}
+
+
+    <h1>Pass Item</h1>
+<form method="POST" id="passItemForm" action="">
+  {% csrf_token %}
+  <label for="student">Select Student:</label>
+  <select id="student" name="student" onchange="updateFormAction()">
+    {% for s in students %}
+      <option value="{{ s.id }}">{{ s.full_name }}</option>
+    {% endfor %}
+  </select>
+
+  <br><br>
+
+  <input type="hidden" name="item" value="{{ item.id  }} {{ student }}">
+  <button type="submit" class="btn-primary btn">Pass item</button>
+</form>
+
+<script>
+  function updateFormAction() {
+    var item = "{{ item.id }}";
+    var student = document.getElementById("student");
+    var form = document.getElementById("passItemForm");
+    form.action = "{% url 'pass_item_to_student' item student %}";
+  }
+</script>
+
 {% endblock %}
