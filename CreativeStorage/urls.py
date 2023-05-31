@@ -26,7 +26,7 @@ import main.views
 urlpatterns = [
     path('admin', admin.site.urls),
     path('', main.views.main_view, name='main'),
-    path('accounts', include("django.contrib.auth.urls")),
+    path('accounts/', include("django.contrib.auth.urls")),
     path('malfunction/<serial>', main.views.malfunction_view, name='malfunction'),
     path('report', main.views.mal_view, name='mal'),
     path('categories', main.views.categories_view, name='categories'),
@@ -42,7 +42,8 @@ urlpatterns = [
     path('profile/view', main.views.profile_view, name='profile'),
     path('policy', main.views.policy_view, name='policy'),
     path('addstudents', main.views.addstudents, name='addstudents'),
-    # path('contact', apps.pages.views.contact_view, name='contact'),
+    path('pass/<item>', main.views.pass_item_view, name='pass'),
+    path('pass/<item>', main.views.pass_item_to_student, name='pass_confirm'),
 ]
 
 
