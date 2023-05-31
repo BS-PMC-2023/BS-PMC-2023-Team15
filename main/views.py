@@ -267,3 +267,11 @@ def addstudents(request):
     return render(request, 'addstudents.html')
 
 
+def pass_item_view(request, item):
+    users = User.objects.all()
+    if request.method == "POST":
+        student = Student.objects.get(email=request.user.email)
+        reservation = Reservation.objects.get(id=item, student=student.id)
+        reservation.save()
+
+    return render(request, 'pass_item.html', {"users": users , "item": item})

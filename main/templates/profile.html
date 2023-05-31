@@ -29,6 +29,11 @@
                             <button type="submit" class="btn-primary btn">Return</button>
                         </form>
                         <a class="btn-primary btn" href="{% url 'malfunction' serial=my_item.item.serial_number %}">Open Issue</a>
+                        <form method="POST"
+                              action="{% url 'pass' item=my_item.id %}" class="btn">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-primary btn">Pass item</button>
+                        </form>
                     </td>
                 </tr>
                 {% empty %}
