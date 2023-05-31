@@ -44,7 +44,6 @@ urlpatterns = [
     path('addstudents', main.views.addstudents, name='addstudents'),
     path('pass/<item>', main.views.pass_item_view, name='pass'),
     path('pass/<item>', main.views.pass_item_to_student, name='pass_confirm'),
-    # path('contact', apps.pages.views.contact_view, name='contact'),
 ]
 
 
