@@ -289,20 +289,24 @@ def addstudents(request):
 
 def pass_item_view(request, item):
     students = Student.objects.all()
-    return render(request, 'pass_item.html', {"item": item, "students": students})
-
-def pass_item_to_student(request, item, student):
     date = datetime.today()
 
     if request.method == "POST":
+        student = request.POST.get('student')
+        me = request.user if request.user.username != "admin" else request.user.email
         item = Equipment.objects.get(serial_number=item)
-        student = Student.objects.get(full_name=student)
-        reservation = Reservation.objects.create(student=student, item=item, date_from=date,
-                                                date_to=date, returned=False, status='B')
+        student = Student.objects.get(email=student)
+        me = Student.objects.get(email=me)
+        reservation = Reservation.objects.get(item=item, student=me)
+        reservation.student = student
+        reservation.date_from = date
         reservation.save()
         return redirect('profile')
-    else:
-        return redirect('/')
+
+    return render(request, 'pass_item.html', {"item": item, "students": students})
+
+def pass_item_to_student(request):
+    pass
 
 
 # def pass_item_to_student_confirm(request, item,student):

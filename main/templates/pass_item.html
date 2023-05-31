@@ -1,74 +1,27 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  {% comment %}  <div class="contact-form spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="contact__form__title">
-                        <form action="{% url 'pass_item '  %}" method="post" id="passForm">
-                            {% csrf_token %}
-                            <select name="student" id="student">
-                                <option selected disabled>Choose a student...</option>
-                                {% for u in student %}
-                                    <option value="{{ u.id }}">{{ u.full_name }}</option>
-                                {% endfor %}
-                            </select>
-                            <br><br>
-                            <h2 id="issueHeading">Open Issue for {{ item }}</h2>
-                            <textarea placeholder="Your message" name="message" id="messageTextarea"></textarea>
-                            <button type="submit" class="site-btn">Pass item</button>
-                        </form>
-                    </div>
-                </div>
+
+<div class="container">
+    <h1 class="text-center">Pass Item</h1>
+    <form method="POST" id="passItemForm" action="{% url 'pass_confirm' item %}">
+        {% csrf_token %}
+        <div class="d-flex justify-content-center">
+            <div class="form-group">
+                <label for="student" class="text-center">Select Student:</label>
+                <select id="student" name="student" class="form-control">
+                    {% for s in students %}
+                    <option value="{{ s.email }}">{{ s.full_name }}</option>
+                    {% endfor %}
+                </select>
             </div>
         </div>
-    </div>{% endcomment %}
-
-{% comment %}        <h1>Pass Item</h1>
-    <form method="POST" >
-        {% csrf_token %}
-        <label for="student">Select Student:</label>
-        <select id="student" name="student">
-            {% for student in students %}
-                <option value="{% url 'pass_item_to_student' item student %}"><a>{{ student.full_name }}</a></option>
-            {% endfor %}
-
-        </select>
-        <br><br>
-                            <form method="POST"
-                              action="{% url 'pass_item_to_student_confirm' item student %}" class="btn">
-                            {% csrf_token %}
-                            <button type="submit" class="btn-primary btn">Pass item</button>
-                            </form>
+    <br><br>
+        <input type="hidden" name="item" value="{{ item }}">
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary">Pass item</button>
+        </div>
     </form>
-
-    {% endcomment %}
-
-
-    <h1>Pass Item</h1>
-<form method="POST" id="passItemForm" action="">
-  {% csrf_token %}
-  <label for="student">Select Student:</label>
-  <select id="student" name="student" onchange="updateFormAction()">
-    {% for s in students %}
-      <option value="{{ s.id }}">{{ s.full_name }}</option>
-    {% endfor %}
-  </select>
-
-  <br><br>
-
-  <input type="hidden" name="item" value="{{ item.id  }} {{ student }}">
-  <button type="submit" class="btn-primary btn">Pass item</button>
-</form>
-
-<script>
-  function updateFormAction() {
-    var item = "{{ item.id }}";
-    var student = document.getElementById("student");
-    var form = document.getElementById("passItemForm");
-    form.action = "{% url 'pass_item_to_student' item student %}";
-  }
-</script>
+</div>
 
 {% endblock %}
