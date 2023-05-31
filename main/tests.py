@@ -118,13 +118,13 @@ class ViewsTest(TestCase):
         self.client.logout()
         self.client.login(username="admin", password="admin")
 
-        # student = Student.objects.create(
-        #     id=312,
-        #     full_name='milky',
-        #     email='milky@gmail.com',
-        #     phone_number=123456789,
-        #     password='test'
-        # )
+        Student.objects.create(
+            id=312,
+            full_name='milky',
+            email='milky@gmail.com',
+            phone_number=123456789,
+            password='test'
+        )
 
         response = self.client.post('/history/milky@gmail.com')
         self.assertEqual(response.status_code, 200)
