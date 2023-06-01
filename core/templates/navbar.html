@@ -48,7 +48,7 @@
                 </div>
 
                 <div class="mx-4">
-                    <form action="{% url 'logout' %}?next=/login" method="post">
+                    <form action="{% url 'logout' %}" method="post">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-outline-danger">Logout</button>
                     </form>
