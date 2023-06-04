@@ -78,16 +78,21 @@ def item_detail_view(request, item):
         item_serial_number = item
         date_from = form.data['date_from']
         date_to = form.data['date_to']
+        time_from = form.data['time_from']
+        time_to = form.data['time_to']
 
         # catch ValidationError
         item_to_borrow = Equipment.objects.get(serial_number=item_serial_number)
         try:
             date_from = datetime.strptime(date_from, '%Y-%m-%d').date()
             date_to = datetime.strptime(date_to, '%Y-%m-%d').date()
+            time_from = datetime.strptime(time_from, '%H:%M').time()
+            time_to = datetime.strptime(time_to, '%H:%M').time()
+
             if date_from > date_to:
                 raise ArithmeticError
-            reservation = Reservation(student=student, item=item_to_borrow, date_from=date_from, date_to=date_to,
-                                      status='B')
+            reservation = Reservation(student=student, item=item_to_borrow, date_from=date_from, date_to=date_to,time_from=time_from, time_to=time_to, status='B')
+
             reservation.save()
             s = 'Q'
             messages.success(request, 'Item reserved successfully')
@@ -114,6 +119,7 @@ def item_detail_view(request, item):
     result = Equipment.objects.get(serial_number=item)
     issues = IssueReport.objects.filter(item=result)
     date_min = datetime.now().date().isoformat()
+
 
     # qr code
     img = qrcode.make(item)
