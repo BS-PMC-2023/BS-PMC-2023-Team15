@@ -17,40 +17,50 @@ import base64, qrcode, io
 from django.views.decorators.http import require_http_methods
 from django.db.models.signals import post_save, post_delete
 
+
 @login_required
 def main_view(request):
-    return render(request, 'categories.html',{} )
+    return render(request, 'categories.html', {})
 
 @login_required
 def categories_view(request):
     categories = Category.objects.all()
     return render(request, 'products.html', {'categories': categories})
 
+
 @login_required
 def studio_view(request):
     categories = Category.objects.all()
     return render(request, 'studio.html', {'categories': categories})
 
+
 @login_required
 def podcast_view(request):
     categories = Category.objects.all()
     return render(request, 'podcast.html', {'categories': categories})
+
+
 @login_required
 def malfunction_view(request, serial):
     return render(request, 'malfunction.html', {"item": serial})
 
+
 def malfunction_send(request):
     # add malfunction to DB
     return redirect('main')
+
+
 @login_required
 def policy_view(request):
-    return render(request, 'policy.html',)
+    return render(request, 'policy.html', )
+
 
 @login_required
 def category_view(request, category):
     # category = Category.objects.get(name=category)
     items = Equipment.objects.filter(category=category)
     return render(request, 'catalog.html', {"items": items})
+
 
 @login_required
 @never_cache
@@ -61,8 +71,8 @@ def item_detail_view(request, item):
     s = 'A'
     if request.method == 'POST':
         form = ReservationForm(request.POST)
-        u =request.user
-        if u.username =='admin':
+        u = request.user
+        if u.username == 'admin':
             u = u.email
         student = Student.objects.get(email=u)
         item_serial_number = item
@@ -81,8 +91,7 @@ def item_detail_view(request, item):
 
             if date_from > date_to:
                 raise ArithmeticError
-            reservation = Reservation(student=student, item=item_to_borrow, date_from=date_from, date_to=date_to,
-                                      time_from=time_from, time_to=time_to, status='B')
+            reservation = Reservation(student=student, item=item_to_borrow, date_from=date_from, date_to=date_to,time_from=time_from, time_to=time_to, status='B')
 
             reservation.save()
             s = 'Q'
@@ -118,18 +127,19 @@ def item_detail_view(request, item):
     img.save(byteIO, format='PNG')
     byteArr = byteIO.getvalue()
     image_data = base64.b64encode(byteArr).decode('utf-8')
-    return render(request, 'details.html', {"form": form, "item": result, "issues": issues, "date_min": date_min, "qr": image_data, "status": s})
+    return render(request, 'details.html',
+                  {"form": form, "item": result, "issues": issues, "date_min": date_min, "qr": image_data, "status": s})
+
 
 def requests(request):
     return render(request, 'requests.html', )
+
 
 def overdue(request):
     today = date.today()
     reservations = Reservation.objects.filter(returned=False, date_to__lt=today)
     context = {'reservations': reservations}
     return render(request, 'overdue.html', context)
-
-
 
 
 def profile_view(request):
@@ -144,7 +154,8 @@ def profile_view(request):
 
     return render(request, 'profile.html', {"my_items": my_items})
 
-def profile_return(request,item):
+
+def profile_return(request, item):
     if request.method != "POST":
         return redirect('main')
     student = Student.objects.get(email=request.user.email)
@@ -153,10 +164,12 @@ def profile_return(request,item):
     reservation.save()
     return redirect('profile')
 
+
 def mal_view(request):
     return render(request, 'mal.html', )
 
-def history(request,user):
+
+def history(request, user):
     if user == None: user = request.user
     users = User.objects.all()
 
@@ -168,7 +181,8 @@ def history(request,user):
     student = Student.objects.get(email=user)
     my_items = Reservation.objects.filter(student=student.id)
 
-    return  render(request, 'history.html', {"reservations": my_items, "users": users})
+    return render(request, 'history.html', {"reservations": my_items, "users": users})
+
 
 @receiver(post_save, sender=Student)
 def new_user(sender, instance, created, **kwargs):
@@ -187,7 +201,6 @@ def del_user(sender, instance, **kwargs):
         pass
 
 
-
 @login_required
 def search(request):
     q = request.GET.get('query')
@@ -199,13 +212,12 @@ def search(request):
     by_model = Equipment.objects.filter(model__contains=q)
     s = by_serial.union(by_category, by_brand, by_model)
     if s.exists():
-        return render(request,'catalog.html', {'items': s})
+        return render(request, 'catalog.html', {'items': s})
 
-    return render(request,'catalog.html', {'items': None})
+    return render(request, 'catalog.html', {'items': None})
 
 
 def stats(request):
-
     categories = Category.objects.all()
     items = Equipment.objects.all()
 
@@ -214,15 +226,18 @@ def stats(request):
     for category in categories:
         reservations[category.name] = {}
         for item in items.filter(category=category):
-            reservations[category.name][f"{item.brand} {item.model}"] = Reservation.objects.filter(item=item, item__category=category).count()
+            reservations[category.name][f"{item.brand} {item.model}"] = Reservation.objects.filter(item=item,
+                                                                                                   item__category=category).count()
 
     return render(request, 'statistics.html', {"reservations": reservations})
+
 
 import csv
 from django.shortcuts import render
 from database.models import Student
 
 from django.core.exceptions import ObjectDoesNotExist
+
 
 def addstudents(request):
     if request.method == 'POST':
@@ -252,7 +267,8 @@ def addstudents(request):
             try:
                 phone_number = int(phone_number_str)
             except ValueError:
-                return render(request, 'addstudents.html', {'error': f"Invalid value for 'phone_number' field: {phone_number_str}."})
+                return render(request, 'addstudents.html',
+                              {'error': f"Invalid value for 'phone_number' field: {phone_number_str}."})
 
             try:
                 # Check if student already exists
@@ -275,3 +291,53 @@ def addstudents(request):
     return render(request, 'addstudents.html')
 
 
+# def pass_item_view(request, item):
+#     student = Student.objects.all()
+#     #reservation = Reservation.objects.get(id=item)
+#  #   if request.method == "POST":
+#         #if user == "admin": user = "admin@gmail.com"
+#         #student = Student.objects.get(email=user)
+#
+#     return render(request, 'pass_item.html', {"item": item, "student": student})
+#
+#
+# def pass_item_to_student(request, item, student):
+#     if request.method != "POST":
+#         return redirect('main')
+#     student = Student.objects.get(id=student)
+#     reservation = Reservation.objects.get(id=item)
+#     reservation.student = student
+#     reservation.save()
+#     return redirect('profile')
+
+
+def pass_item_view(request, item):
+    students = Student.objects.all()
+    date = datetime.today()
+
+    if request.method == "POST":
+        student = request.POST.get('student')
+        me = request.user if request.user.username != "admin" else request.user.email
+        item = Equipment.objects.get(serial_number=item)
+        student = Student.objects.get(email=student)
+        me = Student.objects.get(email=me)
+        reservation = Reservation.objects.get(item=item, student=me)
+        reservation.student = student
+        reservation.date_from = date
+        reservation.save()
+        return redirect('profile')
+
+    return render(request, 'pass_item.html', {"item": item, "students": students})
+
+
+def pass_item_to_student(request):
+    pass
+
+# def pass_item_to_student_confirm(request, item,student):
+#     if request.method == "POST":
+#         reservation=Reservation.objects.create(student=student,item=item,date_from=datetime.date.today(),
+#                                            date_to=datetime.date.today(),returned=False,status='B')
+#         reservation.save()
+#         return redirect('profile')
+#     else:
+#         return redirect('/')
