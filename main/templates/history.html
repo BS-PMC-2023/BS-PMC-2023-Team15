@@ -47,6 +47,7 @@
             <th>Date Borrowed</th>
             <th>Due Date</th>
             <th>Returned</th>
+            <th>Passed</th>
         </tr>
         </thead>
         <tbody>
@@ -57,9 +58,14 @@
                 <td>{{ reservation.date_from }}</td>
                 <td>{{ reservation.date_to }}</td>
                 <td>{{ reservation.returned }}</td>
-            </tr>
-        {% empty %}
-            <tr>
+            {% if reservation.status == 'P' %}
+                <td class="bg-danger"> Passed </td>
+            {% else %}
+                <td > No </td>
+            {% endif %}
+                </tr>
+            {% empty %}
+                <tr>
                 <td colspan="5" class="">No Items were taken by any user! 👍</td>
             </tr>
         {% endfor %}

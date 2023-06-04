@@ -22,6 +22,7 @@ from django.db.models.signals import post_save, post_delete
 def main_view(request):
     return render(request, 'categories.html', {})
 
+
 @login_required
 def categories_view(request):
     categories = Category.objects.all()
@@ -136,18 +137,30 @@ def overdue(request):
     return render(request, 'overdue.html', context)
 
 
+# def profile_view(request):
+#     usr = request.user
+#     if request.user.username == "admin": usr = request.user.email
+#     student = Student.objects.get(email=usr)
+#     my_items = Reservation.objects.filter(student=student.id, returned=False)
+#
+#     if request.user.username == "lecturer": usr = request.user.email
+#     student = Student.objects.get(email=usr)
+#     my_items = Reservation.objects.filter(student=student.id, returned=False)
+#     if Reservation.objects.filter(student=student.id, status='P', returned=True) == 1:
+#         res = Reservation.objects.filter(student=student.id, status='P', returned=True)
+#         return render(request, 'profile.html', {"my_items": my_items, "status": 'P', "res": res})
+#
+#     return render(request, 'profile.html', {"my_items": my_items})
+
 def profile_view(request):
     usr = request.user
-    if request.user.username == "admin": usr = request.user.email
+    if request.user.username == "admin":
+        usr = request.user.email
     student = Student.objects.get(email=usr)
     my_items = Reservation.objects.filter(student=student.id, returned=False)
+    res = Reservation.objects.filter(student=student.id, status='P', returned=True)
 
-    if request.user.username == "lecturer": usr = request.user.email
-    student = Student.objects.get(email=usr)
-    my_items = Reservation.objects.filter(student=student.id, returned=False)
-
-    return render(request, 'profile.html', {"my_items": my_items})
-
+    return render(request, 'profile.html', {"my_items": my_items, "res": res})
 
 def profile_return(request, item):
     if request.method != "POST":
@@ -166,7 +179,6 @@ def mal_view(request):
 def history(request, user):
     if user == None: user = request.user
     users = User.objects.all()
-
     if user == "admin": user = "admin@gmail.com"
     student = Student.objects.get(email=user)
     my_items = Reservation.objects.filter(student=student.id)
@@ -174,6 +186,10 @@ def history(request, user):
     if user == "lecturer": user = "lecturer@gmail.com"
     student = Student.objects.get(email=user)
     my_items = Reservation.objects.filter(student=student.id)
+
+    # if user != "admin" and user != "lecturer": user = request.user.email
+    # student = Student.objects.get(email=user)
+    # my_items = Reservation.objects.filter(student=student.id)
 
     return render(request, 'history.html', {"reservations": my_items, "users": users})
 
@@ -285,26 +301,6 @@ def addstudents(request):
     return render(request, 'addstudents.html')
 
 
-# def pass_item_view(request, item):
-#     student = Student.objects.all()
-#     #reservation = Reservation.objects.get(id=item)
-#  #   if request.method == "POST":
-#         #if user == "admin": user = "admin@gmail.com"
-#         #student = Student.objects.get(email=user)
-#
-#     return render(request, 'pass_item.html', {"item": item, "student": student})
-#
-#
-# def pass_item_to_student(request, item, student):
-#     if request.method != "POST":
-#         return redirect('main')
-#     student = Student.objects.get(id=student)
-#     reservation = Reservation.objects.get(id=item)
-#     reservation.student = student
-#     reservation.save()
-#     return redirect('profile')
-
-
 def pass_item_view(request, item):
     students = Student.objects.all()
     date = datetime.today()
@@ -327,11 +323,26 @@ def pass_item_view(request, item):
 def pass_item_to_student(request):
     pass
 
-# def pass_item_to_student_confirm(request, item,student):
-#     if request.method == "POST":
-#         reservation=Reservation.objects.create(student=student,item=item,date_from=datetime.date.today(),
-#                                            date_to=datetime.date.today(),returned=False,status='B')
-#         reservation.save()
-#         return redirect('profile')
-#     else:
-#         return redirect('/')
+
+# pass item view , but with keeping the reservation , and creating a new one for the new student
+def pass_item_view_new(request, item):
+    students = Student.objects.all()
+    date = datetime.today()
+
+    if request.method == "POST":
+        student = request.POST.get('student')
+        me = request.user if request.user.username != "admin" else request.user.email
+        item = Equipment.objects.get(serial_number=item)
+        student = Student.objects.get(email=student)
+        me = Student.objects.get(email=me)
+        reservation = Reservation.objects.get(item=item, student=me)
+        reservation.student = student
+        reservation.date_from = date
+        reservation.save()
+        reservation = Reservation.objects.create(item=item, student=me, date_from=date, date_to=date, status='P')
+        if reservation.status == 'P':
+            reservation.returned = True
+        reservation.save()
+        return redirect('profile')
+
+    return render(request, 'pass_item.html', {"item": item, "students": students})
