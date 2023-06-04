@@ -44,43 +44,44 @@
 
                 <table class="table border shadow ">
                     <thead>
-
-                    <tr>
-                        <th scope="col">Status</th>
-                        <th scope="col">Details</th>
-                        <th scope="col">User</th>
-                        <th scope="col">Opened</th>
-                        <th scope="col">Closed</th>
-                    </tr>
+                        <tr>
+                            <th scope="col">Status</th>
+                            <th scope="col">Details</th>
+                            <th scope="col">User</th>
+                            <th scope="col">Opened</th>
+                            <th scope="col">Closed</th>
+                            <th scope="col">Time From</th>
+                            <th scope="col">Time To</th>
+                        </tr>
                     </thead>
 
                     <tbody class="">
-                    {% for issue in issues %}
-                        {% if issue.status.status == "GOOD" %}
-                            <tr class="table-success">
-                                <td><span class="badge text-bg-success">OK</span></td>
-
-                                {% elif issue.status.status == "SEVERE" %}
-                            <tr class="table-warning">
-                                <td><span class="badge text-bg-warning">Severe</span></td>
-
-                                {% elif issue.status.status == "BAD" %}
-                            <tr class="table-danger">
-                                <td><span class="badge text-bg-danger">Broken</span></td>
-                                {% else %}
+                        {% for issue in issues %}
+                            {% if issue.status.status == "GOOD" %}
+                                <tr class="table-success">
+                                    <td><span class="badge text-bg-success">OK</span></td>
+                            {% elif issue.status.status == "SEVERE" %}
+                                <tr class="table-warning">
+                                    <td><span class="badge text-bg-warning">Severe</span></td>
+                            {% elif issue.status.status == "BAD" %}
+                                <tr class="table-danger">
+                                    <td><span class="badge text-bg-danger">Broken</span></td>
+                            {% else %}
+                                <tr>
+                                    <td><span class="badge text-bg-info">Unknown</span></td>
+                            {% endif %}
+                                    <td>{{ issue.details }}</td>
+                                    <td class="fw-bold">{{ issue.student }}</td>
+                                    <td>{{ issue.date_opened }}</td>
+                                    <td>{{ issue.date_closed }}</td>
+                                    <td>{{ issue.time_from }}</td>
+                                    <td>{{ issue.time_to }}</td>
+                                </tr>
+                        {% empty %}
                             <tr>
-                            <td><span class="badge text-bg-info">Unknown</span></td>
-                        {% endif %}
-                    <td>{{ issue.details }}</td>
-                    <td class="fw-bold">{{ issue.student }}</td>
-                    <td>{{ issue.date_opened }}</td>
-                    <td>{{ issue.date_closed }}</td>
-                    </tr>
-                    {% empty %}
-                        <tr>
-                            <td colspan="5" class="">No issues! 😁</td>
-                        </tr>
-                    {% endfor %}
+                                <td colspan="7" class="">No issues! 😁</td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>
@@ -103,10 +104,4 @@
             </div>
         </div>
     </div>
-
-
 {% endblock %}
-
-
-
-

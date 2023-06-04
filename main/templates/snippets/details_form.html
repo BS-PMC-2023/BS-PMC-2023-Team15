@@ -1,4 +1,4 @@
-<div class="my-3 " role="group" aria-label="Basic example">
+<div class="my-3" role="group" aria-label="Basic example">
     <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1">From:</span>
         <input id="date_from" type="date" class="btn btn-outline-primary" min="{{ date_min }}" name="date_from"
@@ -23,7 +23,6 @@
         <input id="date_to" type="date" class="btn btn-outline-primary" name="date_to" min="{{ date_min }}"
                value="{{ date_min }}">
     </div>
-
 </div>
 
 <script>
@@ -44,7 +43,7 @@
         // Get the radio buttons
         const radioButtons = $("input[name=btnradio]");
         // Set the initial value of the date_to input
-        {#$("#date_to").val(radioButtons.eq(0).val());#}
+        //$("#date_to").val(radioButtons.eq(0).val());
         // Bind an event handler to the radio buttons
         radioButtons.on("click", function () {
             // Get the value of the selected radio button
@@ -67,6 +66,3 @@
         });
     });
 </script>
-
-
-
