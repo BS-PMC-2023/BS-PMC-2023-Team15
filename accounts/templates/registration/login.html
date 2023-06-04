@@ -82,7 +82,7 @@
     </style>
 
 <div class="container" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
-    <div style="display: flex; flex-direction: row; align-items: center;">
+    <div style="display: flex; flex-direction: row; align-items: center;font-family: Cairo,sans-serif">
 
        <div class="col-lg-6 mb-5 mb-lg-0" style="position: relative; z-index: 2;">
     <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(225, 48%, 15%)">
@@ -92,7 +92,7 @@
     <h6 class="mb-4 opacity-70" style="color: hsl(225, 48%, 15%); font-size: 18px; line-height: 1.5; font-weight: 500; letter-spacing: 1px;">
         Welcome to the Visual Communication Warehouse!
     </h6>
-    <p class="mb-4 opacity-70" style="color: hsl(225, 48%, 15%); font-size: 16px; line-height: 1.6;">
+    <p class="mb-4 opacity-70 text-black-150 "  style="color: hsl(225, 48%, 15%); font-size: 16px; line-height: 1.6;font-family: Cairo,sans-serif">
         As students of visual communication, you have entered a captivating sanctuary where ideas breathe life and visual stories unfold with enchanting grace. Step into this ethereal warehouse, meticulously crafted to nurture your growth, ignite your exploration, and elevate your prowess in the boundless realm of visual communication.
     </p>
 </div>
@@ -108,19 +108,19 @@
                 <img src="/static/media/medusa.png" alt="Medusa">
             </div>
 
-            <div class="card bg-light shadow rounded-lg" style="width: 450px; margin-left: 150px;">
-                <div class="card-body px-4 py-5" style="font-family: monospace">
+            <div class="card bg-light shadow rounded-lg" style="width: 450px; margin-left: 150px;font-family: Cairo,sans-serif">
+                <div class="card-body px-4 py-5" style="font-family: Cairo,sans-serif">
                     <div class="text-center mb-4">
                         <h3>Good to see you again 🛒</h3>
                     </div>
                     <form method="post">
                         {% csrf_token %}
 
-                        <div class="mb-3 text-center" style="font-family: monospace">
+                        <div class="mb-3 text-center" style="font-family: Cairo,sans-serif">
                             <label class="form-label">Username</label>
                             {{ form.username }}
                         </div>
-                        <div class="mb-3 text-center" style="font-family: monospace">
+                        <div class="mb-3 text-center" style="font-family: Cairo,sans-serif">
                             <label class="form-label">Password</label>
                             {{ form.password }}
                         </div>
