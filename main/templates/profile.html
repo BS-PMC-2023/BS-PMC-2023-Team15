@@ -29,6 +29,9 @@
                             <button type="submit" class="btn-primary btn">Return</button>
                         </form>
                         <a class="btn-primary btn" href="{% url 'malfunction' serial=my_item.item.serial_number %}">Open Issue</a>
+
+                            <a  href="{% url 'pass' item=my_item.item.serial_number%}" type="submit" class="btn-primary btn">Pass item</a>
+
                     </td>
                 </tr>
                 {% empty %}
