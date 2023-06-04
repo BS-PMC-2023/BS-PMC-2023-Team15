@@ -3,8 +3,9 @@
         <span class="input-group-text" id="basic-addon1">From:</span>
         <input id="date_from" type="date" class="btn btn-outline-primary" min="{{ date_min }}" name="date_from"
                value="{{ date_min }}">
-        <input id="time_from" type="time" class="btn btn-outline-primary" name="time_from" value="00:00:00">
-        <label class="btn btn-outline-primary" for="btnradio4">Time From</label>
+        <input id="time_from" type="time" class="btn btn-outline-primary" name="time_from">
+
+        <span class="input-group-text" id="basic-addon1">Time From:</span>
 
     </div>
 
@@ -25,8 +26,9 @@
 
         <input id="date_to" type="date" class="btn btn-outline-primary" name="date_to" min="{{ date_min }}"
                value="{{ date_min }}">
-        <input id="time_to" type="time" class="btn btn-outline-primary" name="time_to" value="23:59:59">
-        <label class="btn btn-outline-primary" for="btnradio4">Time To</label>
+        <input id="time_to" type="time" class="btn btn-outline-primary" name="time_to">
+
+        <span class="input-group-text" id="basic-addon1">Time To</span>
 
 
 
@@ -77,7 +79,7 @@
         // Set the initial value of the time_from and time_to inputs
         const currentTime = new Date();
         var hours = ("0" + currentTime.getHours()).slice(-2);
-        var minutes = ("0" + currentTime.getMinutes()).slice(-2);
+        var minutes =  ("0" + currentTime.getMinutes()).slice(-2);
         var initialTime = hours + ":" + minutes;
         $("#time_from").val(initialTime);
         $("#time_to").val(initialTime);

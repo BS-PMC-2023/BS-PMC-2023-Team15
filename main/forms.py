@@ -1,4 +1,5 @@
 import datetime
+
 from django import forms
 from database.models import Student, Equipment, Reservation
 
@@ -17,13 +18,3 @@ class ReservationForm(forms.Form):
         date_min = datetime.date.today().isoformat()
         context['date_min'] = date_min
         return context
-
-
-
-
-
-
-
-
-
-

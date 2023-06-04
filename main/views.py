@@ -78,9 +78,11 @@ def item_detail_view(request, item):
             date_to = datetime.strptime(date_to, '%Y-%m-%d').date()
             time_from = datetime.strptime(time_from, '%H:%M').time()
             time_to = datetime.strptime(time_to, '%H:%M').time()
+
             if date_from > date_to:
                 raise ArithmeticError
-            reservation = Reservation(student=student, item=item_to_borrow, date_from=date_from,date_to = date_to, time_from = time_from, time_to=time_to, status='B')
+            reservation = Reservation(student=student, item=item_to_borrow, date_from=date_from, date_to=date_to,
+                                      time_from=time_from, time_to=time_to, status='B')
 
             reservation.save()
             s = 'Q'
@@ -108,6 +110,7 @@ def item_detail_view(request, item):
     result = Equipment.objects.get(serial_number=item)
     issues = IssueReport.objects.filter(item=result)
     date_min = datetime.now().date().isoformat()
+
 
     # qr code
     img = qrcode.make(item)

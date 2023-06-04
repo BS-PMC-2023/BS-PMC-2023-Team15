@@ -48,8 +48,8 @@ class Reservation(models.Model):
     item = models.ForeignKey('Equipment', on_delete=models.CASCADE, related_name='item')
     date_from = models.DateField()
     date_to = models.DateField()
-    time_from = models.TimeField().default = '00:00'
-    time_to = models.TimeField().default = '00:00'
+    time_from = models.TimeField()
+    time_to = models.TimeField()
     id = models.AutoField(primary_key=True)
     returned = models.BooleanField(default=False)
     statuses = [('B', 'Borrowed'), ('Q', 'In queue'), ('M', 'malfunction'), ('A', 'Available'), ('W', 'Waiting')]
