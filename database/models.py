@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 from django.conf import settings
 
@@ -51,8 +53,8 @@ class Reservation(models.Model):
     item = models.ForeignKey('Equipment', on_delete=models.CASCADE, related_name='item')
     date_from = models.DateField()
     date_to = models.DateField()
-    time_from = models.TimeField()
-    time_to = models.TimeField()
+    time_from = models.TimeField(default=datetime.time.min)
+    time_to = models.TimeField(default=datetime.time.min)
     id = models.AutoField(primary_key=True)
     returned = models.BooleanField(default=False)
     statuses = [('B', 'Borrowed'), ('Q', 'In queue'), ('M', 'malfunction'), ('A', 'Available'),
