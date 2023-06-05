@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='reservation',
             name='status',
-            field=models.CharField(choices=[('B', 'Borrowed'), ('Q', 'In queue'), ('M', 'malfunction'), ('A', 'Available'), ('W', 'Waiting')], default=('A', 'Available'), max_length=100),
+            field=models.CharField(choices=[('B', 'Borrowed'), ('Q', 'In queue'), ('M', 'malfunction'), ('A', 'Available'), ('W', 'Waiting'), ('P', 'Passed')], default=('A', 'Available'), max_length=100),
         ),
         migrations.AlterUniqueTogether(
             name='reservation',
