@@ -43,7 +43,7 @@ urlpatterns = [
     path('profile/view', main.views.profile_view, name='profile'),
     path('policy', main.views.policy_view, name='policy'),
     path('addstudents', main.views.addstudents, name='addstudents'),
-    path('pass/<item>', main.views.pass_item_view, name='pass'),
+    path('pass/<item>', main.views.pass_item_view_new, name='pass'),
     path('pass/<item>', main.views.pass_item_to_student, name='pass_confirm'),
 ]
 

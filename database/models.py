@@ -1,8 +1,12 @@
+import datetime
+
 from django.db import models
 from django.conf import settings
+
+
 # Create your models here.
 
-#model named students - full name, id, email, phone number, password
+# model named students - full name, id, email, phone number, password
 class Student(models.Model):
     full_name = models.CharField(max_length=100)
     id = models.IntegerField(primary_key=True)
@@ -18,6 +22,7 @@ class Category(models.Model):
     name = models.CharField(max_length=100, primary_key=True)
     image = models.ImageField(upload_to='categories/', default='default.png')
     description = models.TextField(max_length=1000, default='No description')
+
     def __str__(self):
         return self.name
 
@@ -25,7 +30,7 @@ class Category(models.Model):
         verbose_name_plural = "Categories"
 
 
-#model named equipement: serial number - string, category, brand, model, details
+# model named equipement: serial number - string, category, brand, model, details
 class Equipment(models.Model):
     serial_number = models.CharField(max_length=100, primary_key=True)
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
@@ -42,17 +47,18 @@ class Equipment(models.Model):
         verbose_name_plural = "Equipment"
 
 
-#model named reservations: email-PK, ID number-PK, item - ID, date - from, date - to
+# model named reservations: email-PK, ID number-PK, item - ID, date - from, date - to
 class Reservation(models.Model):
     student = models.ForeignKey('Student', on_delete=models.CASCADE)
     item = models.ForeignKey('Equipment', on_delete=models.CASCADE, related_name='item')
     date_from = models.DateField()
     date_to = models.DateField()
-    time_from = models.TimeField()
-    time_to = models.TimeField()
+    time_from = models.TimeField(default=datetime.time.min)
+    time_to = models.TimeField(default=datetime.time.min)
     id = models.AutoField(primary_key=True)
     returned = models.BooleanField(default=False)
-    statuses = [('B', 'Borrowed'), ('Q', 'In queue'), ('M', 'malfunction'), ('A', 'Available'), ('W', 'Waiting')]
+    statuses = [('B', 'Borrowed'), ('Q', 'In queue'), ('M', 'malfunction'), ('A', 'Available'),
+                ('W', 'Waiting'), ('P', 'Passed')]
     status = models.CharField(max_length=100, choices=statuses, default=statuses[3])
 
     class Meta:
@@ -62,7 +68,7 @@ class Reservation(models.Model):
         return self.student.email
 
 
-#model named issue report: item_serial_number,student_email, date when opened, date when closed,status details (no foreign keys)
+# model named issue report: item_serial_number,student_email, date when opened, date when closed,status details (no foreign keys)
 class IssueReport(models.Model):
     student = models.ForeignKey('Student', on_delete=models.CASCADE)
     item = models.ForeignKey('Equipment', on_delete=models.CASCADE)
@@ -76,6 +82,7 @@ class IssueReport(models.Model):
 
     def __str__(self):
         return f'{self.item}: {self.details}'
+
 
 # Studio: room - pk, name, image - default: default.png, details
 class Studio(models.Model):
@@ -94,5 +101,6 @@ class IssueStatus(models.Model):
 
     class Meta:
         verbose_name_plural = "Issue Status"
+
     def __str__(self):
         return self.status
