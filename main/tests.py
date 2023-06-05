@@ -90,7 +90,7 @@ class ViewsTest(TestCase):
         """
         response = self.client.post(
             '/category/details/item1',
-            {'date_from': '2020-01-01', 'date_to': '2020-01-02'}
+            {'date_from': '2020-01-01', 'date_to': '2020-01-02', 'time_from': '12:00', 'time_to': '13:00'}
         )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'details.html')
