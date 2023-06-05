@@ -29,7 +29,7 @@
                             <button type="submit" class="btn-primary btn">Return</button>
                         </form>
                         <a class="btn-primary btn" href="{% url 'malfunction' serial=my_item.item.serial_number %}">Open Issue</a>
-                        <form method="GET" onsubmit="show_alert()"
+                        <form method="GET" onsubmit="show_alert1()"
                               action="{% url 'pass' item=my_item.item.serial_number %}" class="btn">
                             {% csrf_token %}
                             <button type="submit" class="btn-primary btn">Pass Item</button>
@@ -48,6 +48,12 @@
     <script>
         function show_alert() {
             if (!confirm("Do you really want to return this item?")) {
+                return false;
+            }
+            this.form.submit();
+        }
+               function show_alert1() {
+            if (!confirm("Do you really want to pass this item?")) {
                 return false;
             }
             this.form.submit();

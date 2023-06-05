@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 from database.models import Category, Equipment, Student, Reservation
 
 
-
 class ViewsTest(TestCase):
     """
     Test class for views in the main app.
@@ -164,7 +163,6 @@ class ViewsTest(TestCase):
         response = self.client.post('/myhistory/milky@gmail.com')
         self.assertEqual(response.status_code, 200)
 
-
     def addstudent(self):
         """
         Test add student.
@@ -173,3 +171,18 @@ class ViewsTest(TestCase):
         self.client.login(username="admin", password="admin")
         response = self.client.get('/addstudent')
         self.assertEqual(response.status_code, 200)
+
+    def test_pass_item(self):
+        """
+        Test pass item.
+        """
+        Equipment.objects.create(
+            serial_number='012121',
+            category=Category.objects.get(name='category1')
+        )
+
+        self.client.logout()
+        self.client.login(username="admin", password="admin")
+        response = self.client.get('/pass/012121')
+        self.assertEqual(response.status_code, 200)
+
