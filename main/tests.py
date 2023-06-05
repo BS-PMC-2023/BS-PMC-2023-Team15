@@ -173,5 +173,3 @@ class ViewsTest(TestCase):
         self.client.login(username="admin", password="admin")
         response = self.client.get('/addstudent')
         self.assertEqual(response.status_code, 200)
-
-
