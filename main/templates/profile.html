@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="container">
+
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Item Name</th>
+                <th scope="col">Date From</th>
+                <th scope="col">Date To</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for my_item in my_items %}
+
+
+                <tr>
+                    <td class="align-middle">{{ my_item.item.brand }} {{ my_item.item.model }}</td>
+                    <td class="align-middle">{{ my_item.date_from }}</td>
+                    <td class="align-middle">{{ my_item.date_to }}</td>
+                    <td>
+                        <form method="POST" onsubmit="show_alert()"
+                              action="{% url 'return' item=my_item.id %}" class="btn">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-primary btn">Return</button>
+                        </form>
+                        <a class="btn-primary btn" href="{% url 'malfunction' serial=my_item.item.serial_number %}">Open Issue</a>
+
+                            <a  href="{% url 'pass' item=my_item.item.serial_number%}" type="submit" class="btn-primary btn">Pass item</a>
+
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4">No items to show 🧾</td>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+    <script>
+        function show_alert() {
+            if (!confirm("Do you really want to return this item?")) {
+                return false;
+            }
+            this.form.submit();
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+    <div class="container">
+
+<div class="input-group mb-5">
+    <label class="input-group-text" for="selectType">Select Type:</label>
+    <select class="form-select" id="selectType" onchange="handleSelection(this.value)">
+        <option selected disabled>Choose an option...</option>
+        <option value="students">Students</option>
+        <option value="items">Items</option>
+    </select>
+</div>
+
+<div id="studentSection" style="display: none;">
+    <div class="input-group mb-5">
+        <label class="input-group-text" for="std">Student:</label>
+        <select class="form-select" id="std" onchange="location=this.value">
+            <option selected disabled>Choose a student...</option>
+            {% for u in users %}
+                <option value="{% url 'history' user=u %}"><a>({{ u }}) {{ u.first_name }} {{ u.last_name }}</a></option>
+            {% endfor %}
+        </select>
+    </div>
+</div>
+
+<div id="itemSection" style="display: none;">
+        <div class="input-group mb-5">
+        <label class="input-group-text" for="std">Items:</label>
+        <select class="form-select" id="std" onchange="location=this.value">
+            <option selected disabled>Choose a item...</option>
+            {% for r in reservations %}
+                <option value="{% url 'history' user=r %}"><a>({{ r }}) {{ r.item }}</a></option>
+            {% endfor %}
+        </select>
+    </div>
+</div>
+
+
+ <table class="table table-bordered" id="reservationTable">
+        <thead class="thead-dark">
+        <tr class="bg-secondary-subtle">
+            <th>Student</th>
+            <th>Item</th>
+            <th>Date Borrowed</th>
+            <th>Due Date</th>
+            <th>Returned</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for reservation in reservations %}
+            <tr data-student="{{ reservation.student }}" data-item="{{ reservation.item }}">
+                <td>{{ reservation.student }}</td>
+                <td>{{ reservation.item }}</td>
+                <td>{{ reservation.date_from }}</td>
+                <td>{{ reservation.date_to }}</td>
+                <td>{{ reservation.returned }}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="5" class="">No Items were taken by any user! 👍</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function handleSelection(value) {
+        var studentSection = document.getElementById("studentSection");
+        var itemSection = document.getElementById("itemSection");
+        var table = document.getElementById("reservationTable");
+
+        if (value === "students") {
+            studentSection.style.display = "block";
+            itemSection.style.display = "none";
+            table.querySelectorAll("tr").forEach(function (row) {
+                row.style.display = "";
+            });
+        } else if (value === "items") {
+            studentSection.style.display = "none";
+            itemSection.style.display = "block";
+            table.querySelectorAll("tr").forEach(function (row) {
+                row.style.display = "";
+            });
+        }
+    }
+
+    function filterTable(value, column) {
+        var table = document.getElementById("reservationTable");
+        var rows = table.querySelectorAll("tbody tr");
+
+        rows.forEach(function (row) {
+            var data = row.getAttribute("data-" + column);
+            if (data === value || value === "") {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <h1 class="text-center">Pass Item</h1>
+    <form method="POST" id="passItemForm" action="{% url 'pass_confirm' item %}">
+        {% csrf_token %}
+        <div class="d-flex justify-content-center">
+            <div class="form-group">
+                <label for="student" class="text-center">Select Student:</label>
+                <select id="student" name="student" class="form-control">
+                    {% for s in students %}
+                    <option value="{{ s.email }}">{{ s.full_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    <br><br>
+        <input type="hidden" name="item" value="{{ item }}">
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary">Pass item</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

@@ -6,28 +6,47 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="contact__form__title">
-                        <h2>Leave Message</h2>
+                        <select name="issue" id="issue">
+                            <option value="Issue about item">Issue about item</option>
+                            <option value="Ask of more inv">Ask for more inventory</option>
+                        </select>
+                        <br><br>
+                        <h2 id="issueHeading">Open Issue for {{ item }}</h2>
                     </div>
                 </div>
             </div>
-            <form action="#">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6">
-                        <input type="text" placeholder="Your name">
-
-
-                    </div>
-                    <div class="col-lg-6 col-md-6">
-                        <input type="text" placeholder="Your Email">
-
-                </div>
+            <form action="#" id="issueForm">
                 <div class="col-lg-12 text-center">
-                    <textarea placeholder="Your message"></textarea>
-                    <button type="submit" class="site-btn">SEND MESSAGE</button>
-                </div>
-
+                    <textarea placeholder="Your message" id="messageTextarea"></textarea>
+                    <textarea placeholder="Reason" id="reasonTextarea" style="display: none;"></textarea>
+                    <button type="submit" class="site-btn">Open Issue</button>
                 </div>
             </form>
         </div>
     </div>
+
+    <script>
+        var issueSelect = document.getElementById("issue");
+
+        var reasonTextarea = document.getElementById("reasonTextarea");
+        var messageTextarea = document.getElementById("messageTextarea");
+        var issueHeading = document.getElementById("issueHeading");
+
+        issueSelect.addEventListener("change", function() {
+            var selectedValue = this.value;
+
+            if (selectedValue === "Issue about item") {
+
+                reasonTextarea.style.display = "none";
+                messageTextarea.style.display = "block";
+                messageTextarea.placeholder = "Your message";
+                issueHeading.textContent = "Open Issue for {{ item }}";
+            } else if (selectedValue === "Ask of more inv") {
+
+                reasonTextarea.style.display = "block";
+                messageTextarea.style.display = "none";
+                issueHeading.textContent = "Ask for more inventory for item {{ item }}";
+            }
+        });
+    </script>
 {% endblock %}

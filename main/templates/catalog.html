@@ -12,6 +12,8 @@
                 <div class="px-3">
                     {% include 'snippets/item.html' with item=item   %}
                 </div>
+                {% empty %}
+                <h1> No items </h1>
             {% endfor %}
 
         </div>

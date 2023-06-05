@@ -45,15 +45,18 @@ class Equipment(models.Model):
 #model named reservations: email-PK, ID number-PK, item - ID, date - from, date - to
 class Reservation(models.Model):
     student = models.ForeignKey('Student', on_delete=models.CASCADE)
-    item = models.ForeignKey('Equipment', on_delete=models.CASCADE)
+    item = models.ForeignKey('Equipment', on_delete=models.CASCADE, related_name='item')
     date_from = models.DateField()
     date_to = models.DateField()
+    time_from = models.TimeField()
+    time_to = models.TimeField()
+    id = models.AutoField(primary_key=True)
     returned = models.BooleanField(default=False)
-    statuses = [('B', 'Borrowed'), ('Q', 'In queue'), ('M', 'malfunction'), ('A', 'Available')]
+    statuses = [('B', 'Borrowed'), ('Q', 'In queue'), ('M', 'malfunction'), ('A', 'Available'), ('W', 'Waiting')]
     status = models.CharField(max_length=100, choices=statuses, default=statuses[3])
 
     class Meta:
-        unique_together = ('student', 'item', 'date_from')
+        unique_together = ('student', 'item', 'date_from', 'status')
 
     def __str__(self):
         return self.student.email

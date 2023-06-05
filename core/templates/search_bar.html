@@ -1,29 +1,12 @@
-    <div class="container my-4">
-        <div class="row" style="justify-content: center; margin-top: 20px">
-            <div class="col-lg-9">
-                <div class="">
-                    <div class="hero__search__bar dropdown">
-                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                            All Categories
-                        </button>
-                        <ul class="dropdown-menu">
-                            {% for category in categories %}
-                                <li><a class="dropdown-item" href="#">{{ category.name }}</a></li>
-                            {% endfor%}
-                        </ul>
-                        <div style="color:lightgrey; display:inline; font-size: 25px; margin-right:10px">|</div>
+<div class="container mb-5">
 
-                        <div class="search_bar">
-                            <input type="text" placeholder="Search here?" class="search__input my-2">
-                            <button type="submit" class="site-btn">SEARCH</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <form action="{% url 'search' %}" method="GET">
+
+        <div class="input-group container w-50 ">
+            <input name="query" type="search" class="form-control px-3 rounded-0" placeholder="Search here?">
+            <button type="submit" class="btn btn-primary fw-bold rounded-0 " style="background-color: purple">SEARCH</button>
         </div>
-    <br>
-    <br>
-    <br>
-    </div>
+    </form>
+
+</div>
 
