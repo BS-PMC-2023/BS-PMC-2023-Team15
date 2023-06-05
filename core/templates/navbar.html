@@ -5,7 +5,7 @@
     <div class="container d-flex ">
         <div class="ml-auto p-2">
             <div class="d-flex align-items-center">
-                <h4 class="mx-4 al">Hello {{ student }}!👋</h4>
+                <h4 class="mx-4 al" >Hello {{ student }}!👋</h4>
             </div>
         </div>
 
@@ -65,10 +65,11 @@
                                 Pages
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{% url 'categories' %}">Products</a></li>
-                                <li><a class="dropdown-item" href="{% url 'studio' %}">Studios</a></li>
-                                <li><a class="dropdown-item" href="{% url 'podcast' %}">Podcast Rooms</a></li>
+                                <li><a class="dropdown-item" href="{% url 'categories' %}">Products ℹ️</a></li>
+                                <li><a class="dropdown-item" href="{% url 'studio' %}">Studios 🎙️</a></li>
+                                <li><a class="dropdown-item" href="{% url 'podcast' %}">Podcast Rooms 🎤️</a></li>
                                 <li><a class="dropdown-item" href="{% url 'myhistory' user=user %}">My History 📔</a></li>
+                                <li><a class="dropdown-item" href="{% url 'personal' student %}">Personal page 💻</a></li>
                                 {% if user.is_superuser %}
                                     <li><a class="dropdown-item" href="{% url 'history' user=user %}">History 📔</a></li>
                                     <li><a class="dropdown-item" href="{% url 'history' user=user %}">Lecturer History 🕶</a></li>
