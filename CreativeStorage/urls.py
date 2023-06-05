@@ -38,6 +38,7 @@ urlpatterns = [
     path('overdue', main.views.overdue, name='overdue'),
     path('statistics', main.views.stats, name='stats'),
     path('history/<user>', main.views.history, name='history'),
+    path('myhistory/<user>', main.views.myhistory, name='myhistory'),
     path('search', main.views.search, name='search'),
     path('profile/<item>/return', main.views.profile_return, name='return'),
     path('profile/view', main.views.profile_view, name='profile'),

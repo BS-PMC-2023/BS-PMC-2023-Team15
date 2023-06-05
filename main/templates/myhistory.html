@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+    <div class="container">
+
+
+
+ <table class="table table-bordered" id="reservationTable">
+        <thead class="thead-dark">
+        <tr class="bg-secondary-subtle">
+            <th>Student</th>
+            <th>Item</th>
+            <th>Date Borrowed</th>
+            <th>Due Date</th>
+            <th>Returned</th>
+            <th>Passed</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for reservation in reservations %}
+            <tr data-student="{{ reservation.student }}" data-item="{{ reservation.item }}">
+                <td>{{ reservation.student }}</td>
+                <td>{{ reservation.item }}</td>
+                <td>{{ reservation.date_from }}</td>
+                <td>{{ reservation.date_to }}</td>
+                <td>{{ reservation.returned }}</td>
+            {% if reservation.status == 'P' %}
+                <td class="bg-danger"> Passed </td>
+            {% else %}
+                <td > No </td>
+            {% endif %}
+                </tr>
+            {% empty %}
+                <tr>
+                <td colspan="5" class="">No Items were taken by any user! 👍</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{#<script>#}
+{##}
+{##}
+{#    function filterTable(value, column) {#}
+{#        var table = document.getElementById("reservationTable");#}
+{#        var rows = table.querySelectorAll("tbody tr");#}
+{##}
+{#        rows.forEach(function (row) {#}
+{#            var data = row.getAttribute("data-" + column);#}
+{#            if (data === value || value === "") {#}
+{#                row.style.display = "";#}
+{#            } else {#}
+{#                row.style.display = "none";#}
+{#            }#}
+{#        });#}
+{#    }#}
+{#</script>#}
+{% endblock %}
