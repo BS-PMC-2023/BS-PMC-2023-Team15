@@ -4,7 +4,7 @@ from django.views.decorators.cache import never_cache
 from django.contrib import messages
 
 from accounts import forms
-from database.models import Category, Equipment, IssueReport
+from database.models import Category, Equipment, IssueReport, IssueStatus
 from django.shortcuts import render, redirect
 from .forms import ReservationForm
 from django.shortcuts import get_object_or_404
@@ -179,7 +179,19 @@ def profile_return(request, item):
 
 
 def mal_view(request):
-    return render(request, 'mal.html', )
+    items = Equipment.objects.all()
+    if request.method == "POST":
+        message = request.POST["report"]
+        item = request.POST["item"]
+        user = request.user if request.user.username != "admin" else "admin@gmail.com"
+        student = Student.objects.get(email=user)
+        stat = IssueStatus.objects.get(status='GOOD')
+        rep = IssueReport.objects.create(student=student, details=message, date_opened=datetime.today(), status=stat, item_id=item)
+        rep.save()
+        messages.success(request, 'Issue Reported!')
+
+
+    return render(request, 'mal.html',{"items":items} )
 
 
 def history(request, user):
