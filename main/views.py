@@ -200,6 +200,22 @@ def history(request, user):
     return render(request, 'history.html', {"reservations": my_items, "users": users})
 
 
+def myhistory(request, user):
+    if user == None: user = request.user
+    users = User.objects.all()
+    if user == "admin": user = "admin@gmail.com"
+    student = Student.objects.get(email=user)
+    my_items = Reservation.objects.filter(student=student.id)
+
+    if user == "lecturer": user = "lecturer@gmail.com"
+    student = Student.objects.get(email=user)
+    my_items = Reservation.objects.filter(student=student.id)
+
+    # if user != "admin" and user != "lecturer": user = request.user.email
+    # student = Student.objects.get(email=user)
+    # my_items = Reservation.objects.filter(student=student.id)
+
+    return render(request, 'myhistory.html', {"reservations": my_items, "users": users})
 @receiver(post_save, sender=Student)
 def new_user(sender, instance, created, **kwargs):
     if created:

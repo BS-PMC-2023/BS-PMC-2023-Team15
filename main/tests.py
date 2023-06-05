@@ -90,7 +90,8 @@ class ViewsTest(TestCase):
         """
         response = self.client.post(
             '/category/details/item1',
-            {'date_from': '2020-01-01', 'date_to': '2020-01-02'}
+            {'date_from': '2020-01-01', 'date_to': '2020-01-02',
+             'time_from': '12:00', 'time_to': '13:00'}
         )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'details.html')
@@ -144,3 +145,58 @@ class ViewsTest(TestCase):
         """
         response = self.client.get('/policy')
         self.assertEqual(response.status_code, 200)
+
+    def test_myhistory(self):
+        """
+        Test My history.
+        """
+        self.client.logout()
+        self.client.login(username="admin", password="admin")
+
+        Student.objects.create(
+            id=312,
+            full_name='milky',
+            email='milky@gmail.com',
+            phone_number=123456789,
+            password='test'
+        )
+
+        response = self.client.post('/myhistory/milky@gmail.com')
+        self.assertEqual(response.status_code, 200)
+
+
+    def test_pass_item(self):
+        """
+        Test pass item.
+        """
+        self.client.logout()
+        self.client.login(username="admin", password="admin")
+
+        Student.objects.create(
+            id=312,
+            full_name='milky',
+            email='milky@gmail.com',
+            phone_number=123456789,
+            password='test'
+        )
+        Student.objects.create(
+            id=311,
+            full_name='milky-2',
+            email='milky2@gmail.com',
+            phone_number=123456789,
+            password='test'
+        )
+        Reservation.objects.create(
+            id=1,
+            student=Student.objects.get(id=312),
+            equipment=Equipment.objects.get(serial_number='item1'),
+            date_from=datetime.date(2020, 1, 1),
+            date_to=datetime.date(2020, 1, 2),
+            time_from=datetime.time(12, 0),
+            time_to=datetime.time(13, 0),
+            status='pending'
+        )
+        response = self.client.post('/pass_item/1')
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(Reservation.objects.get(id=1).status, 'passed')
+
