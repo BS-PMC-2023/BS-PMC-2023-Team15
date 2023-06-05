@@ -92,7 +92,8 @@ def item_detail_view(request, item):
 
             if date_from > date_to:
                 raise ArithmeticError
-            reservation = Reservation(student=student, item=item_to_borrow, date_from=date_from, date_to=date_to,time_from=time_from, time_to=time_to, status='B')
+            reservation = Reservation(student=student, item=item_to_borrow, date_from=date_from, date_to=date_to,
+                                      time_from=time_from, time_to=time_to, status='B')
 
             reservation.save()
             s = 'Q'
@@ -120,7 +121,6 @@ def item_detail_view(request, item):
     result = Equipment.objects.get(serial_number=item)
     issues = IssueReport.objects.filter(item=result)
     date_min = datetime.now().date().isoformat()
-
 
     # qr code
     img = qrcode.make(item)
@@ -162,7 +162,8 @@ def personal_profile(request, student):
     user = student if student != "admin" else "admin@gmail.com"
     student = Student.objects.get(email=user)
 
-    return render(request, 'personal_profile.html',{"student":student})
+    return render(request, 'personal_profile.html', {"student": student})
+
 
 def profile_view(request):
     usr = request.user
@@ -173,6 +174,7 @@ def profile_view(request):
     res = Reservation.objects.filter(student=student.id, status='P', returned=True)
 
     return render(request, 'profile.html', {"my_items": my_items, "res": res})
+
 
 def profile_return(request, item):
     if request.method != "POST":
@@ -192,12 +194,12 @@ def mal_view(request):
         user = request.user if request.user.username != "admin" else "admin@gmail.com"
         student = Student.objects.get(email=user)
         stat = IssueStatus.objects.get(status='GOOD')
-        rep = IssueReport.objects.create(student=student, details=message, date_opened=datetime.today(), status=stat, item_id=item)
+        rep = IssueReport.objects.create(student=student, details=message, date_opened=datetime.today(), status=stat,
+                                         item_id=item)
         rep.save()
         messages.success(request, 'Issue Reported!')
 
-
-    return render(request, 'mal.html',{"items":items} )
+    return render(request, 'mal.html', {"items": items})
 
 
 def history(request, user):
@@ -234,6 +236,8 @@ def myhistory(request, user):
     # my_items = Reservation.objects.filter(student=student.id)
 
     return render(request, 'myhistory.html', {"reservations": my_items, "users": users})
+
+
 @receiver(post_save, sender=Student)
 def new_user(sender, instance, created, **kwargs):
     if created:

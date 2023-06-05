@@ -69,7 +69,7 @@
                                 <li><a class="dropdown-item" href="{% url 'studio' %}">Studios 🎙️</a></li>
                                 <li><a class="dropdown-item" href="{% url 'podcast' %}">Podcast Rooms 🎤️</a></li>
                                 <li><a class="dropdown-item" href="{% url 'myhistory' user=user %}">My History 📔</a></li>
-                                <li><a class="dropdown-item" href="{% url 'personal' student %}">Personal page 💻</a></li>
+                                <li><a class="dropdown-item" href="{% url 'personal' user=user %}">Personal page 💻</a></li>
                                 {% if user.is_superuser %}
                                     <li><a class="dropdown-item" href="{% url 'history' user=user %}">History 📔</a></li>
                                     <li><a class="dropdown-item" href="{% url 'history' user=user %}">Lecturer History 🕶</a></li>
