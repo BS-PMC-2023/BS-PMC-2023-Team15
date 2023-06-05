@@ -158,6 +158,12 @@ def overdue(request):
 #
 #     return render(request, 'profile.html', {"my_items": my_items})
 
+def personal_profile(request, student):
+    user = student if student != "admin" else "admin@gmail.com"
+    student = Student.objects.get(email=user)
+
+    return render(request, 'personal_profile.html',{"student":student})
+
 def profile_view(request):
     usr = request.user
     if request.user.username == "admin":
