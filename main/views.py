@@ -16,6 +16,7 @@ from datetime import date
 import base64, qrcode, io
 from django.views.decorators.http import require_http_methods
 from django.db.models.signals import post_save, post_delete
+from random import randint
 
 
 @login_required
@@ -60,7 +61,8 @@ def policy_view(request):
 def category_view(request, category):
     # category = Category.objects.get(name=category)
     items = Equipment.objects.filter(category=category)
-    return render(request, 'catalog.html', {"items": items})
+    r = randint(0, items.count())
+    return render(request, 'catalog.html', {"items": items, "r": r})
 
 
 @login_required
